@@ -39,6 +39,12 @@ class Category extends Model
         return $this->hasMany(Category::class, 'parent_id');
     }
 
+    /*关联商品*/
+    public function product()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     /*获取所有祖先分类的ID*/
     public function getPathIdsAttribute()
     {

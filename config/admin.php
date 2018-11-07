@@ -68,7 +68,7 @@ return [
      */
     'upload' => [
         // 对应 filesystem.php 中的 disks
-        'disk' => 'public',
+        'disk' => 'admin',
 
         'directory' => [
             'image' => 'images',
@@ -149,6 +149,18 @@ return [
      * 扩展设置.
      */
     'extensions' => [
+        'simplemde' => [
 
+            // Set to false if you want to disable this extension
+            'enable' => true,
+
+            // If you want to set an alias for the calling method
+            //'alias' => 'markdown',
+
+            // Editor configuration
+            'config' => [
+                'autofocus'   => true,
+            ]
+        ]
     ],
 ];

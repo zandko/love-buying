@@ -40,7 +40,7 @@ class CategoriesController extends Controller
         return $content
             ->header('修改')
             ->description('分类')
-            ->body($this->form()->edit($id));
+            ->body($this->form($id)->edit($id));
     }
 
     /**
@@ -65,8 +65,11 @@ class CategoriesController extends Controller
     protected function grid()
     {
         $grid = new Grid(new Category);
-        $grid->id('ID');
 
+        $grid->filter(function ($filter) {
+            $filter->like('name','名称');
+        });
+        $grid->id('ID')->sortable();
         $grid->name('名称')->display(function ($name) {
             return str_repeat("&nbsp;",$this->level*8).$name;
         });
@@ -76,8 +79,8 @@ class CategoriesController extends Controller
         });
         $grid->level('级别');
         $grid->path('路径');
-        $grid->created_at('添加时间');
-        $grid->updated_at('修改时间');
+        $grid->created_at('添加时间')->sortable();
+        $grid->updated_at('修改时间')->sortable();
 
         $grid->disableRowSelector();
         $grid->actions(function ($actions) {
@@ -93,20 +96,37 @@ class CategoriesController extends Controller
      *
      * @return Form
      */
-    protected function form()
+    protected function form($isEditing = false)
     {
         $category_data = Category::all();
-        $category = [];
+        $category_name = [];
         foreach($category_data as $v)
         {
-            $category[$v['id']] = $v->full_name;
+            $category_name[$v['id']] = $v->full_name;
         }
 
         $form = new Form(new Category);
+        $form->text('name', '名称')->rules('required');
 
-        $form->text('name', '名称');
-        $form->select('parent_id', '上级分类')->options($category);
-        $form->radio('is_directory','是否有子级分类')->options(['1'=>'是','0'=>'否']);
+        if($isEditing) {
+            $form->display('parent.name','上级分类');
+
+            $form->display('is_directory','是否有子级分类')->with(function ($is_directory) {
+                return $is_directory ? '是' : '否';
+            });
+        }else {
+            $form->select('parent_id', '上级分类')->options($category_name);
+            $form->radio('is_directory','是否有子级分类')->options(['1'=>'是','0'=>'否'])->rules('required');
+        }
+
+        $form->tools(function (Form\Tools $tools) {
+            $tools->disableDelete();
+            $tools->disableView();
+        });
+        $form->footer(function ($footer) {
+            $footer->disableViewCheck();
+            $footer->disableEditingCheck();
+        });
         return $form;
     }
 }
