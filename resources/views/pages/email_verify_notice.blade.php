@@ -6,12 +6,6 @@
 
 <!-- Main Container  -->
 <div class="main-container container">
-    <ul class="breadcrumb">
-        <li><a href="/"><i class="fa fa-home"></i></a></li>
-        <li><a href="{{ route('register') }}">注册</a></li>
-        <li><a href="{{ route('email_verify_notice') }}">验证邮箱</a></li>
-    </ul>
-
     <div class="row">
         <div id="content" class="col-sm-12">
 

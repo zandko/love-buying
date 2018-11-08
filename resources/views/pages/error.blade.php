@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','操作成功')
+@section('title','操作失败')
 
 @section('content')
 
@@ -16,7 +16,7 @@
                     <div class="col-lg-12 col-md-12 about-us-center">
                         <div class="content-description">
                             <h2 class="about-title">{{ $msg }}</h2>
-                            <p>感谢您的配合，祝您在本商城购物愉快！</p>
+                            <p>亲，执行失败了哦！</p>
                         </div>
                         <div class="about-image-slider">
                             <div class="yt-content-slider" data-rtl="yes" data-autoplay="no" data-autoheight="no"
