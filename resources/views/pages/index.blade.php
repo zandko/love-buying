@@ -3,7 +3,6 @@
 @section('title','首页')
 
 @section('content')
-
 <!-- Main Container  -->
 <div class="main-container container">
     <div id="content">

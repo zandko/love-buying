@@ -480,14 +480,30 @@
                 <div class="bottom3">
                     <div class="telephone hidden-xs hidden-sm hidden-md">
                         <ul class="blank">
-                            <li><a href="#"><i class="fa fa-truck"></i>track your order</a></li>
-                            <li><a href="#"><i class="fa fa-phone-square"></i>Hotline (+123)4 567 890</a></li>
+                            <li><a href="#"><i class="fa fa-truck"></i>追踪您的订单</a></li>
+                            <li><a href="#"><i class="fa fa-phone-square"></i>热线 17805202450</a></li>
                         </ul>
                     </div>
                     <div class="signin-w hidden-md hidden-sm hidden-xs">
                         <ul class="signin-link blank">
-                            <li class="log login"><i class="fa fa-lock"></i> <a class="link-lg" href="login.html">Login
-                                </a> or <a href="register.html">Register</a></li>
+                            <li class="log login">
+                                @guest
+                                    <i class="fa fa-lock"></i>
+                                    <a class="link-lg" href="{{ route('login') }}">登录
+                                    </a> or <a href="{{ route('register') }}">注册</a>
+                                @else
+                                    <a href="#">{{ Auth::user()->name }}
+                                        <a href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                           document.getElementById('logout-form').submit();">
+                                            退出
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                              style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                @endguest
+                            </li>
                         </ul>
                     </div>
                 </div>

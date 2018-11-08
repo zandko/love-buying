@@ -92,6 +92,7 @@
         <script type="text/javascript" src="{{ asset('js/themejs/so_megamenu.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/themejs/addtocart.js') }}"></script>
 
+                @yield('scriptsAfterJs')
     </body>
 
 </html>

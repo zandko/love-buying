@@ -11,8 +11,8 @@ class PagesController extends Controller
         return view('pages.index');
     }
 
-    public function cart()
+    public function emailVerifyNotice(Request $request)
     {
-        return view('cart.index');
+        return view('pages.email_verify_notice');
     }
 }
