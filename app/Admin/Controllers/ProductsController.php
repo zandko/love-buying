@@ -11,6 +11,7 @@ use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 use App\Models\Category;
 
+
 class ProductsController extends Controller
 {
     use HasResourceActions;
@@ -81,8 +82,8 @@ class ProductsController extends Controller
         $grid->id('ID');
         $grid->title('标题');
         $grid->image('封面图');
-        $grid->category_id('所属分类');
-        $grid->on_sale('是否上架')->default(function ($on_sale) {
+        $grid->column('category.name','所属分类');
+        $grid->on_sale('是否上架')->display(function ($on_sale) {
             return $on_sale ? '是' : '否';
         });
         $grid->rating('评分');
@@ -116,11 +117,10 @@ class ProductsController extends Controller
         $category_id = (int)($id ? Product::find($id)->category_id : 0);
 
         $form = new Form(new Product);
-
         $form->text('title', '标题')->rules('required');
         $form->text('long_title', '长标题')->rules('required');
         $form->select('category_id', '所属分类')->options($category_name)->default($category_id)->rules('required');
-        $form->image('image', '封面图')->rules('required|image');
+        $form->image('image', '封面图')->resize(50,50)->rules('required|image');
         $form->simplemde('description', '详情')->rules('required');
         $form->radio('on_sale', '是否上架')->options([1 => '是', '0' => '否'])->default(1);
 

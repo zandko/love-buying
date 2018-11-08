@@ -28,4 +28,12 @@ Route::group([
     $router->put('products/{products}','ProductsController@update');
     $router->delete('products/{products}','ProductsController@destroy');
 
+    /*优惠卷*/
+    $router->get('coupon_codes','CouponCodesController@index');
+    $router->get('coupon_codes/create','CouponCodesController@create');
+    $router->post('coupon_codes','CouponCodesController@store');
+    $router->get('coupon_codes/{coupon_codes}/edit', 'CouponCodesController@edit');
+    $router->put('coupon_codes/{coupon_codes}','CouponCodesController@update');
+    $router->delete('coupon_codes/{coupon_codes}','CouponCodesController@destroy');
+
 });
