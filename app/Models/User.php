@@ -30,4 +30,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified' => 'boolean',
     ];
+
+    /*关联地址*/
+    public function user_address()
+    {
+        return $this->hasMany(UserAddress::class);
+    }
 }

@@ -7,7 +7,6 @@
 <div class="main-container container">
     <div id="content">
         <div class="content-top-w">
-
             <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 main-left">
                 <div class="module col1 hidden-sm hidden-xs"></div>
             </div>

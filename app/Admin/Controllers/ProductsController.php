@@ -155,6 +155,8 @@ class ProductsController extends Controller
             $form->model()->price = collect($form->input('product_sku'))->where(Form::REMOVE_FLAG_NAME, 0)->min('price') ?: 0;
         });
 
+
+
         return $form;
     }
 }

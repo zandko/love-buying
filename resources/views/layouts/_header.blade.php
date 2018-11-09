@@ -283,157 +283,55 @@
                                         <div class="megamenu-pattern">
                                             <div class="container-mega">
                                                 <ul class="megamenu">
+                                                    @if(isset($categoryTree))
+                                                        @foreach($categoryTree as $category)
                                                     <li class="item-vertical  with-sub-menu hover">
                                                         <p class="close-menu"></p>
                                                         <a href="#" class="clearfix">
-                                                            <img src="/image/catalog/menu/icons/ico10.png" alt="icon">
-                                                            <span>Gifts & Toys</span>
+                                                            <img src="image/catalog/menu/icons/ico10.png" alt="icon">
+                                                            <span>{{ $category['name'] }}</span>
                                                             <b class="fa-angle-right"></b>
                                                         </a>
-                                                        <div class="sub-menu" data-subwidth="60">
-                                                            <div class="content">
+                                                        <div class="sub-menu" data-subwidth="60"  >
+                                                            <div class="content" >
                                                                 <div class="row">
                                                                     <div class="col-sm-12">
                                                                         <div class="row">
-                                                                            <div class="col-md-4 static-menu">
+                                                                            @if(isset($category['children']) && count($category['children']) > 0)
+                                                                            @foreach($category['children'] as $children)
+                                                                            <div class="col-md-12 static-menu">
                                                                                 <div class="menu">
                                                                                     <ul>
                                                                                         <li>
-                                                                                            <a href="#"
-                                                                                               class="main-menu">Apparel</a>
                                                                                             <ul>
-                                                                                                <li><a href="#">Accessories
-                                                                                                        for
-                                                                                                        Tablet
-                                                                                                        PC</a></li>
-                                                                                                <li><a href="#">Accessories
-                                                                                                        for i
-                                                                                                        Pad</a></li>
-                                                                                                <li><a href="#">Accessories
-                                                                                                        for
-                                                                                                        iPhone</a></li>
-                                                                                                <li><a href="#">Bags,
-                                                                                                        Holiday
-                                                                                                        Supplies</a>
-                                                                                                </li>
-                                                                                                <li><a href="#">Car
-                                                                                                        Alarms
-                                                                                                        and
-                                                                                                        Security</a>
-                                                                                                </li>
-                                                                                                <li><a href="#">Car
-                                                                                                        Audio
-                                                                                                        &amp;
-                                                                                                        Speakers</a>
-                                                                                                </li>
-                                                                                            </ul>
-                                                                                        </li>
-                                                                                        <li>
-                                                                                            <a href="#"
-                                                                                               class="main-menu">Cables
-                                                                                                &amp;
-                                                                                                Connectors</a>
-                                                                                            <ul>
-                                                                                                <li><a href="#">Cameras
-                                                                                                        &amp;
-                                                                                                        Photo</a></li>
-                                                                                                <li><a href="#">Electronics</a>
-                                                                                                </li>
-                                                                                                <li><a href="#">Outdoor
-                                                                                                        &amp;
-                                                                                                        Traveling</a>
-                                                                                                </li>
+                                                                                                @if(isset($children['children']))
+                                                                                                    <li style="float: left;margin-right: 5px;"><a style="font-weight: bold;" href="#">{{ $children['name'] }} ></a></li>
+
+                                                                                                @foreach($children['children'] as $child)
+                                                                                                <li style="float: left;margin-right: 5px;"><a href="#" >{{ $child['name'] }}</a></li>
+                                                                                                @endforeach
+                                                                                                @endif
                                                                                             </ul>
                                                                                         </li>
                                                                                     </ul>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-md-4 static-menu">
-                                                                                <div class="menu">
-                                                                                    <ul>
-                                                                                        <li>
-                                                                                            <a href="#"
-                                                                                               class="main-menu">Camping
-                                                                                                &amp; Hiking</a>
-                                                                                            <ul>
-                                                                                                <li>
-                                                                                                    <a href="#">Earings</a>
-                                                                                                </li>
-                                                                                                <li><a href="#">Shaving
-                                                                                                        &amp;
-                                                                                                        Hair
-                                                                                                        Removal</a></li>
-                                                                                                <li><a href="#">Salon
-                                                                                                        &amp;
-                                                                                                        Spa
-                                                                                                        Equipment</a>
-                                                                                                </li>
-                                                                                            </ul>
-                                                                                        </li>
-                                                                                        <li>
-                                                                                            <a href="#"
-                                                                                               class="main-menu">Smartphone
-                                                                                                &amp; Tablets</a>
-                                                                                            <ul>
-                                                                                                <li><a href="#">Sports
-                                                                                                        &amp;
-                                                                                                        Outdoors</a>
-                                                                                                </li>
-                                                                                                <li><a href="#">Bath
-                                                                                                        &amp;
-                                                                                                        Body</a></li>
-                                                                                                <li><a href="#">Gadgets
-                                                                                                        &amp;
-                                                                                                        Auto
-                                                                                                        Parts</a></li>
-                                                                                            </ul>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-4 static-menu">
-                                                                                <div class="menu">
-                                                                                    <ul>
-                                                                                        <li>
-                                                                                            <a href="#"
-                                                                                               class="main-menu">Bags,
-                                                                                                Holiday
-                                                                                                Supplies</a>
-                                                                                            <ul>
-                                                                                                <li><a href="#"
-                                                                                                       onclick="window.location = '18_46';">Battereries
-                                                                                                        &amp;
-                                                                                                        Chargers</a>
-                                                                                                </li>
-                                                                                                <li><a href="#"
-                                                                                                       onclick="window.location = '24_64';">Bath
-                                                                                                        &amp;
-                                                                                                        Body</a></li>
-                                                                                                <li><a href="#"
-                                                                                                       onclick="window.location = '18_45';">Headphones,
-                                                                                                        Headsets</a>
-                                                                                                </li>
-                                                                                                <li><a href="#"
-                                                                                                       onclick="window.location = '18_30';">Home
-                                                                                                        Audio</a></li>
-                                                                                            </ul>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
+                                                                                @endforeach
+                                                                            @endif
+
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </li>
-
+                                                        @endforeach
+                                                    @endif
 
                                                     <li class="loadmore">
                                                         <i class="fa fa-plus-square-o"></i>
                                                         <span class="more-view">More Categories</span>
                                                     </li>
-
                                                 </ul>
                                             </div>
                                         </div>
@@ -492,7 +390,7 @@
                                     <a class="link-lg" href="{{ route('login') }}">登录
                                     </a> or <a href="{{ route('register') }}">注册</a>
                                 @else
-                                    <a href="#">{{ Auth::user()->name }}
+                                    <a href="{{ route('user_addresses.index') }}">{{ Auth::user()->name }}</a>
                                         <a href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                            document.getElementById('logout-form').submit();">

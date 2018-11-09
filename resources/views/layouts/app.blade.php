@@ -20,6 +20,8 @@
 
     <title>@yield('title', 'loveBuying') - 爱购网</title>
 
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     {{--Favicon--}}
     <link rel="shortcut icon" type="image/png" href="/ico/favicon-16x16.png"/>
 
@@ -56,43 +58,48 @@
     </style>
 
 </head>
-    @if(route_class() == 'pages-index')
+@if(route_class() == 'pages-index')
     <body class="common-home res layout-1">
         <div id="wrapper" class="wrapper-fluid banners-effect-3">
             @else
-                <body class="res layout-1">
-                <div id="wrapper" class="wrapper-fluid banners-effect-5">
-                    @endif
+            <body class="res layout-1">
+            <div id="wrapper" class="wrapper-fluid banners-effect-5">
+                <div id="app">
+                @endif
 
-            @include('layouts._header')
+                @include('layouts._header')
                 @yield('content');
-            @include('layouts._footer')
-        </div>
+                @include('layouts._footer')
+                </div>
+            </div>
+            <script src="{{ asset('js/app.js') }}"></script>
 
+            {{--包括LIBS和插件--}}
+            <script type="text/javascript" src="{{ asset('js/jquery-2.2.4.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/owl-carousel/owl.carousel.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/slick-slider/slick.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/themejs/libs.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/unveil/jquery.unveil.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/countdown/jquery.countdown.min.js') }}"></script>
+            <script type="text/javascript"
+                    src="{{ asset('js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/datetimepicker/moment.js') }}"></script>
+            <script type="text/javascript"
+                    src="{{ asset('js/datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/jquery-ui/jquery-ui.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/modernizr/modernizr-2.6.2.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/minicolors/jquery.miniColors.min.js') }}"></script>
 
-        {{--包括LIBS和插件--}}
-        <script type="text/javascript" src="{{ asset('js/jquery-2.2.4.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/owl-carousel/owl.carousel.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/slick-slider/slick.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/themejs/libs.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/unveil/jquery.unveil.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/countdown/jquery.countdown.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/datetimepicker/moment.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/jquery-ui/jquery-ui.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/modernizr/modernizr-2.6.2.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/minicolors/jquery.miniColors.min.js') }}"></script>
+            {{--主题文件--}}
+            <script type="text/javascript" src="{{ asset('js/themejs/application.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/themejs/homepage.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/themejs/toppanel.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/themejs/so_megamenu.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/themejs/addtocart.js') }}"></script>
 
-        {{--主题文件--}}
-        <script type="text/javascript" src="{{ asset('js/themejs/application.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/themejs/homepage.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/themejs/toppanel.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/themejs/so_megamenu.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/themejs/addtocart.js') }}"></script>
+            @yield('scriptsAfterJs')
 
-                @yield('scriptsAfterJs')
-    </body>
+            </body>
 
 </html>

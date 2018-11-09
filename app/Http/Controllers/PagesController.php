@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\CategoryService;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
-    public function index()
+    public function index(CategoryService $categoryService)
     {
-        return view('pages.index');
+        return view('pages.index',[
+            'categoryTree' => $categoryService->getCategoryTree(),
+        ]);
     }
 
     public function emailVerifyNotice(Request $request)
