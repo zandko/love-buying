@@ -36,4 +36,7 @@ Route::group([
     $router->put('coupon_codes/{coupon_codes}','CouponCodesController@update');
     $router->delete('coupon_codes/{coupon_codes}','CouponCodesController@destroy');
 
+    /*用户*/
+    $router->get('users','UsersController@index');
+
 });

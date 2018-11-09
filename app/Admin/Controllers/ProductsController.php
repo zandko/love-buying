@@ -81,7 +81,9 @@ class ProductsController extends Controller
 
         $grid->id('ID');
         $grid->title('标题');
-        $grid->image('封面图');
+        $grid->image('封面图')->display(function () {
+            return "<img width='80' src='$this->image_url'>";
+        });
         $grid->column('category.name','所属分类');
         $grid->on_sale('是否上架')->display(function ($on_sale) {
             return $on_sale ? '是' : '否';
