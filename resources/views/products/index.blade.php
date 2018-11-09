@@ -292,33 +292,34 @@
                                 </div>
 
                             </div>
-                            <div class="short-by-show form-inline text-right col-md-7 col-sm-9 col-xs-12">
-                                <div class="form-group short-by">
-                                    <label class="control-label" for="input-sort">Sort By:</label>
-                                    <select id="input-sort" class="form-control"
-                                            onchange="location = this.value;">
-                                        <option value="" selected="selected">Default</option>
-                                        <option value="">Name (A - Z)</option>
-                                        <option value="">Name (Z - A)</option>
-                                        <option value="">Price (Low &gt; High)</option>
-                                        <option value="">Price (High &gt; Low)</option>
-                                        <option value="">Rating (Highest)</option>
-                                        <option value="">Rating (Lowest)</option>
-                                        <option value="">Model (A - Z)</option>
-                                        <option value="">Model (Z - A)</option>
-                                    </select>
+                            <form action="{{ route('products.index') }}" class="search-form">
+                                <div class="short-by-show form-inline text-right col-md-7 col-sm-9 col-xs-12">
+                                    <div class="form-group short-by">
+                                        <label class="control-label" for="input-sort">排序方式:</label>
+                                        <select id="input-sort" name="order" class="form-control">
+                                            <option value="" selected="selected">默认排序</option>
+                                            <option value="price_asc">价格从低到高</option>
+                                            <option value="price_desc">价格从高到低</option>
+                                            <option value="sold_count_desc">销量从高到低</option>
+                                            <option value="sold_count_asc">销量从低到高</option>
+                                            <option value="rating_desc">评价从高到低</option>
+                                            <option value="rating_asc">评价从低到高</option>
+                                        </select>
+
+                                    </div>
+                                    {{--<div class="form-group">--}}
+                                        {{--<label class="control-label" for="input-limit">页数:</label>--}}
+                                        {{--<select id="input-limit" name="page" class="form-control">--}}
+                                            {{--<option value="15" selected="selected">15</option>--}}
+                                            {{--<option value="25">25</option>--}}
+                                            {{--<option value="50">50</option>--}}
+                                            {{--<option value="75">75</option>--}}
+                                            {{--<option value="100">100</option>--}}
+                                        {{--</select>--}}
+                                    {{--</div>--}}
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label" for="input-limit">Show:</label>
-                                    <select id="input-limit" class="form-control" onchange="location = this.value;">
-                                        <option value="" selected="selected">15</option>
-                                        <option value="">25</option>
-                                        <option value="">50</option>
-                                        <option value="">75</option>
-                                        <option value="">100</option>
-                                    </select>
-                                </div>
-                            </div>
+                            </form>
+
                             <!-- <div class="box-pagination col-md-3 col-sm-4 col-xs-12 text-right">
                                 <ul class="pagination">
                                     <li class="active"><span>1</span></li>
@@ -338,7 +339,8 @@
                                     <div class="left-block left-b">
 
                                         <div class="product-image-container second_img">
-                                            <a href="{{ route('products.show',['product'=>$product->id]) }}" target="_self" title="Lastrami bacon">
+                                            <a href="{{ route('products.show',['product'=>$product->id]) }}"
+                                               target="_self" title="Lastrami bacon">
                                                 <img src="{{ $product->image_url }}"
                                                      class="img-1 img-responsive" alt="image1">
                                                 @foreach($product->product_sku as $sku_img)
@@ -380,7 +382,8 @@
                                                 </div>
                                                 <span class="rating-num">( {{ $product->review_count }} )</span>
                                             </div>
-                                            <h4><a href="{{ route('products.show',['product'=>$product->id]) }}" title="Pastrami bacon"
+                                            <h4><a href="{{ route('products.show',['product'=>$product->id]) }}"
+                                                   title="Pastrami bacon"
                                                    target="_self">{{ str_limit($product->title,20) }}</a></h4>
 
                                         </div>
@@ -449,4 +452,14 @@
         }
         if (view) display(view);
         //--></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('.search-form select[name=order]').on('change', function () {
+                $('.search-form').submit();
+            });
+
+        });
+    </script>
 @endsection
