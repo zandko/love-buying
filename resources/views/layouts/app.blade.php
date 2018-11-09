@@ -20,7 +20,7 @@
 
     <title>@yield('title', 'loveBuying') - 爱购网</title>
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
 
     {{--Favicon--}}
     <link rel="shortcut icon" type="image/png" href="/ico/favicon-16x16.png"/>
@@ -49,7 +49,7 @@
 
     <!-- Google web fonts
 ============================================ -->
-    <!-- <link href='https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700' rel='stylesheet' type='text/css'> -->
+    <link href='https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700' rel='stylesheet' type='text/css'>
 
     <style type="text/css">
         body {
@@ -97,6 +97,7 @@
             <script type="text/javascript" src="{{ asset('js/themejs/toppanel.js') }}"></script>
             <script type="text/javascript" src="{{ asset('js/themejs/so_megamenu.js') }}"></script>
             <script type="text/javascript" src="{{ asset('js/themejs/addtocart.js') }}"></script>
+
 
             @yield('scriptsAfterJs')
 

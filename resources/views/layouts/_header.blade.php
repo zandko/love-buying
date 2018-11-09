@@ -84,7 +84,7 @@
                         <div class="icon-search hidden-lg hidden-md hidden-sm"><i class="fa fa-search"></i></div>
 
                         <div id="sosearchpro" class="sosearchpro-wrapper so-search ">
-                            <form method="GET" action="index.html">
+                            <form method="GET" action="{{ route('pages.index') }}">
                                 <div id="search0" class="search input-group form-group">
                                     <div class="select_category filter_type  icon-select hidden-sm hidden-xs">
                                         <select class="no-border" name="category_id">
@@ -105,13 +105,13 @@
                                     </div>
 
                                     <input class="autosearch-input form-control" type="text" value="" size="50"
-                                           autocomplete="off" placeholder="Keyword here..." name="search">
+                                               autocomplete="off" placeholder="Keyword here..." name="search">
 
-                                    <button type="submit" class="button-search btn btn-primary" name="submit_search"><i
+                                    <button type="submit" class="button-search btn btn-primary"><i
                                                 class="fa fa-search"></i></button>
 
                                 </div>
-                                <input type="hidden" name="route" value="product/search"/>
+                                {{--<input type="hidden" name="route" value="product/search"/>--}}
                             </form>
                         </div>
                     </div>
