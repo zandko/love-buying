@@ -6,17 +6,16 @@
         <div class="container">
             <div class="row">
                 <div class="header-top-left col-lg-7 col-md-8 col-sm-6 col-xs-4">
-                    <div class="hidden-md hidden-sm hidden-xs welcome-msg">Welcome to SuperMarket! Wrap new
-                        offers / gift every single day on Weekends - New Coupon code: <span>Happy2018</span>
+                    <div class="hidden-md hidden-sm hidden-xs welcome-msg">欢迎来到爱购物！在爱购物上每天都有新的优惠/礼物 - 新优惠券代码：Happy2018: <span>Happy2018</span>
                     </div>
                     <ul class="top-link list-inline hidden-lg ">
                         <li class="account" id="my_account">
-                            <a href="#" title="My Account " class="btn-xs dropdown-toggle" data-toggle="dropdown">
-                                <span class="hidden-xs">My Account </span> <span class="fa fa-caret-down"></span>
+                            <a href="{{ route('user_addresses.index') }}" title="个人中心 " class="btn-xs dropdown-toggle" data-toggle="dropdown">
+                                <span class="hidden-xs">我的账户</span> <span class="fa fa-caret-down"></span>
                             </a>
                             <ul class="dropdown-menu ">
-                                <li><a href="register.html"><i class="fa fa-user"></i> Register</a></li>
-                                <li><a href="login.html"><i class="fa fa-pencil-square-o"></i> Login</a></li>
+                                <li><a href="{{ route('register') }}"><i class="fa fa-user"></i> 注册</a></li>
+                                <li><a href="{{ route('login') }}"><i class="fa fa-pencil-square-o"></i> 登录</a></li>
                             </ul>
                         </li>
                     </ul>

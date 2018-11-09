@@ -344,7 +344,6 @@
                                     <div class="brand"><span>上架时间 :</span><a href="#">{{ $product->created_at    }}</a>
                                     </div>
                                     <div class="price-tax"><span>税前 :</span> <span class="min_price">${{ $product->price }}</span></div>
-                                    <div class="brand"><span>品牌 :</span><a href="#">Apple</a></div>
                                     <div class="model"><span>产品代码 :</span> {{ $product->id }}</div>
                                     <div class="model"><span>销量 :</span> {{ $product->sold_count }}</div>
                                 </div>
@@ -395,7 +394,7 @@
                                             <label>数量</label>
                                             <input class="form-control" type="text" name="quantity"
                                                    value="1">
-                                            <input type="hidden" name="product_id" value="50">
+                                            {{--<input type="hidden" name="product_id" value="50">--}}
                                             <span class="input-group-addon product_quantity_down">−</span>
                                             <span class="input-group-addon product_quantity_up">+</span>
                                         </div>
@@ -404,7 +403,7 @@
                                         <input type="button" data-toggle="tooltip" title="" value="添加到购物车"
                                                data-loading-text="Loading..." id="button-cart"
                                                class="btn btn-mega btn-lg"
-                                               onclick="cart.add('42', '1');" data-original-title="亲，您看要不加一下">
+                                               onclick="cart.add('+{{ $product->id }}+', '11','+{{ $product->image_url }}+','+{{ $product->title }}+');" data-original-title="亲，您看要不加一下">
                                     </div>
                                     <div class="add-to-links wish_comp">
                                         <ul class="blank list-inline">
