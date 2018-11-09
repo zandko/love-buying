@@ -338,7 +338,7 @@
                                     <div class="left-block left-b">
 
                                         <div class="product-image-container second_img">
-                                            <a href="product.html" target="_self" title="Lastrami bacon">
+                                            <a href="{{ route('products.show',['product'=>$product->id]) }}" target="_self" title="Lastrami bacon">
                                                 <img src="{{ $product->image_url }}"
                                                      class="img-1 img-responsive" alt="image1">
                                                 @foreach($product->product_sku as $sku_img)
@@ -380,7 +380,7 @@
                                                 </div>
                                                 <span class="rating-num">( {{ $product->review_count }} )</span>
                                             </div>
-                                            <h4><a href="product.html" title="Pastrami bacon"
+                                            <h4><a href="{{ route('products.show',['product'=>$product->id]) }}" title="Pastrami bacon"
                                                    target="_self">{{ str_limit($product->title,20) }}</a></h4>
 
                                         </div>
