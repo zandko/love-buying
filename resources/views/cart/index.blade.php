@@ -124,7 +124,8 @@
                                     <div class="form-group required">
                                         <label class="col-sm-2 control-label" for="input-postcode">备注</label>
                                         <div class="col-sm-10" id="order-form">
-                                            <textarea name="remark" id="" cols="20" class="form-control" rows="10"></textarea>
+                                            <textarea name="remark" id="" cols="20" class="form-control"
+                                                      rows="10"></textarea>
                                         </div>
                                     </div>
                                     <button type="button" id="button-quote" data-loading-text="Loading..."
@@ -216,7 +217,7 @@
                     .then(function (response) {
                         swal('订单提交成功', '', 'success')
                             .then(function () {
-                                location.href = '/orders/' + response.data.id+ '/show';
+                                location.href = '/orders/' + response.data.id + '/show';
                             })
                     }, function (error) {
                         if (error.response.status === 422) {

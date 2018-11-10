@@ -9,6 +9,7 @@ class PagesController extends Controller
 {
     public function index(CategoryService $categoryService)
     {
+
         return view('pages.index',[
             'categoryTree' => $categoryService->getCategoryTree(),
         ]);

@@ -88,18 +88,7 @@
                                     <div class="select_category filter_type  icon-select hidden-sm hidden-xs">
                                         <select class="no-border" name="category_id">
                                             <option value="0">所有分类</option>
-                                            <option value="78">Apparel</option>
-                                            <option value="77">Cables &amp; Connectors</option>
-                                            <option value="82">Cameras &amp; Photo</option>
-                                            <option value="80">Flashlights &amp; Lamps</option>
-                                            <option value="81">Mobile Accessories</option>
-                                            <option value="79">Video Games</option>
-                                            <option value="20">Jewelry &amp; Watches</option>
-                                            <option value="76">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Earings</option>
-                                            <option value="26">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wedding
-                                                Rings
-                                            </option>
-                                            <option value="27">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Men Watches</option>
+
                                         </select>
                                     </div>
 
@@ -129,7 +118,6 @@
                                             </span>
                                     <div class="shopcart-inner">
                                         <p class="text-shopping-cart">
-
                                             我的购物车
                                         </p>
 

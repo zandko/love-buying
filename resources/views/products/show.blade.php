@@ -400,7 +400,7 @@
                                         <input type="button" data-toggle="tooltip" title="" value="添加到购物车"
                                                data-loading-text="Loading..." id="button-cart"
                                                class="btn btn-mega btn-lg"
-                                               onclick="cart.add('+{{ $product->id }}+', '','+{{ $product->image_url }}+','+{{ $product->title }}+');"
+                                               onclick="cart.add('+{{ $product->id }}+', '','/image/catalog/demo/product/fashion/1.jpg','+{{ $product->title }}+');"
                                                data-original-title="亲，您看要不加一下">
                                     </div>
                                     <div class="add-to-links wish_comp">
