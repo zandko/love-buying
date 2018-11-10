@@ -133,7 +133,7 @@
                                                         </td>
                                                         <td class="text-right">${{ $item->productSku->price }}</td>
                                                         <td class="text-right">
-                                                           
+
                                                         </td>
                                                     </tr>
                                                 @endforeach
