@@ -7,9 +7,9 @@
     <!-- Main Container  -->
     <div class="main-container container">
         <ul class="breadcrumb">
-            <li><a href="#"><i class="fa fa-home"></i></a></li>
-            <li><a href="#">Smartphone & Tablets</a></li>
-            <li><a href="#">Chicken swinesha</a></li>
+            <li><a href="/"><i class="fa fa-home"></i></a></li>
+            <li><a href="#">{{ $product->category->name }}</a></li>
+            <li><a href="#">{{ $product->long_title }}</a></li>
 
         </ul>
 
@@ -292,12 +292,12 @@
                                 </a>
 
                                 @foreach($product->product_sku as $k => $sku)
-                                <a data-index="{{$k}}" class="img thumbnail "
-                                   data-image="/image/catalog/demo/product/fashion/2.jpg" title="Chicken swinesha">
-                                    <img src="{{ $sku->image_url }}" title="{{ $sku->title }}"
-                                         alt="Chicken swinesha">
-                                </a>
-                                    @endforeach
+                                    <a data-index="{{$k}}" class="img thumbnail "
+                                       data-image="/image/catalog/demo/product/fashion/2.jpg" title="Chicken swinesha">
+                                        <img src="{{ $sku->image_url }}" title="{{ $sku->title }}"
+                                             alt="Chicken swinesha">
+                                    </a>
+                                @endforeach
                             </div>
 
                         </div>
@@ -343,7 +343,8 @@
                                 <div class="inner-box-desc">
                                     <div class="brand"><span>上架时间 :</span><a href="#">{{ $product->created_at    }}</a>
                                     </div>
-                                    <div class="price-tax"><span>税前 :</span> <span class="min_price">${{ $product->price }}</span></div>
+                                    <div class="price-tax"><span>税前 :</span> <span
+                                                class="min_price">${{ $product->price }}</span></div>
                                     <div class="model"><span>产品代码 :</span> {{ $product->id }}</div>
                                     <div class="model"><span>销量 :</span> {{ $product->sold_count }}</div>
                                 </div>
@@ -367,7 +368,8 @@
                                                     <input class="image_radio" type="radio" name="skus"
                                                            value="{{ $sku->id }}">
                                                     <img style="width: 50px" src="{{ $sku->image_url }}"
-                                                         data-original-title="{{ $sku->description }}"> <i class="fa fa-check"></i>
+                                                         data-original-title="{{ $sku->description }}"> <i
+                                                            class="fa fa-check"></i>
                                                     <label>{{ $sku->title }}</label>
                                                 </label>
                                             </li>
@@ -389,10 +391,10 @@
 
                                 <div class="form-group box-info-product">
                                     <div class="option quantity">
-                                        <div class="input-group quantity-control" unselectable="on"
+                                        <div class="input-group quantity-control cart_amount" unselectable="on"
                                              style="-webkit-user-select: none;">
                                             <label>数量</label>
-                                            <input class="form-control" type="text" name="quantity"
+                                            <input class="form-control" type="text" name="amount"
                                                    value="1">
                                             {{--<input type="hidden" name="product_id" value="50">--}}
                                             <span class="input-group-addon product_quantity_down">−</span>
@@ -403,7 +405,8 @@
                                         <input type="button" data-toggle="tooltip" title="" value="添加到购物车"
                                                data-loading-text="Loading..." id="button-cart"
                                                class="btn btn-mega btn-lg"
-                                               onclick="cart.add('+{{ $product->id }}+', '11','+{{ $product->image_url }}+','+{{ $product->title }}+');" data-original-title="亲，您看要不加一下">
+                                               onclick="cart.add('+{{ $product->id }}+', '','+{{ $product->image_url }}+','+{{ $product->title }}+');"
+                                               data-original-title="亲，您看要不加一下">
                                     </div>
                                     <div class="add-to-links wish_comp">
                                         <ul class="blank list-inline">
@@ -947,12 +950,41 @@
 
     <script>
         $(document).ready(function () {
+            /*获取规格信息*/
             $('[data-toggle="tooltip"]').tooltip({trigger: 'hover'});
             $('.sku-btn').click(function () {
                 $('.price-new').text($(this).data('price'));
                 $('.price-old').text($(this).data('price'));
                 $('.min_price').text($(this).data('price'));
                 $('.stock').text('库存：' + $(this).data('stock') + '件');
+            });
+
+            /*加入购物车*/
+            $("#button-cart").click(function () {
+                    axios.post('{{ route('cart.store') }}', {
+                        sku_id: $('label.sku-btn input[name=skus]').val(),
+                        amount: $('.cart_amount input').val(),
+                })
+                    .then(function () {
+                        swal('加入购物车成功', '', 'success');
+                    }, function (error) {
+                        if (error.response.status === 401) {
+                            swal('请先登录', '', 'error');
+                        } else if (error.response.status === 422) {
+                            var html = '<div>';
+                            _.each(error.response.data.errors, function (errors) {
+                                _.each(errors, function (error) {
+                                    html += error + '<br>';
+                                })
+                            });
+
+                            html += '</div>';
+
+                            swal({content: $(html)[0], icon: 'error'});
+                        } else {
+                            swal('系统错误', '', 'error');
+                        }
+                    });
             });
         });
     </script>

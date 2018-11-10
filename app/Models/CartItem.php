@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class CartItem extends Model
 {
     protected $fillable = [
-        'user_id',
-        'product_id',
         'amount',
     ];
+
+    public $timestamps = false;
 
     /*关联用户*/
     public function user()

@@ -130,7 +130,7 @@
                                     <div class="shopcart-inner">
                                         <p class="text-shopping-cart">
 
-                                            My cart
+                                            我的购物车
                                         </p>
 
                                         <span class="total-shopping-cart cart-total-full">
@@ -165,25 +165,6 @@
                                                 <a onclick="cart.remove('2');" class="fa fa-times fa-delete"></a>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class="text-center" style="width:70px">
-                                                <a href="product.html">
-                                                    <img src="/image/catalog/demo/product/80/2.jpg" style="width:70px"
-                                                         alt="Xancetta bresao" title="Xancetta bresao" class="preview">
-                                                </a>
-                                            </td>
-                                            <td class="text-left"><a class="cart_product_name" href="product.html">Xancetta
-                                                    bresao</a>
-                                            </td>
-                                            <td class="text-center">x1</td>
-                                            <td class="text-center">$60.00</td>
-                                            <td class="text-right">
-                                                <a href="product.html" class="fa fa-edit"></a>
-                                            </td>
-                                            <td class="text-right">
-                                                <a onclick="cart.remove('1');" class="fa fa-times fa-delete"></a>
-                                            </td>
-                                        </tr>
                                         </tbody>
                                     </table>
                                 </li>
@@ -213,10 +194,10 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <p class="text-right"><a class="btn view-cart" href="cart.html"><i
-                                                        class="fa fa-shopping-cart"></i>View Cart</a>&nbsp;&nbsp;&nbsp;
+                                        <p class="text-right"><a class="btn view-cart" href="{{ route('cart.index') }}"><i
+                                                        class="fa fa-shopping-cart"></i>查看购物车</a>&nbsp;&nbsp;&nbsp;
                                             <a class="btn btn-mega checkout-cart" href="checkout.html"><i
-                                                        class="fa fa-share"></i>Checkout</a>
+                                                        class="fa fa-share"></i>查看</a>
                                         </p>
                                     </div>
                                 </li>
