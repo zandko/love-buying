@@ -374,8 +374,8 @@
                                                 </label>
                                             </li>
                                         @endforeach
-                                        <li class="selected-option">
-                                        </li>
+                                        {{--<li class="selected-option">--}}
+                                        {{--</li>--}}
                                     </ul>
                                 </div>
 
@@ -962,7 +962,7 @@
             /*加入购物车*/
             $("#button-cart").click(function () {
                     axios.post('{{ route('cart.store') }}', {
-                        sku_id: $('label.sku-btn input[name=skus]').val(),
+                        sku_id: $('li.active input[name=skus]').val(),
                         amount: $('.cart_amount input').val(),
                 })
                     .then(function () {
@@ -981,7 +981,7 @@
                             html += '</div>';
 
                             swal({content: $(html)[0], icon: 'error'});
-                        } else {
+                        } else {WW
                             swal('系统错误', '', 'error');
                         }
                     });

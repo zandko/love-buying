@@ -19,6 +19,7 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
+                            <td><input id="select-all" type="checkbox"></td>
                             <td class="text-center">图片</td>
                             <td class="text-left">产品名称</td>
                             <td class="text-left">规格</td>
@@ -30,6 +31,9 @@
                         <tbody>
                         @foreach($cartItems as $item)
                             <tr data-id="{{ $item->productSku->id }}">
+                                <td><input type="checkbox" name="select"
+                                           value="{{ $item->productSku->id }}" {{ $item->productSku->product->on_sale ? 'checked' : 'disabled' }}>
+                                </td>
                                 <td class="text-center"><a
                                             href="{{ route('products.show',[$item->productSku->product_id]) }}"><img
                                                 width="70px" src="{{ $item->productSku->image_url }}"
@@ -48,10 +52,11 @@
                                                    name="amount" value="{{ $item->amount }}" size="1"
                                                    class="form-control"/>
                                             <span class="input-group-btn">
-                        <button type="submit" data-toggle="tooltip" title="修改" class="btn btn-primary"><i
-                                    class="fa fa-clone"></i></button>
-                        <button type="button" data-toggle="tooltip" title="移除" class="btn btn-danger" onClick=""><i
-                                    class="fa fa-times-circle"></i></button>
+                            {{--<button type="submit" data-toggle="tooltip" title="修改" class="btn btn-primary"><i--}}
+                                                {{--class="fa fa-clone"></i></button>--}}
+                                                <button type="button" data-toggle="tooltip" title="移除"
+                                                        class="btn btn-danger" onClick=""><i
+                                                            class="fa fa-times-circle"></i></button>
                         </span></div>
                                     </td>
                                 @endif
@@ -89,61 +94,61 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a href="#collapse-shipping" class="accordion-toggle collapsed" data-toggle="collapse"
-                                   data-parent="#accordion" aria-expanded="false">Estimate Shipping &amp; Taxes
+                    {{--<div class="panel panel-default">--}}
+                    {{--<div class="panel-heading">--}}
+                    {{--<h4 class="panel-title">--}}
+                    {{--<a href="#collapse-shipping" class="accordion-toggle collapsed" data-toggle="collapse"--}}
+                    {{--data-parent="#accordion" aria-expanded="false">Estimate Shipping &amp; Taxes--}}
 
-                                    <i class="fa fa-caret-down"></i>
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapse-shipping" class="panel-collapse collapse" aria-expanded="false"
-                             style="height: 0px;">
-                            <div class="panel-body">
-                                <p>Enter your destination to get a shipping estimate.</p>
-                                <div class="form-horizontal">
-                                    <div class="form-group required">
-                                        <label class="col-sm-2 control-label" for="input-country">Country</label>
-                                        <div class="col-sm-10">
-                                            <select name="country_id" id="input-country" class="form-control">
-                                                <option value=""> --- Please Select ---</option>
-                                                <option value="244">Aaland Islands</option>
-                                                <option value="1">Afghanistan</option>
-                                                <option value="2">Albania</option>
-                                                <option value="3">Algeria</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group required">
-                                        <label class="col-sm-2 control-label" for="input-zone">Region / State</label>
-                                        <div class="col-sm-10">
-                                            <select name="zone_id" id="input-zone" class="form-control">
-                                                <option value=""> --- Please Select ---</option>
-                                                <option value="3513">Aberdeen</option>
-                                                <option value="3514">Aberdeenshire</option>
-                                                <option value="3515">Anglesey</option>
-                                                <option value="3516">Angus</option>
-                                                <option value="3517">Argyll and Bute</option>
-                                                <option value="3518">Bedfordshire</option>
-                                                <option value="3519">Berkshire</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group required">
-                                        <label class="col-sm-2 control-label" for="input-postcode">Post Code</label>
-                                        <div class="col-sm-10"><input type="text" name="postcode" value=""
-                                                                      placeholder="Post Code" id="input-postcode"
-                                                                      class="form-control"></div>
-                                    </div>
-                                    <button type="button" id="button-quote" data-loading-text="Loading..."
-                                            class="btn btn-primary">Get Quotes
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {{--<i class="fa fa-caret-down"></i>--}}
+                    {{--</a>--}}
+                    {{--</h4>--}}
+                    {{--</div>--}}
+                    {{--<div id="collapse-shipping" class="panel-collapse collapse" aria-expanded="false"--}}
+                    {{--style="height: 0px;">--}}
+                    {{--<div class="panel-body">--}}
+                    {{--<p>Enter your destination to get a shipping estimate.</p>--}}
+                    {{--<div class="form-horizontal">--}}
+                    {{--<div class="form-group required">--}}
+                    {{--<label class="col-sm-2 control-label" for="input-country">Country</label>--}}
+                    {{--<div class="col-sm-10">--}}
+                    {{--<select name="country_id" id="input-country" class="form-control">--}}
+                    {{--<option value=""> --- Please Select ---</option>--}}
+                    {{--<option value="244">Aaland Islands</option>--}}
+                    {{--<option value="1">Afghanistan</option>--}}
+                    {{--<option value="2">Albania</option>--}}
+                    {{--<option value="3">Algeria</option>--}}
+                    {{--</select>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group required">--}}
+                    {{--<label class="col-sm-2 control-label" for="input-zone">Region / State</label>--}}
+                    {{--<div class="col-sm-10">--}}
+                    {{--<select name="zone_id" id="input-zone" class="form-control">--}}
+                    {{--<option value=""> --- Please Select ---</option>--}}
+                    {{--<option value="3513">Aberdeen</option>--}}
+                    {{--<option value="3514">Aberdeenshire</option>--}}
+                    {{--<option value="3515">Anglesey</option>--}}
+                    {{--<option value="3516">Angus</option>--}}
+                    {{--<option value="3517">Argyll and Bute</option>--}}
+                    {{--<option value="3518">Bedfordshire</option>--}}
+                    {{--<option value="3519">Berkshire</option>--}}
+                    {{--</select>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group required">--}}
+                    {{--<label class="col-sm-2 control-label" for="input-postcode">Post Code</label>--}}
+                    {{--<div class="col-sm-10"><input type="text" name="postcode" value=""--}}
+                    {{--placeholder="Post Code" id="input-postcode"--}}
+                    {{--class="form-control"></div>--}}
+                    {{--</div>--}}
+                    {{--<button type="button" id="button-quote" data-loading-text="Loading..."--}}
+                    {{--class="btn btn-primary">Get Quotes--}}
+                    {{--</button>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
 
                 </div>
 
@@ -176,8 +181,9 @@
                 </div>
 
                 <div class="buttons">
-                    <div class="pull-left"><a href="index.html" class="btn btn-primary">继续购物</a></div>
-                    <div class="pull-right"><a href="checkout.html" class="btn btn-primary">查看</a></div>
+                    <div class="pull-left"><a href="{{ route('products.index') }}" class="btn btn-primary">继续购物</a>
+                    </div>
+                    <div class="pull-right"><a href="" id="btn-show" class="btn btn-primary">查看</a></div>
                 </div>
             </div>
             <!--Middle Part End -->
@@ -213,7 +219,43 @@
                             });
                     });
             });
+
+
+            /*全选全不选*/
+            $('#select-all').change(function () {
+                var checked = $(this).prop('checked');
+
+                $('input[name=select][type=checkbox]:not([disabled])').each(function () {
+                    $(this).prop('checked', checked);
+                });
+            });
+
+            /*订单信息*/
+            $('#btn-show').click(function () {
+                var req = {
+                    items: [],
+                }
+
+                $("table tr[data-id]").each(function () {
+                    var checkbox = $(this).find('input[name=select][type=checkbox]');
+                    if (checkbox.prop('disabled') || !checkbox.prop('checked')) {
+                        return;
+                    }
+
+                    var input = $(this).find('input[name=amount]');
+
+                    if (input.val() == 0 || isNaN(input.val())) {
+                        return;
+                    }
+
+                    req.items.push({
+                        sku_id: $(this).data('id'),
+                        amount: input.val(),
+                    });
+                });
+            });
         });
+
     </script>
 
 @endsection

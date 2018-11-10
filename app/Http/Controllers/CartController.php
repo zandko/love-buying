@@ -37,7 +37,9 @@ class CartController extends Controller
             $cart->save();
         }
 
-        return [];
+        return [
+            'sku_id' => $skuId,
+        ];
     }
 
     public function destory(ProductSku $sku, Request $request)
