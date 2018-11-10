@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\InvalidRequestException;
+use App\Http\Requests\OrderRequest;
 use App\Jobs\CloseOrder;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -27,7 +28,6 @@ class OrdersController extends Controller
 
     public function detail(Order $order, Request $request)
     {
-        $this->authorize('own', $order);
         /*延迟预加载*/
         return view('orders.detail',[
             'order' => $order->load([
@@ -37,7 +37,7 @@ class OrdersController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(OrderRequest $request)
     {
         $user = $request->user();
 

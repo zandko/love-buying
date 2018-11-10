@@ -2,10 +2,21 @@
 
 namespace App\Http\Requests;
 
+use App\Models\ProductSku;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class OrderRequest extends Request
+class OrderRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -15,8 +26,8 @@ class OrderRequest extends Request
     public function rules()
     {
         return [
-            'address_id' => ['required', Rule::exists('user_addresses', 'id')->where('user_id', $this->user()->id)],
-            'items' => ['required', 'array'],
+            'address_id'     => ['required', Rule::exists('user_addresses', 'id')->where('user_id', $this->user()->id)],
+            'items'          => ['required', 'array'],
             'items.*.sku_id' => [
                 'required',
                 function ($attribute, $value, $fail) {
@@ -32,10 +43,10 @@ class OrderRequest extends Request
                         $fail('该商品已售完');
                         return;
                     }
-                    /*获取当前索引*/
+
                     preg_match('/items\.(\d+)\.sku_id/', $attribute, $m);
-                    $index = $m[1];
-                    /*根据索引找到用户所提交的购买数量*/
+                    $index  = $m[1];
+
                     $amount = $this->input('items')[$index]['amount'];
                     if ($amount > 0 && $amount > $sku->stock) {
                         $fail('该商品库存不足');
@@ -44,6 +55,13 @@ class OrderRequest extends Request
                 },
             ],
             'items.*.amount' => ['required', 'integer', 'min:1'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'items.required' => '商品或数量不能为空',
         ];
     }
 }
