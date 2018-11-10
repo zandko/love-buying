@@ -358,7 +358,7 @@
                 <div class="bottom3">
                     <div class="telephone hidden-xs hidden-sm hidden-md">
                         <ul class="blank">
-                            <li><a href="#"><i class="fa fa-truck"></i>追踪您的订单</a></li>
+                            <li><a href="{{ route('orders.index') }}"><i class="fa fa-truck"></i>追踪您的订单</a></li>
                             <li><a href="#"><i class="fa fa-phone-square"></i>热线 17805202450</a></li>
                         </ul>
                     </div>

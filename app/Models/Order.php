@@ -74,9 +74,9 @@ class Order extends Model
     }
 
     /*生成订单号*/
-    public function findAvailableNo()
+    public static function findAvailableNo()
     {
-        $prefix = data('YmdHis');
+        $prefix = date('YmdHis');
         for ($i = 0; $i < 10; $i++) {
             $no = $prefix . str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
             if (!static::query()->where('no', $no)->exists()) {

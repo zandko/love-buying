@@ -276,7 +276,7 @@
                                      src="/image/catalog/demo/product/fashion/1.jpg" title="{{ $product->title }}"
                                      alt="Chicken swinesha">
                             </div>
-                            <a class="thumb-video pull-left" href="https://www.youtube.com/watch?v=HhabgvIIXik"><i
+                            <a class="thumb-video pull-left" href="http://www.iqiyi.com/w_19s1mp66o5.html"><i
                                         class="fa fa-youtube-play"></i></a>
 
                             <div id="thumb-slider" class="yt-content-slider full_slider owl-drag" data-rtl="yes"
@@ -285,7 +285,7 @@
                                  data-items_column00="4" data-items_column0="4" data-items_column1="3"
                                  data-items_column2="4" data-items_column3="1" data-items_column4="1" data-arrows="yes"
                                  data-pagination="no" data-lazyload="yes" data-loop="no" data-hoverpause="yes">
-                                <a data-index="0" class="img thumbnail "
+                                <a data-index="0" class="img thumbnail"
                                    data-image="/image/catalog/demo/product/fashion/1.jpg" title="Chicken swinesha">
                                     <img src="{{ $product->image_url }}" title="{{ $product->title }}"
                                          alt="Chicken swinesha">
@@ -314,11 +314,6 @@
                                         @for($i =1;$i<=floor($product->rating);$i++)
                                             <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
                                         @endfor
-                                        {{--<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                        {{--<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                        {{--<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                        {{--<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                        {{--<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
                                     </div>
                                 </div>
 

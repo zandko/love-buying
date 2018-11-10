@@ -39,5 +39,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('cart','CartController@index')->name('cart.index');
         Route::post('cart', 'CartController@store')->name('cart.store');
         Route::delete('cart/{sku}', 'CartController@destory')->name('cart.destory');
+
+        /*订单*/
+        Route::get('orders', 'OrdersController@index')->name('orders.index');
+        Route::get('orders/{order}/detail', 'OrdersController@detail')->name('orders.detail');
+        Route::post('orders', 'OrdersController@store')->name('orders.store');
+        Route::get('orders/{order}/show', 'OrdersController@show')->name('orders.show');
     });
 });

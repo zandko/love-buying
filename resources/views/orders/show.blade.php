@@ -1,199 +1,181 @@
 @extends('layouts.app')
-@section('title', '订单信息')
+@section('title', '商品下单')
 
 @section('content')
-
     <!-- Main Container  -->
     <div class="main-container container">
         <ul class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i></a></li>
-            <li><a href="#">Order Infomation</a></li>
+            <li><a href="#">查看</a></li>
+
         </ul>
 
         <div class="row">
             <!--Middle Part Start-->
-            <div id="content" class="col-sm-9">
-                <h2 class="title">Order Information</h2>
+            <div id="content" class="col-sm-12">
+                <h2 class="title">查看</h2>
+                <div class="so-onepagecheckout row">
+                    <div class="col-left col-sm-3">
 
-                <table class="table table-bordered table-hover">
-                    <thead>
-                    <tr>
-                        <td colspan="2" class="text-left">Order Details</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td style="width: 50%;" class="text-left"><b>Order ID:</b> #214521
-                            <br>
-                            <b>Date Added:</b> 20/06/2016
-                        </td>
-                        <td style="width: 50%;" class="text-left"><b>Payment Method:</b> Cash On Delivery
-                            <br>
-                            <b>Shipping Method:</b> Flat Shipping Rate
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <table class="table table-bordered table-hover">
-                    <thead>
-                    <tr>
-                        <td style="width: 50%; vertical-align: top;" class="text-left">Payment Address</td>
-                        <td style="width: 50%; vertical-align: top;" class="text-left">Shipping Address</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="text-left">Jhone Cary
-                            <br>Central Square
-                            <br>22 Hoi Wing Road
-                            <br>New Delhi
-                            <br>India
-                        </td>
-                        <td class="text-left">Jhone Cary
-                            <br>Central Square
-                            <br>22 Hoi Wing Road
-                            <br>New Delhi
-                            <br>India
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                        <tr>
-                            <td class="text-left">Product Name</td>
-                            <td class="text-left">Model</td>
-                            <td class="text-right">Quantity</td>
-                            <td class="text-right">Price</td>
-                            <td class="text-right">Total</td>
-                            <td style="width: 20px;"></td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td class="text-left">iPhone5</td>
-                            <td class="text-left">product 11</td>
-                            <td class="text-right">1</td>
-                            <td class="text-right">$123.20</td>
-                            <td class="text-right">$123.20</td>
-                            <td style="white-space: nowrap;" class="text-right"><a class="btn btn-primary" title=""
-                                                                                   data-toggle="tooltip" href="#"
-                                                                                   data-original-title="Reorder"><i
-                                            class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-danger" title="" data-toggle="tooltip" href="return.html"
-                                   data-original-title="Return"><i class="fa fa-reply"></i></a>
-                            </td>
-                        </tr>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><i class="fa fa-user"></i>您的个人资料</h4>
+                            </div>
+                            <div class="panel-body">
+                                <fieldset id="account">
+                                    <div class="form-group required">
+                                        <label for="input-payment-firstname" class="control-label">用户名</label>
+                                        <input disabled type="text" value="{{ Auth::user()->name }}"
+                                               class="form-control" id="input-payment-firstname"
+                                               placeholder="First Name" value="" name="firstname">
+                                    </div>
+                                    <div class="form-group required">
+                                        <label for="input-payment-lastname" class="control-label">名字</label>
+                                        <input disabled type="text" class="form-control"
+                                               value="{{ Auth::user()->firstname }}" id="input-payment-lastname"
+                                               placeholder="Last Name" value="" name="lastname">
+                                    </div>
+                                    <div class="form-group required">
+                                        <label for="input-payment-email" class="control-label">电子邮件</label>
+                                        <input disabled type="text" value="{{ Auth::user()->email }}"
+                                               class="form-control" id="input-payment-email" placeholder="E-Mail"
+                                               value="" name="email">
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><i class="fa fa-book"></i>你的地址</h4>
+                            </div>
+                            <div class="panel-body">
+                                <fieldset id="address" class="required">
+                                    <div class="form-group required">
+                                        <label for="input-payment-postcode" class="control-label">详细地址</label>
+                                        <textarea disabled type="text" class="form-control" id="input-payment-postcode"
+                                                  value="" name="postcode">{{join(' ', $order->address)}}</textarea>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" checked="checked" value="1" name="shipping_address">
+                                            我的递送和帐单地址是相同的。 </label>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-right col-sm-9">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="panel panel-default no-padding">
 
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <td colspan="3"></td>
-                            <td class="text-right"><b>Sub-Total</b>
-                            </td>
-                            <td class="text-right">$101.00</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"></td>
-                            <td class="text-right"><b>Flat Shipping Rate</b>
-                            </td>
-                            <td class="text-right">$5.00</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"></td>
-                            <td class="text-right"><b>Eco Tax (-2.00)</b>
-                            </td>
-                            <td class="text-right">$6.00</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"></td>
-                            <td class="text-right"><b>VAT (20%)</b>
-                            </td>
-                            <td class="text-right">$21.20</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"></td>
-                            <td class="text-right"><b>Total</b>
-                            </td>
-                            <td class="text-right">$133.20</td>
-                            <td></td>
-                        </tr>
-                        </tfoot>
-                    </table>
-                </div>
-                <h3>Order History</h3>
-                <table class="table table-bordered table-hover">
-                    <thead>
-                    <tr>
-                        <td class="text-left">Date Added</td>
-                        <td class="text-left">Status</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="text-left">20/06/2016</td>
-                        <td class="text-left">Processing</td>
-                    </tr>
-                    <tr>
-                        <td class="text-left">21/06/2016</td>
-                        <td class="text-left">Shipped</td>
-                    </tr>
-                    <tr>
-                        <td class="text-left">24/06/2016</td>
-                        <td class="text-left">Complete</td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div class="buttons clearfix">
-                    <div class="pull-right"><a class="btn btn-primary" href="#">Continue</a>
+                                    <div class="col-sm-6  checkout-payment-methods">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title"><i class="fa fa-credit-card"></i>付款方法</h4>
+                                        </div>
+                                        <div class="panel-body">
+                                            <p>请选择要在此订单上使用的首选付款方式。</p>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" checked="checked" name="class">支付宝</label>
+                                            </div>
+
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="class">微信</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><i class="fa fa-shopping-cart"></i>购物车</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <td class="text-center">图片</td>
+                                                    <td class="text-left">产品名称</td>
+                                                    <td class="text-left">数量</td>
+                                                    <td class="text-right">单价</td>
+                                                    <td class="text-right">总</td>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($order->orderItems as $index => $item)
+                                                    <tr data-id="{{ $item->id }}">
+                                                        <td class="text-center"><a
+                                                                    href="{{ route('products.show',['product'=>$item->product->id]) }}"><img
+                                                                        width="60px"
+                                                                        src="{{ $item->productSku->image_url }}"
+                                                                        alt="Xitefun Causal Wear Fancy Shoes"
+                                                                        title="{{ $item->productSku->title }}"
+                                                                        class="img-thumbnail"></a></td>
+                                                        <td class="text-left"><a
+                                                                    href="{{ route('products.show',['product'=>$item->product->id]) }}">{{ $item->product->title }}</a>
+                                                        </td>
+                                                        <td class="text-left">
+                                                            <div class="input-group btn-block"
+                                                                 style="min-width: 100px;">
+                                                                <input type="text" name="quantity"
+                                                                       value="{{ $item->amount }}" size="1"
+                                                                       class="form-control">
+                                                                <span class="input-group-btn">
+										{{--<button type="submit" data-toggle="tooltip" title="Update" class="btn btn-primary"><i class="fa fa-refresh"></i></button>--}}
+
+										</span></div>
+                                                        </td>
+                                                        <td class="text-right">${{ $item->productSku->price }}</td>
+                                                        <td class="text-right">
+                                                           
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                                <tfoot>
+
+                                                <tr>
+                                                    <td class="text-right" colspan="4"><strong>优惠卷:</strong></td>
+                                                    <td class="text-right">$19.68</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-right" colspan="4"><strong>总价:</strong></td>
+                                                    <td class="text-right">${{ $order->total_amount }}</td>
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="panel panel-default">
+
+                                    <div class="panel-body">
+                                        <div class="buttons">
+                                            <div class="pull-right">
+                                                <input type="button" class="btn btn-primary" id="button-confirm"
+                                                       value="确认订单">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-
             </div>
-            <!--Middle Part End-->
-            <!--Right Part Start -->
-            <aside class="col-sm-3 hidden-xs content-aside col-md-3" id="column-right">
-                <h2 class="subtitle">Account</h2>
-                <div class="list-group">
-                    <ul class="list-item">
-                        <li><a href="login.html">Login</a>
-                        </li>
-                        <li><a href="register.html">Register</a>
-                        </li>
-                        <li><a href="#">Forgotten Password</a>
-                        </li>
-                        <li><a href="#">My Account</a>
-                        </li>
-                        <li><a href="#">Address Books</a>
-                        </li>
-                        <li><a href="wishlist.html">Wish List</a>
-                        </li>
-                        <li><a href="#">Order History</a>
-                        </li>
-                        <li><a href="#">Downloads</a>
-                        </li>
-                        <li><a href="#">Reward Points</a>
-                        </li>
-                        <li><a href="#">Returns</a>
-                        </li>
-                        <li><a href="#">Transactions</a>
-                        </li>
-                        <li><a href="#">Newsletter</a>
-                        </li>
-                        <li><a href="#">Recurring payments</a>
-                        </li>
-                    </ul>
-                </div>
-            </aside>
-            <!--Right Part End -->
+            <!--Middle Part End -->
+
         </div>
     </div>
-    <!-- //Main Container -->
+
 
 @endsection
+

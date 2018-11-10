@@ -31,6 +31,7 @@
                         <tbody>
                         @foreach($cartItems as $item)
                             <tr data-id="{{ $item->productSku->id }}">
+                                {{ $item->productSku->id }}
                                 <td><input type="checkbox" name="select"
                                            value="{{ $item->productSku->id }}" {{ $item->productSku->product->on_sale ? 'checked' : 'disabled' }}>
                                 </td>
@@ -94,96 +95,52 @@
                             </div>
                         </div>
                     </div>
-                    {{--<div class="panel panel-default">--}}
-                    {{--<div class="panel-heading">--}}
-                    {{--<h4 class="panel-title">--}}
-                    {{--<a href="#collapse-shipping" class="accordion-toggle collapsed" data-toggle="collapse"--}}
-                    {{--data-parent="#accordion" aria-expanded="false">Estimate Shipping &amp; Taxes--}}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a href="#collapse-shipping" class="accordion-toggle collapsed" data-toggle="collapse"
+                                   data-parent="#accordion" aria-expanded="false">选择地址 &amp; 备注
 
-                    {{--<i class="fa fa-caret-down"></i>--}}
-                    {{--</a>--}}
-                    {{--</h4>--}}
-                    {{--</div>--}}
-                    {{--<div id="collapse-shipping" class="panel-collapse collapse" aria-expanded="false"--}}
-                    {{--style="height: 0px;">--}}
-                    {{--<div class="panel-body">--}}
-                    {{--<p>Enter your destination to get a shipping estimate.</p>--}}
-                    {{--<div class="form-horizontal">--}}
-                    {{--<div class="form-group required">--}}
-                    {{--<label class="col-sm-2 control-label" for="input-country">Country</label>--}}
-                    {{--<div class="col-sm-10">--}}
-                    {{--<select name="country_id" id="input-country" class="form-control">--}}
-                    {{--<option value=""> --- Please Select ---</option>--}}
-                    {{--<option value="244">Aaland Islands</option>--}}
-                    {{--<option value="1">Afghanistan</option>--}}
-                    {{--<option value="2">Albania</option>--}}
-                    {{--<option value="3">Algeria</option>--}}
-                    {{--</select>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group required">--}}
-                    {{--<label class="col-sm-2 control-label" for="input-zone">Region / State</label>--}}
-                    {{--<div class="col-sm-10">--}}
-                    {{--<select name="zone_id" id="input-zone" class="form-control">--}}
-                    {{--<option value=""> --- Please Select ---</option>--}}
-                    {{--<option value="3513">Aberdeen</option>--}}
-                    {{--<option value="3514">Aberdeenshire</option>--}}
-                    {{--<option value="3515">Anglesey</option>--}}
-                    {{--<option value="3516">Angus</option>--}}
-                    {{--<option value="3517">Argyll and Bute</option>--}}
-                    {{--<option value="3518">Bedfordshire</option>--}}
-                    {{--<option value="3519">Berkshire</option>--}}
-                    {{--</select>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group required">--}}
-                    {{--<label class="col-sm-2 control-label" for="input-postcode">Post Code</label>--}}
-                    {{--<div class="col-sm-10"><input type="text" name="postcode" value=""--}}
-                    {{--placeholder="Post Code" id="input-postcode"--}}
-                    {{--class="form-control"></div>--}}
-                    {{--</div>--}}
-                    {{--<button type="button" id="button-quote" data-loading-text="Loading..."--}}
-                    {{--class="btn btn-primary">Get Quotes--}}
-                    {{--</button>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
+                                    <i class="fa fa-caret-down"></i>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse-shipping" class="panel-collapse collapse" aria-expanded="false"
+                             style="height: 0px;">
+                            <div class="panel-body">
+                                <p>选择地址和备注。</p>
+                                <div class="form-horizontal">
+                                    <div class="form-group required">
+                                        <label class="col-sm-2 control-label" for="input-country">地址</label>
+                                        <div class="col-sm-10">
+                                            <select name="address" id="input-country" class="form-control">
+                                                @foreach($addresses as $address)
+                                                    <option value="{{ $address->id }}">{{ $address->full_address }} {{ $address->contact_name }} {{ $address->contact_phone }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
 
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-4 col-sm-offset-8">
-                        <table class="table table-bordered">
-                            <tbody>
-                            <tr>
-                                <td class="text-right">
-                                    <strong>小计：</strong>
-                                </td>
-                                <td class="text-right">$168.71</td>
-                            </tr>
-                            <tr>
-                                <td class="text-right">
-                                    <strong>优惠卷：</strong>
-                                </td>
-                                <td class="text-right">$0.00</td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-right">
-                                    <strong>总：</strong>
-                                </td>
-                                <td class="text-right">$213.70</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                                    <div class="form-group required">
+                                        <label class="col-sm-2 control-label" for="input-postcode">备注</label>
+                                        <div class="col-sm-10" id="order-form">
+                                            <textarea name="remark" id="" cols="20" class="form-control" rows="10"></textarea>
+                                        </div>
+                                    </div>
+                                    <button type="button" id="button-quote" data-loading-text="Loading..."
+                                            class="btn btn-primary">添加新地址
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
 
                 <div class="buttons">
                     <div class="pull-left"><a href="{{ route('products.index') }}" class="btn btn-primary">继续购物</a>
                     </div>
-                    <div class="pull-right"><a href="" id="btn-show" class="btn btn-primary">查看</a></div>
+                    <div class="pull-right"><a id="btn-show" class="btn btn-primary">查看</a></div>
                 </div>
             </div>
             <!--Middle Part End -->
@@ -201,7 +158,6 @@
             /*删除商品*/
             $('button.btn-danger').click(function () {
                 var id = $(this).closest('tr').data('id');
-                console.log(id);
                 swal({
                     title: '确定要将该商品移除？',
                     icon: 'warning',
@@ -232,11 +188,14 @@
 
             /*订单信息*/
             $('#btn-show').click(function () {
+
                 var req = {
                     items: [],
+                    address_id: $('#input-country option:selected').val(),
+                    remark: $('#order-form').find('textarea[name=remark]').val(),
                 }
 
-                $("table tr[data-id]").each(function () {
+                $('table tr[data-id]').each(function () {
                     var checkbox = $(this).find('input[name=select][type=checkbox]');
                     if (checkbox.prop('disabled') || !checkbox.prop('checked')) {
                         return;
@@ -251,8 +210,28 @@
                     req.items.push({
                         sku_id: $(this).data('id'),
                         amount: input.val(),
-                    });
+                    })
                 });
+                axios.post('{{ route('orders.store') }}', req)
+                    .then(function (response) {
+                        swal('订单提交成功', '', 'success')
+                            .then(function () {
+                                location.href = '/orders/' + response.data.id+ '/show';
+                            })
+                    }, function (error) {
+                        if (error.response.status === 422) {
+                            var html = '<div>';
+                            _.each(error.response.data.errors, function (errors) {
+                                _.each(errors, function (error) {
+                                    html += error + '<br>';
+                                })
+                            });
+                            html += '</div>';
+                            swal({content: $(html)[0], icon: 'error'})
+                        } else {
+                            swal('系统错误', '', 'error');
+                        }
+                    });
             });
         });
 
