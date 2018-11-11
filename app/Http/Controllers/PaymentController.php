@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderPaid;
 use App\Exceptions\InvalidRequestException;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -40,21 +41,26 @@ class PaymentController extends Controller
         $data = app('alipay')->verify();
 
         $order = Order::where('no', $data->out_trade_no)->first();
+
         if (!$order) {
             return 'fail';
         }
-
         if ($order->paid_at) {
-            return app('alipay')->success();
+            return app('支付宝')->success();
         }
 
         $order->update([
             'paid_at' => Carbon::now(),
-            'payment_method' => '支付宝',
+            'payment_method' => 'alipay',
             'payment_no' => $data->trade_no,
         ]);
 
+        $this->afterPaid($order);
         return app('alipay')->success();
-        \Log::debug('支付宝', $data->all());
+    }
+
+    protected function afterPaid(Order $order)
+    {
+        event(new OrderPaid($order));
     }
 }

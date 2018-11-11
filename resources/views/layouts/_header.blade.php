@@ -83,10 +83,10 @@
                         <div class="icon-search hidden-lg hidden-md hidden-sm"><i class="fa fa-search"></i></div>
 
                         <div id="sosearchpro" class="sosearchpro-wrapper so-search ">
-                            <form method="GET" action="{{ route('pages.index') }}">
-                                <div id="search0" class="search input-group form-group">
+                            <form method="GET" action="{{ route('products.index') }}">
+                                <div  class="search input-group form-group">
                                     <div class="select_category filter_type  icon-select hidden-sm hidden-xs">
-                                        <select class="no-border" name="category_id">
+                                        <select class="no-border">
                                             <option value="0">所有分类</option>
 
                                         </select>

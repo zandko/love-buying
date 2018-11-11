@@ -43,6 +43,7 @@ class User extends Authenticatable
         return $this->hasMany(CartItem::class);
     }
 
+    /*关联订单*/
     public function order()
     {
         return $this->hasMany(Order::class);

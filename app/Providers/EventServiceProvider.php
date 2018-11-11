@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\OrderPaid;
+use App\Listeners\UpdateProductSoldCount;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Event;
 use App\Listeners\RegisteredListener;
@@ -17,6 +19,10 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             RegisteredListener::class,
+        ],
+
+        OrderPaid::class => [
+            UpdateProductSoldCount::class,
         ],
     ];
 
