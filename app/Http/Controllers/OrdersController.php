@@ -24,6 +24,7 @@ class OrdersController extends Controller
 
     public function detail(Order $order, Request $request)
     {
+        $this->authorize('own', $order);
         /*延迟预加载*/
         return view('orders.detail', [
             'order' => $order->load([
@@ -46,6 +47,7 @@ class OrdersController extends Controller
 
     public function show(Request $request, Order $order)
     {
+        $this->authorize('own', $order);
         return view('orders.show', [
             'order' => $order->load([
                 'orderItems.productSku',

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Order;
 use App\Models\UserAddress;
 use App\Policies\OrderPolicy;
 use App\Policies\UserAddressPolicy;

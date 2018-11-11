@@ -160,9 +160,12 @@
                                     <div class="panel-body">
                                         <div class="buttons">
                                             <div class="pull-right">
-                                                <input type="button" class="btn btn-primary" id="button-confirm"
-                                                       value="确认订单">
+                                                @if(!$order->paid_at && !$order->closed)
+                                                    <a href="{{ route('payment.alipay',['order'=>$order->id]) }}" class="btn btn-primary">提交订单</a>
+                                                @endif
+
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
