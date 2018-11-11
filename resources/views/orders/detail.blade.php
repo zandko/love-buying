@@ -29,10 +29,15 @@
                             <b>添加日期:</b> {{ $order->created_at }}
                             <br>
                             <br>
-                            <b>付款日期:</b> {{ $order->paid_at }}
-                            <br>
-                            <br>
-                            <b>备注：</b>{{ $order->remark }}
+                            @if($order->paid_at)
+                                <b>付款日期:</b> {{ $order->paid_at }}
+                                <br>
+                                <br>
+                            @endif
+
+                            @if($order->remark)
+                                <b>备注：</b>{{ $order->remark }}
+                            @endif
                         </td>
                         <td style="width: 50%;" class="text-left"><b>付款方式:</b> {{ $order->payment_method }}
 
@@ -63,7 +68,7 @@
                             <td class="text-left">规格</td>
                             <td class="text-right">数量</td>
                             <td class="text-right">单价</td>
-                            <td class="text-right">最终价</td>
+                            <td class="text-right">操作</td>
                         </tr>
                         </thead>
                         <tbody>
@@ -78,8 +83,11 @@
                                         <a class="btn btn-primary" data-toggle="tooltip"
                                            href="{{ route('payment.alipay',['order'=>$order->id]) }}">继续支付</a>
                                     @elseif($order->closed)
-                                        <a disabled class="btn btn-danger" data-toggle="tooltip" >订单已关闭</a>
-                                    @else
+                                        <a disabled class="btn btn-danger" data-toggle="tooltip">订单已关闭</a>
+                                    @elseif($order->ship_status === \App\Models\Order::SHIP_STATUS_DELIVERED)
+                                        <a id="btn-receive"  class="btn btn-success">确认收货</a>
+                                    @elseif($order->ship_status===\App\Models\Order::SHIP_STATUS_RECEIVED)
+                                        <a id="btn-review"  class="btn btn-primary">评价商品</a>
                                         <a class="btn btn-danger" data-toggle="tooltip" href="return.html">申请退款</a>
                                     @endif
                                 </td>
@@ -115,7 +123,7 @@
                     <thead>
                     <tr>
                         <td class="text-left">
-                            时间
+                            更新时间
                         </td>
                         <td class="text-left">状态</td>
                     </tr>
@@ -141,6 +149,44 @@
 
                     </tbody>
                 </table>
+
+                <h3>物流状态</h3>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <td class="text-left">
+                            发货时间
+                        </td>
+                        <td>
+                            快递公司
+                        </td>
+                        <td>
+                            物流单号
+                        </td>
+                        <td class="text-left">状态</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        @if($order->ship_data)
+
+                            <td>{{ $order->updated_at }}</td>
+
+                            <td class="text-left">
+                                {{ $order->ship_data['express_company'] }}
+                            </td>
+                            <td class="text-left">
+                                {{ $order->ship_data['express_no'] }}
+                            </td>
+                            <td class="text-left">{{ \App\Models\Order::$shipStatusMap[$order->ship_status] }}</td>
+                        @else
+                            <td class="text-left">商家正在处理，请耐心等待发货</td>
+                        @endif
+
+                    </tr>
+                    </tbody>
+                </table>
+
                 <div class="buttons clearfix">
                     <div class="pull-right"><a class="btn btn-primary" href="{{ route('orders.index') }}">返回</a>
                     </div>
@@ -153,5 +199,32 @@
         </div>
     </div>
     <!-- //Main Container -->
+
+@endsection
+
+@section('scriptsAfterJs')
+
+    <script>
+        $(document).ready(function () {
+            $('#btn-receive').click(function () {
+                swal({
+                    title: "确认已经收到商品？",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                    buttons: ['取消', '确认'],
+                })
+                    .then(function (ret) {
+                        if (!ret) {
+                            return;
+                        }
+                        axios.post('{{ route('orders.received', [$order->id]) }}')
+                            .then(function () {
+                                location.reload();
+                            });
+                    });
+            });
+        });
+    </script>
 
 @endsection
