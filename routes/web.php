@@ -36,7 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('products/{product}', 'ProductsController@show')->name('products.show');
 
         /*购物车*/
-        Route::get('cart','CartController@index')->name('cart.index');
+        Route::get('cart', 'CartController@index')->name('cart.index');
         Route::post('cart', 'CartController@store')->name('cart.store');
         Route::delete('cart/{sku}', 'CartController@destory')->name('cart.destory');
 
@@ -48,5 +48,8 @@ Route::group(['middleware' => 'auth'], function () {
 
         /*支付*/
         Route::get('payment/{order}/alipay', 'PaymentController@payByAlipay')->name('payment.alipay');
+        Route::get('payment/alipay/return', 'PaymentController@alipayReturn')->name('payment.alipay.return');
     });
 });
+
+Route::post('payment/alipay/notify', 'PaymentController@alipayNotify')->name('payment.alipay.notify');

@@ -26,12 +26,15 @@
                         <td style="width: 50%;" class="text-left"><b>订单编号:</b>{{$order->no}}
                             <br>
                             <br>
-                            <b>添加日期:</b> {{ $order->paid_at }}
+                            <b>添加日期:</b> {{ $order->created_at }}
+                            <br>
+                            <br>
+                            <b>付款日期:</b> {{ $order->paid_at }}
                             <br>
                             <br>
                             <b>备注：</b>{{ $order->remark }}
                         </td>
-                        <td style="width: 50%;" class="text-left"><b>付款方式:</b> 货到付款
+                        <td style="width: 50%;" class="text-left"><b>付款方式:</b> {{ $order->payment_method }}
 
                         </td>
                     </tr>
@@ -47,7 +50,7 @@
                     <tr>
 
                         <td class="text-left">
-                           {{ join(' ',$order->address) }}
+                            {{ join(' ',$order->address) }}
                         </td>
                     </tr>
                     </tbody>
@@ -65,16 +68,23 @@
                         </thead>
                         <tbody>
                         @foreach($order->orderItems as $item)
-                        <tr>
-                            <td class="text-left">{{ $item->product->title }}</td>
-                            <td class="text-left">{{ $item->productSku->title }}</td>
-                            <td class="text-right">{{ $item->amount }}</td>
-                            <td class="text-right">${{ $item->productSku->price }}</td>
-                            <td style="white-space: nowrap;" class="text-right">
-                                <a class="btn btn-danger" title="" data-toggle="tooltip" href="return.html"
-                                   data-original-title="Return"><i class="fa fa-reply"></i></a></td>
+                            <tr>
+                                <td class="text-left">{{ $item->product->title }}</td>
+                                <td class="text-left">{{ $item->productSku->title }}</td>
+                                <td class="text-right">{{ $item->amount }}</td>
+                                <td class="text-right">${{ $item->productSku->price }}</td>
+                                <td style="white-space: nowrap;" class="text-right">
+                                    @if(!$order->paid_at && !$order->closed)
+                                        <a class="btn btn-primary" data-toggle="tooltip"
+                                           href="{{ route('payment.alipay',['order'=>$order->id]) }}">继续支付</a>
+                                    @elseif($order->closed)
+                                        <a disabled class="btn btn-danger" data-toggle="tooltip" >订单已关闭</a>
+                                    @else
+                                        <a class="btn btn-danger" data-toggle="tooltip" href="return.html">申请退款</a>
+                                    @endif
+                                </td>
 
-                        </tr>
+                            </tr>
                         @endforeach
                         </tbody>
                         <tfoot>
@@ -105,7 +115,8 @@
                     <thead>
                     <tr>
                         <td class="text-left">
-                            时间</td>
+                            时间
+                        </td>
                         <td class="text-left">状态</td>
                     </tr>
                     </thead>
