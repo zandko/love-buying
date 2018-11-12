@@ -12,6 +12,8 @@
 */
 
 Route::get('/', 'PagesController@index')->name('pages.index');
+Route::get('products', 'ProductsController@index')->name('products.index');
+Route::get('products/{product}', 'ProductsController@show')->name('products.show');
 
 Auth::routes();
 
@@ -32,8 +34,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::delete('user_addresses/{user_address}', 'UserAddressesController@destory')->name('user_addresses.destory');
 
         /*商品*/
-        Route::get('products', 'ProductsController@index')->name('products.index');
-        Route::get('products/{product}', 'ProductsController@show')->name('products.show');
+//        Route::get('products', 'ProductsController@index')->name('products.index');
+//        Route::get('products/{product}', 'ProductsController@show')->name('products.show');
 
         /*购物车*/
         Route::get('cart', 'CartController@index')->name('cart.index');

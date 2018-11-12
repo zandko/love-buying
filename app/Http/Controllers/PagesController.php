@@ -8,10 +8,15 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
-    public function index(CategoryService $categoryService)
+    public function index(Product $product,CategoryService $categoryService)
     {
+        $sold_count = $product->query()->orderBy('sold_count','desc')->paginate(4);
+        $desc = $product->query()->orderBy('created_at','desc')->paginate(4);
+
         return view('pages.index',[
             'categoryTree' => $categoryService->getCategoryTree(),
+            'sold_count' => $sold_count,
+            'desc' => $desc,
         ]);
     }
 

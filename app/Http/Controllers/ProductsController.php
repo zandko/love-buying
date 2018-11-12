@@ -4,13 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\InvalidRequestException;
 use App\Models\Product;
+use App\Services\CategoryService;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request,CategoryService $categoryService)
     {
         $builder = Product::query()->where('on_sale', true);
+
+        if ($search = $request->input('search', '')) {
+            $keywords = '%'.$search.'%';
+            $builder->where('title','like',$keywords)
+                ->orWhere('description','like',$keywords);
+        }
 
         if ($order = $request->input('order', '')) {
             if (preg_match('/^(.+)_(asc|desc)$/', $order, $m)) {
@@ -21,8 +28,12 @@ class ProductsController extends Controller
         }
 
         $products = $builder->paginate(15);
+
+        $product_desc = $builder->paginate(5);
         return view('products.index', [
             'products' => $products,
+            'categoryTree' => $categoryService->getCategoryTree(),
+            'product_desc' => $product_desc,
         ]);
     }
 
