@@ -52,6 +52,10 @@ Route::group(['middleware' => 'auth'], function () {
         /*支付*/
         Route::get('payment/{order}/alipay', 'PaymentController@payByAlipay')->name('payment.alipay');
         Route::get('payment/alipay/return', 'PaymentController@alipayReturn')->name('payment.alipay.return');
+
+        /*收藏*/
+        Route::post('products/{product}/favorite', 'ProductsController@favor')->name('products.favor');
+        Route::delete('products/{product}/favorite', 'ProductsController@disfavor')->name('products.disfavor');
     });
 });
 

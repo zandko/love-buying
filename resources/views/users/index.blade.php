@@ -93,21 +93,21 @@
             </div>
             <!--Middle Part End-->
             <!--Right Part Start -->
-            <aside class="col-sm-3 hidden-xs content-aside col-md-3" id="column-right">
-                <h2 class="subtitle">导航</h2>
-                <div class="list-group">
-                    <ul class="list-item">
-                        <li><a href="{{ route('user_addresses.create') }}">添加地址</a>
-                        </li>
-                        <li><a href="register.html">修改地址</a>
-                        </li>
-                        <li><a href="#">我的收藏</a>
-                        </li>
-                        <li><a href="#">我的订单</a>
-                        </li>
-                    </ul>
-                </div>
-            </aside>
+            {{--<aside class="col-sm-3 hidden-xs content-aside col-md-3" id="column-right">--}}
+                {{--<h2 class="subtitle">导航</h2>--}}
+                {{--<div class="list-group">--}}
+                    {{--<ul class="list-item">--}}
+                        {{--<li><a href="{{ route('user_addresses.create') }}">添加地址</a>--}}
+                        {{--</li>--}}
+                        {{--<li><a href="register.html">修改地址</a>--}}
+                        {{--</li>--}}
+                        {{--<li><a href="#">我的收藏</a>--}}
+                        {{--</li>--}}
+                        {{--<li><a href="#">我的订单</a>--}}
+                        {{--</li>--}}
+                    {{--</ul>--}}
+                {{--</div>--}}
+            {{--</aside>--}}
             <!--Right Part End -->
         </div>
     </div>

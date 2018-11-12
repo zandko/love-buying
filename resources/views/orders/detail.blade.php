@@ -87,7 +87,7 @@
                                     @elseif($order->ship_status === \App\Models\Order::SHIP_STATUS_DELIVERED)
                                         <a id="btn-receive"  class="btn btn-success">确认收货</a>
                                     @elseif($order->ship_status===\App\Models\Order::SHIP_STATUS_RECEIVED)
-                                        <a id="btn-review"  class="btn btn-primary">评价商品</a>
+                                        <a id="btn-review" href="{{ route('products.show',['product'=>$item->product->id]) }}"  class="btn btn-primary">评价商品</a>
                                         <a class="btn btn-danger" data-toggle="tooltip" href="return.html">申请退款</a>
                                     @endif
                                 </td>

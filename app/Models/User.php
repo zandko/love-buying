@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','email_verified','firstname'
+        'name', 'email', 'password', 'email_verified', 'firstname'
     ];
 
     /**
@@ -47,5 +47,13 @@ class User extends Authenticatable
     public function order()
     {
         return $this->hasMany(Order::class);
+    }
+
+    /*方法用于定义一个多对多的关联 第一个参数是关联的模型类名 第二个参数是中间表的表名*/
+    public function favoriteProducts()
+    {
+        return $this->belongsToMany(Product::class, 'user_favorite_products')
+            ->withTimestamps()
+            ->orderBy('user_favorite_products.created_at', 'desc');
     }
 }

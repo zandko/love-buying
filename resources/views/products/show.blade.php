@@ -406,10 +406,18 @@
                                     <div class="add-to-links wish_comp">
                                         <ul class="blank list-inline">
                                             <li class="wishlist">
-                                                <a class="icon" data-toggle="tooltip" title=""
-                                                   onclick="wishlist.add('50');" data-original-title="加入收藏"><i
-                                                            class="fa fa-heart"></i>
-                                                </a>
+                                                @if(!$favored)
+                                                    <a class="icon btn-favor" data-toggle="tooltip" title=""
+                                                       onclick="wishlist.add('50');" data-original-title="加入收藏"><i
+                                                                class="fa fa-heart"></i>
+                                                    </a>
+                                                @else
+                                                    <a style="background: crimson" class="icon btn-disfavor" data-toggle="tooltip" title=""
+                                                       data-original-title="取消收藏"><i
+                                                                class="fa fa-heart"></i>
+                                                    </a>
+                                                @endif
+
                                             </li>
                                         </ul>
                                     </div>
@@ -519,7 +527,7 @@
 
                 <!-- Related Products -->
                 <div class="related titleLine products-list grid module ">
-                    <h3 class="modtitle">Related Products </h3>
+                    <h3 class="modtitle">猜您喜欢</h3>
 
                     <div class="releate-products yt-content-slider products-list" data-rtl="no" data-loop="yes"
                          data-autoplay="no" data-autoheight="no" data-autowidth="no" data-delay="4" data-speed="0.6"
@@ -592,339 +600,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="item">
-                            <div class="item-inner product-layout transition product-grid">
-                                <div class="product-item-container">
-                                    <div class="left-block left-b">
-                                        <div class="box-label">
-                                            <span class="label-product label-sale">-15%</span>
-                                        </div>
-                                        <div class="product-image-container second_img">
-                                            <a href="product.html" target="_self" title="Exceeur sint occaecat">
-                                                <img src="/image/catalog/demo/product/270/e2.jpg"
-                                                     class="img-1 img-responsive" alt="image1">
-                                                <img src="/image/catalog/demo/product/270/e9.jpg"
-                                                     class="img-2 img-responsive" alt="image2">
-                                            </a>
-                                        </div>
-                                        <!--quickview-->
-                                        <div class="so-quickview">
-                                            <a class="iframe-link btn-button quickview quickview_handler visible-lg"
-                                               href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i
-                                                        class="fa fa-eye"></i><span>Quick view</span></a>
-                                        </div>
-                                        <!--end quickview-->
-
-                                    </div>
-                                    <div class="right-block">
-                                        <div class="button-group so-quickview cartinfo--left">
-                                            <button type="button" class="addToCart" title="Add to cart"
-                                                    onclick="cart.add('60 ');">
-                                                <span>Add to cart </span>
-                                            </button>
-                                            <button type="button" class="wishlist btn-button" title="Add to Wish List"
-                                                    onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>Add to Wish List</span>
-                                            </button>
-                                            <button type="button" class="compare btn-button"
-                                                    title="Compare this Product "
-                                                    onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>Compare this Product</span>
-                                            </button>
-
-                                        </div>
-                                        <div class="caption hide-cont">
-                                            <div class="ratings">
-                                                <div class="rating-box"><span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                </div>
-                                                <span class="rating-num">( 3 )</span>
-                                            </div>
-                                            <h4><a href="product.html" title="Pastrami bacon" target="_self">Exceeur
-                                                    sint
-                                                    occaecat</a></h4>
-
-                                        </div>
-                                        <p class="price">
-                                            <span class="price-new">$50.00</span>
-                                            <span class="price-old">$59.00</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="item-inner product-layout transition product-grid">
-                                <div class="product-item-container">
-                                    <div class="left-block left-b">
-
-                                        <div class="product-image-container second_img">
-                                            <a href="product.html" target="_self" title="Mapicola incidid">
-                                                <img src="/image/catalog/demo/product/270/e3.jpg"
-                                                     class="img-1 img-responsive" alt="image1">
-                                                <img src="/image/catalog/demo/product/270/e8.jpg"
-                                                     class="img-2 img-responsive" alt="image2">
-                                            </a>
-                                        </div>
-                                        <!--quickview-->
-                                        <div class="so-quickview">
-                                            <a class="iframe-link btn-button quickview quickview_handler visible-lg"
-                                               href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i
-                                                        class="fa fa-eye"></i><span>Quick view</span></a>
-                                        </div>
-                                        <!--end quickview-->
-
-
-                                    </div>
-                                    <div class="right-block">
-                                        <div class="button-group so-quickview cartinfo--left">
-                                            <button type="button" class="addToCart" title="Add to cart"
-                                                    onclick="cart.add('60 ');">
-                                                <span>Add to cart </span>
-                                            </button>
-                                            <button type="button" class="wishlist btn-button" title="Add to Wish List"
-                                                    onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>Add to Wish List</span>
-                                            </button>
-                                            <button type="button" class="compare btn-button"
-                                                    title="Compare this Product "
-                                                    onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>Compare this Product</span>
-                                            </button>
-
-                                        </div>
-                                        <div class="caption hide-cont">
-                                            <div class="ratings">
-                                                <div class="rating-box"><span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star-o fa-stack-2x"></i></span>
-                                                </div>
-                                                <span class="rating-num">( 5 )</span>
-                                            </div>
-                                            <h4><a href="product.html" title="Pastrami bacon" target="_self">Mapicola
-                                                    incidid</a></h4>
-
-                                        </div>
-                                        <p class="price">
-                                            <span class="price-new">$60.00</span>
-
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="item-inner product-layout transition product-grid">
-                                <div class="product-item-container">
-                                    <div class="left-block left-b">
-                                        <div class="box-label">
-                                            <span class="label-product label-new">New</span>
-                                        </div>
-                                        <div class="product-image-container second_img">
-                                            <a href="product.html" target="_self" title="Duis aute irure ">
-                                                <img src="/image/catalog/demo/product/270/e4.jpg"
-                                                     class="img-1 img-responsive" alt="image1">
-                                                <img src="/image/catalog/demo/product/270/e7.jpg"
-                                                     class="img-2 img-responsive" alt="image2">
-                                            </a>
-                                        </div>
-                                        <!--quickview-->
-                                        <div class="so-quickview">
-                                            <a class="iframe-link btn-button quickview quickview_handler visible-lg"
-                                               href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i
-                                                        class="fa fa-eye"></i><span>Quick view</span></a>
-                                        </div>
-                                        <!--end quickview-->
-
-
-                                    </div>
-                                    <div class="right-block">
-                                        <div class="button-group so-quickview cartinfo--left">
-                                            <button type="button" class="addToCart" title="Add to cart"
-                                                    onclick="cart.add('60 ');">
-                                                <span>Add to cart </span>
-                                            </button>
-                                            <button type="button" class="wishlist btn-button" title="Add to Wish List"
-                                                    onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>Add to Wish List</span>
-                                            </button>
-                                            <button type="button" class="compare btn-button"
-                                                    title="Compare this Product "
-                                                    onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>Compare this Product</span>
-                                            </button>
-
-                                        </div>
-                                        <div class="caption hide-cont">
-                                            <div class="ratings">
-                                                <div class="rating-box"><span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                </div>
-                                                <span class="rating-num">( 2 )</span>
-                                            </div>
-                                            <h4><a href="product.html" title="Pastrami bacon" target="_self">Duis aute
-                                                    irure </a></h4>
-
-                                        </div>
-                                        <p class="price">
-                                            <span class="price-new">$48.00</span>
-
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="item-inner product-layout transition product-grid">
-                                <div class="product-item-container">
-                                    <div class="left-block left-b">
-
-                                        <div class="product-image-container second_img">
-                                            <a href="product.html" target="_self" title="Excepteur sint occ">
-                                                <img src="/image/catalog/demo/product/270/e5.jpg"
-                                                     class="img-1 img-responsive" alt="image1">
-                                                <img src="/image/catalog/demo/product/270/e6.jpg"
-                                                     class="img-2 img-responsive" alt="image2">
-                                            </a>
-                                        </div>
-                                        <!--quickview-->
-                                        <div class="so-quickview">
-                                            <a class="iframe-link btn-button quickview quickview_handler visible-lg"
-                                               href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i
-                                                        class="fa fa-eye"></i><span>Quick view</span></a>
-                                        </div>
-                                        <!--end quickview-->
-
-
-                                    </div>
-                                    <div class="right-block">
-                                        <div class="button-group so-quickview cartinfo--left">
-                                            <button type="button" class="addToCart" title="Add to cart"
-                                                    onclick="cart.add('60 ');">
-                                                <span>Add to cart </span>
-                                            </button>
-                                            <button type="button" class="wishlist btn-button" title="Add to Wish List"
-                                                    onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>Add to Wish List</span>
-                                            </button>
-                                            <button type="button" class="compare btn-button"
-                                                    title="Compare this Product "
-                                                    onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>Compare this Product</span>
-                                            </button>
-
-                                        </div>
-                                        <div class="caption hide-cont">
-                                            <div class="ratings">
-                                                <div class="rating-box"><span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                </div>
-                                                <span class="rating-num">( 4 )</span>
-                                            </div>
-                                            <h4><a href="product.html" title="Pastrami bacon" target="_self">Excepteur
-                                                    sint
-                                                    occ</a></h4>
-
-                                        </div>
-                                        <p class="price">
-                                            <span class="price-new">$90.00</span>
-
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="item-inner product-layout transition product-grid">
-                                <div class="product-item-container">
-                                    <div class="left-block left-b">
-
-                                        <div class="product-image-container second_img">
-                                            <a href="product.html" target="_self" title="PCenison meatloa">
-                                                <img src="/image/catalog/demo/product/270/e6.jpg"
-                                                     class="img-1 img-responsive" alt="image1">
-                                                <img src="/image/catalog/demo/product/270/e2.jpg"
-                                                     class="img-2 img-responsive" alt="image2">
-                                            </a>
-                                        </div>
-                                        <!--quickview-->
-                                        <div class="so-quickview">
-                                            <a class="iframe-link btn-button quickview quickview_handler visible-lg"
-                                               href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i
-                                                        class="fa fa-eye"></i><span>Quick view</span></a>
-                                        </div>
-                                        <!--end quickview-->
-
-
-                                    </div>
-                                    <div class="right-block">
-                                        <div class="button-group so-quickview cartinfo--left">
-                                            <button type="button" class="addToCart" title="Add to cart"
-                                                    onclick="cart.add('60 ');">
-                                                <span>Add to cart </span>
-                                            </button>
-                                            <button type="button" class="wishlist btn-button" title="Add to Wish List"
-                                                    onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>Add to Wish List</span>
-                                            </button>
-                                            <button type="button" class="compare btn-button"
-                                                    title="Compare this Product "
-                                                    onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>Compare this Product</span>
-                                            </button>
-
-                                        </div>
-                                        <div class="caption hide-cont">
-                                            <div class="ratings">
-                                                <div class="rating-box"><span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star-o fa-stack-2x"></i></span>
-                                                </div>
-                                                <span class="rating-num">( 6 )</span>
-                                            </div>
-                                            <h4><a href="product.html" title="Pastrami bacon" target="_self">Cenison
-                                                    meatloa</a></h4>
-
-                                        </div>
-                                        <p class="price">$42.00</p>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -956,9 +631,9 @@
 
             /*加入购物车*/
             $("#button-cart").click(function () {
-                    axios.post('{{ route('cart.store') }}', {
-                        sku_id: $('li.active input[name=skus]').val(),
-                        amount: $('.cart_amount input').val(),
+                axios.post('{{ route('cart.store') }}', {
+                    sku_id: $('li.active input[name=skus]').val(),
+                    amount: $('.cart_amount input').val(),
                 })
                     .then(function () {
                         swal('加入购物车成功', '', 'success');
@@ -976,11 +651,43 @@
                             html += '</div>';
 
                             swal({content: $(html)[0], icon: 'error'});
-                        } else {WW
+                        } else {
+                            WW
                             swal('系统错误', '', 'error');
                         }
                     });
             });
+
+            /*收藏*/
+            $('.btn-favor').click(function () {
+                axios.post('{{ route('products.favor', ['product' => $product->id]) }}')
+                    .then(function () {
+                        swal('操作成功', '', 'success')
+                            .then(function () {
+                                location.reload();
+                            })
+                    }, function (error) {
+                        if (error.response && error.response.status === 401) {
+                            swal('请先登录', '', 'error');
+                        } else if (error.response && error.response.data.msg) {
+                            swal(error.response.data.msg, '', 'error');
+                        } else {
+                            swal('系统错误', '', 'error');
+                        }
+                    });
+            });
+
+            /*取消收藏*/
+            $('.btn-disfavor').click(function () {
+                axios.delete('{{ route('products.disfavor', ['product' => $product->id]) }}')
+                    .then(function () {
+                        swal('操作成功', '', 'success')
+                            .then(function () {
+                                location.reload();
+                            });
+                    });
+            });
+
         });
     </script>
 

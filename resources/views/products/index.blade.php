@@ -208,10 +208,10 @@
                                     </div>
                                     <div class="right-block">
                                         <div class="button-group so-quickview cartinfo--left">
-                                            <button type="button" class="addToCart" title="Add to cart"
-                                                    onclick="cart.add('60 ');">
-                                                <span>添加到购物车</span>
-                                            </button>
+                                            {{--<button type="button" class="addToCart" title="Add to cart"--}}
+                                                    {{--onclick="cart.add('60 ');">--}}
+                                                {{--<span>添加到购物车</span>--}}
+                                            {{--</button>--}}
                                             <button type="button" class="wishlist btn-button" title="Add to Wish List"
                                                     onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>收藏商品</span>
                                             </button>
@@ -242,17 +242,17 @@
                                             <p>{{ $product->long_title }}</p>
                                         </div>
                                         <div class="list-block">
-                                            <button class="addToCart btn-button" type="button" title="Add to Cart"
-                                                    onclick="cart.add('101', '1');"><i
-                                                        class="fa fa-shopping-basket"></i>
-                                            </button>
+                                            {{--<button class="addToCart btn-button" type="button" title="Add to Cart"--}}
+                                                    {{--onclick="cart.add('101', '1');"><i--}}
+                                                        {{--class="fa fa-shopping-basket"></i>--}}
+                                            {{--</button>--}}
                                             <button class="wishlist btn-button" type="button" title="Add to Wish List"
                                                     onclick="wishlist.add('101');"><i class="fa fa-heart"></i>
                                             </button>
-                                            <button class="compare btn-button" type="button"
-                                                    title="Compare this Product"
-                                                    onclick="compare.add('101');"><i class="fa fa-refresh"></i>
-                                            </button>
+                                            {{--<button class="compare btn-button" type="button"--}}
+                                                    {{--title="Compare this Product"--}}
+                                                    {{--onclick="compare.add('101');"><i class="fa fa-refresh"></i>--}}
+                                            {{--</button>--}}
                                             <!--quickview-->
                                             <a class="iframe-link btn-button quickview quickview_handler visible-lg"
                                                href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i
