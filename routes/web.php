@@ -13,7 +13,6 @@
 
 Route::get('/', 'PagesController@index')->name('pages.index');
 Route::get('products', 'ProductsController@index')->name('products.index');
-Route::get('products/{product}', 'ProductsController@show')->name('products.show');
 
 Auth::routes();
 
@@ -54,6 +53,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('payment/alipay/return', 'PaymentController@alipayReturn')->name('payment.alipay.return');
 
         /*收藏*/
+        Route::get('products/favorites', 'ProductsController@favorites')->name('products.favorites');
+        Route::get('products/{product}', 'ProductsController@show')->name('products.show');
         Route::post('products/{product}/favorite', 'ProductsController@favor')->name('products.favor');
         Route::delete('products/{product}/favorite', 'ProductsController@disfavor')->name('products.disfavor');
     });

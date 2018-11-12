@@ -23,25 +23,25 @@
                         <div class="box-category">
                             <ul id="cat_accordion" class="list-group">
                                 @foreach($categoryTree as $category)
-                                <li class="hadchild">
-                                    <a href="" class="cutom-parent">{{ $category['name'] }}</a>
-                                    <span class="button-view  fa fa-plus-square-o"></span>
-                                    <ul style="display: block;">
-                                        @foreach($category['children'] as $children)
-                                        <li>
-                                            <a href="">{{ $children['name'] }}</a>
-                                            <span class="button-view  fa fa-plus-square-o"></span>
-                                            <ul style="display:block">
-                                                @foreach($children['children'] as $child)
+                                    <li class="hadchild">
+                                        <a href="" class="cutom-parent">{{ $category['name'] }}</a>
+                                        <span class="button-view  fa fa-plus-square-o"></span>
+                                        <ul style="display: block;">
+                                            @foreach($category['children'] as $children)
                                                 <li>
-                                                    <a href="">{{ $child['name'] }}</a>
+                                                    <a href="">{{ $children['name'] }}</a>
+                                                    <span class="button-view  fa fa-plus-square-o"></span>
+                                                    <ul style="display:block">
+                                                        @foreach($children['children'] as $child)
+                                                            <li>
+                                                                <a href="">{{ $child['name'] }}</a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
                                                 </li>
-                                                @endforeach
-                                            </ul>
-                                        </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -59,39 +59,40 @@
                             <div class="yt-content-slider extraslider-inner">
                                 <div class="item ">
                                     @foreach($product_desc as $desc)
-                                    <div class="product-layout item-inner style1">
-                                        <div class="item-image">
-                                            <div class="item-img-info">
-                                                <a href="#" target="_self" title="Mandouille short ">
-                                                    <img src="{{ $desc->image_url }}"
-                                                         alt="Mandouille short">
-                                                </a>
-                                            </div>
+                                        <div class="product-layout item-inner style1">
+                                            <div class="item-image">
+                                                <div class="item-img-info">
+                                                    <a href="#" target="_self" title="Mandouille short ">
+                                                        <img src="{{ $desc->image_url }}"
+                                                             alt="Mandouille short">
+                                                    </a>
+                                                </div>
 
+                                            </div>
+                                            <div class="item-info" style="width:180%">
+                                                <div class="item-title">
+                                                    <a href="#" target="_self"
+                                                       title="Mandouille short">{{ str_limit($desc->title,15) }}</a>
+                                                </div>
+                                                <div class="rating">
+                                                    @for($i=1;$i<=floor($desc->rating);$i++)
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    @endfor
+
+                                                    {{--<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>--}}
+                                                </div>
+                                                <div class="content_price price">
+                                                    <span class="price-new product-price">${{ $desc->price }}</span>&nbsp;&nbsp;
+
+                                                    <span class="price-old">${{ $desc->price + 200 }} </span>&nbsp;
+
+                                                </div>
+                                            </div>
+                                            <!-- End item-info -->
+                                            <!-- End item-wrap-inner -->
                                         </div>
-                                        <div class="item-info" style="width:180%">
-                                            <div class="item-title">
-                                                <a href="#" target="_self" title="Mandouille short">{{ str_limit($desc->title,15) }}</a>
-                                            </div>
-                                            <div class="rating">
-                                                @for($i=1;$i<=floor($desc->rating);$i++)
-                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
-                                                @endfor
-
-                                                {{--<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>--}}
-                                            </div>
-                                            <div class="content_price price">
-                                                <span class="price-new product-price">${{ $desc->price }}</span>&nbsp;&nbsp;
-
-                                                <span class="price-old">${{ $desc->price + 200 }} </span>&nbsp;
-
-                                            </div>
-                                        </div>
-                                        <!-- End item-info -->
-                                        <!-- End item-wrap-inner -->
-                                    </div>
-                                    @endforeach
-                                    <!-- End item-wrap -->
+                                @endforeach
+                                <!-- End item-wrap -->
                                 </div>
                             </div>
                             <!--End extraslider-inner -->
@@ -155,14 +156,14 @@
 
                                     </div>
                                     {{--<div class="form-group">--}}
-                                        {{--<label class="control-label" for="input-limit">页数:</label>--}}
-                                        {{--<select id="input-limit" name="page" class="form-control">--}}
-                                            {{--<option value="15" selected="selected">15</option>--}}
-                                            {{--<option value="25">25</option>--}}
-                                            {{--<option value="50">50</option>--}}
-                                            {{--<option value="75">75</option>--}}
-                                            {{--<option value="100">100</option>--}}
-                                        {{--</select>--}}
+                                    {{--<label class="control-label" for="input-limit">页数:</label>--}}
+                                    {{--<select id="input-limit" name="page" class="form-control">--}}
+                                    {{--<option value="15" selected="selected">15</option>--}}
+                                    {{--<option value="25">25</option>--}}
+                                    {{--<option value="50">50</option>--}}
+                                    {{--<option value="75">75</option>--}}
+                                    {{--<option value="100">100</option>--}}
+                                    {{--</select>--}}
                                     {{--</div>--}}
                                 </div>
                             </form>
@@ -181,7 +182,7 @@
                     <!--changed listings-->
                     <div class="products-list row nopadding-xs so-filter-gird">
                         @foreach($products as $product)
-                            <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
+                            <div data-id="{{ $product->id }}" class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
                                 <div class="product-item-container">
                                     <div class="left-block left-b">
 
@@ -209,15 +210,16 @@
                                     <div class="right-block">
                                         <div class="button-group so-quickview cartinfo--left">
                                             {{--<button type="button" class="addToCart" title="Add to cart"--}}
-                                                    {{--onclick="cart.add('60 ');">--}}
-                                                {{--<span>添加到购物车</span>--}}
+                                            {{--onclick="cart.add('60 ');">--}}
+                                            {{--<span>添加到购物车</span>--}}
                                             {{--</button>--}}
-                                            <button type="button" class="wishlist btn-button" title="Add to Wish List"
+                                            <a class="wishlist btn-button btn-favor" title="收藏商品"
                                                     onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>收藏商品</span>
-                                            </button>
+                                            </a>
                                             {{--<button type="button" class="compare btn-button" title="Compare this Product "--}}
                                             {{--onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>Compare this Product</span>--}}
                                             {{--</button>--}}
+
 
                                         </div>
                                         <div class="caption hide-cont">
@@ -243,17 +245,17 @@
                                         </div>
                                         <div class="list-block">
                                             {{--<button class="addToCart btn-button" type="button" title="Add to Cart"--}}
-                                                    {{--onclick="cart.add('101', '1');"><i--}}
-                                                        {{--class="fa fa-shopping-basket"></i>--}}
+                                            {{--onclick="cart.add('101', '1');"><i--}}
+                                            {{--class="fa fa-shopping-basket"></i>--}}
                                             {{--</button>--}}
-                                            <button class="wishlist btn-button" type="button" title="Add to Wish List"
-                                                    onclick="wishlist.add('101');"><i class="fa fa-heart"></i>
-                                            </button>
-                                            {{--<button class="compare btn-button" type="button"--}}
-                                                    {{--title="Compare this Product"--}}
-                                                    {{--onclick="compare.add('101');"><i class="fa fa-refresh"></i>--}}
-                                            {{--</button>--}}
-                                            <!--quickview-->
+                                            <a data-id="{{$product->id}}" class="wishlist btn-button btn-favor"  title="收藏商品"
+                                               onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>收藏商品</span>
+                                            </a>
+                                        {{--<button class="compare btn-button" type="button"--}}
+                                        {{--title="Compare this Product"--}}
+                                        {{--onclick="compare.add('101');"><i class="fa fa-refresh"></i>--}}
+                                        {{--</button>--}}
+                                        <!--quickview-->
                                             <a class="iframe-link btn-button quickview quickview_handler visible-lg"
                                                href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i
                                                         class="fa fa-eye"></i></a>
@@ -263,6 +265,7 @@
 
                                 </div>
                             </div>
+                            <input type="hidden" class="product_id" value="{{ $product->id }}">
                         @endforeach
                     </div>
                     <!--// End Changed listings-->
@@ -306,7 +309,7 @@
             $('.search-form select[name=order]').on('change', function () {
                 $('.search-form').submit();
             });
-
+            
         });
     </script>
 @endsection
