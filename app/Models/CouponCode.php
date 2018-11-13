@@ -10,6 +10,7 @@ class CouponCode extends Model
     const TYPE_FIXED = 'fixed';
     const TYPE_PERCENT = 'percent';
 
+    /*定义两种优惠卷类型*/
     public static $typeMap = [
         self::TYPE_FIXED => '固定金额',
         self::TYPE_PERCENT => '比例',
@@ -49,6 +50,7 @@ class CouponCode extends Model
 
     protected $appends = ['description'];
 
+    /*定义访问器优化数据显示*/
     public function getDescriptionAttribute()
     {
         $str = '';

@@ -26,18 +26,14 @@ class CloseOrder implements ShouldQueue
         $this->delay($delay);
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
+    /*超时关闭订单并更新库存量*/
     public function handle()
     {
         if ($this->order->paid_at) {
             return;
         }
 
-        \DB::transaction(function() {
+        \DB::transaction(function () {
             $this->order->update(['closed' => true]);
             foreach ($this->order->orderItems as $item) {
                 $item->productSku->addStock($item->amount);

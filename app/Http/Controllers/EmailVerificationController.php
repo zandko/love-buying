@@ -11,6 +11,7 @@ use App\Notifications\EmailVerificationNotification;
 
 class EmailVerificationController extends Controller
 {
+    /*验证邮箱*/
     public function verify(Request $request)
     {
         $email = $request->input('email');
@@ -34,6 +35,7 @@ class EmailVerificationController extends Controller
         return view('pages.success', ['msg' => '邮箱验证成功']);
     }
 
+    /*遇有其他原因手动发送*/
     public function send(Request $request)
     {
         $user = $request->user();

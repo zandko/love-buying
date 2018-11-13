@@ -6,11 +6,13 @@
         <div class="container">
             <div class="row">
                 <div class="header-top-left col-lg-7 col-md-8 col-sm-6 col-xs-4">
-                    <div class="hidden-md hidden-sm hidden-xs welcome-msg">欢迎来到爱购物！在爱购物上每天都有新的优惠/礼物 - 新优惠券代码：Happy2018: <span>Happy2018</span>
+                    <div class="hidden-md hidden-sm hidden-xs welcome-msg">欢迎来到爱购物！在爱购物上每天都有新的优惠/礼物 - 新优惠券代码：Happy2018:
+                        <span>Happy2018</span>
                     </div>
                     <ul class="top-link list-inline hidden-lg ">
                         <li class="account" id="my_account">
-                            <a href="{{ route('user_addresses.index') }}" title="个人中心 " class="btn-xs dropdown-toggle" data-toggle="dropdown">
+                            <a href="{{ route('user_addresses.index') }}" title="个人中心 " class="btn-xs dropdown-toggle"
+                               data-toggle="dropdown">
                                 <span class="hidden-xs">我的账户</span> <span class="fa fa-caret-down"></span>
                             </a>
                             <ul class="dropdown-menu ">
@@ -19,46 +21,6 @@
                             </ul>
                         </li>
                     </ul>
-                </div>
-                <div class="header-top-right collapsed-block col-lg-5 col-md-4 col-sm-6 col-xs-8">
-                    <ul class="top-link list-inline lang-curr">
-                        <li class="currency">
-                            <div class="btn-group currencies-block">
-                                <form action="index.html" method="post" enctype="multipart/form-data" id="currency">
-                                    <a class="btn btn-link dropdown-toggle" data-toggle="dropdown">
-                                        <span class="icon icon-credit "></span> $ US Dollar <span
-                                                class="fa fa-angle-down"></span>
-                                    </a>
-                                    <ul class="dropdown-menu btn-xs">
-                                        <li><a href="#">(€)&nbsp;Euro</a></li>
-                                        <li><a href="#">(£)&nbsp;Pounds </a></li>
-                                        <li><a href="#">($)&nbsp;US Dollar </a></li>
-                                    </ul>
-                                </form>
-                            </div>
-                        </li>
-                        <li class="language">
-                            <div class="btn-group languages-block ">
-                                <form action="index.html" method="post" enctype="multipart/form-data" id="bt-language">
-                                    <a class="btn btn-link dropdown-toggle" data-toggle="dropdown">
-                                        <img src="/image/catalog/flags/gb.png" alt="English" title="English">
-                                        <span class="">English</span>
-                                        <span class="fa fa-angle-down"></span>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="index.html"><img class="image_flag"
-                                                                      src="/image/catalog/flags/gb.png"
-                                                                      alt="English" title="English"/> English </a></li>
-                                        <li><a href=""> <img class="image_flag" src="/image/catalog/flags/ar.png"
-                                                             alt="Arabic" title="Arabic"/> Arabic </a></li>
-                                    </ul>
-                                </form>
-                            </div>
-
-                        </li>
-                    </ul>
-
-
                 </div>
             </div>
         </div>
@@ -71,7 +33,7 @@
             <div class="row">
                 <!-- Logo -->
                 <div class="navbar-logo col-lg-2 col-md-3 col-sm-4 col-xs-12">
-                    <div class="logo"><a href="index.html"><img src="/image/catalog/logo.png" title="Your Store"
+                    <div class="logo"><a href="/"><img src="/image/catalog/logo.png" title="Your Store"
                                                                 alt="Your Store"/></a></div>
                 </div>
                 <!-- //end Logo -->
@@ -83,18 +45,18 @@
                         <div class="icon-search hidden-lg hidden-md hidden-sm"><i class="fa fa-search"></i></div>
 
                         <div id="sosearchpro" class="sosearchpro-wrapper so-search ">
-                            <form method="GET" action="{{ route('products.index') }}">
-                                <div  class="search input-group form-group">
-                                    <div class="select_category filter_type  icon-select hidden-sm hidden-xs">
-                                        <select class="no-border">
-                                            <option value="0">所有分类</option>
-
-                                        </select>
-                                    </div>
+                            <form class="search-form" action="{{ route('products.index') }}">
+                                <div class="search input-group form-group">
+                                    {{--<div class="select_category filter_type  icon-select hidden-sm hidden-xs">--}}
+                                        {{--<select class="no-border">--}}
+                                            {{--<option value="0">所有分类</option>--}}
+                                            {{----}}
+                                            {{--<option value="0">所有分类</option>--}}
+                                        {{--</select>--}}
+                                    {{--</div>--}}
 
                                     <input class="autosearch-input form-control" type="text" value="" size="50"
-                                               autocomplete="off" placeholder="Keyword here..." name="search">
-
+                                           autocomplete="off" placeholder="Keyword here..." name="search">
                                     <button type="submit" class="button-search btn btn-primary"><i
                                                 class="fa fa-search"></i></button>
 
@@ -122,32 +84,34 @@
                                         </p>
 
                                         <span class="total-shopping-cart cart-total-full">
-                                                    <span class="items_cart">02</span><span class="items_cart2">
-                                                        item(s)</span><span class="items_carts">( $162.00 )</span>
+                                                    <span class="items_cart">{{ count($cart ?? null) }}</span><span class="items_cart2">
+                                                        item(s)</span>
                                                 </span>
                                     </div>
                                 </div>
                             </a>
 
                             <ul class="dropdown-menu pull-right shoppingcart-box" role="menu">
+                                @if($cart ?? null)
+                                @foreach($cart as $c)
                                 <li>
                                     <table class="table table-striped">
                                         <tbody>
                                         <tr>
                                             <td class="text-center" style="width:70px">
-                                                <a href="product.html">
-                                                    <img src="/image/catalog/demo/product/80/1.jpg" style="width:70px"
+                                                <a href="{{ route('products.show',['product'=>$c->productSku->product->id]) }}">
+                                                    <img src="{{ $c->productSku->image_url }}" style="width:70px"
                                                          alt="Yutculpa ullamcon" title="Yutculpa ullamco"
                                                          class="preview">
                                                 </a>
                                             </td>
-                                            <td class="text-left"><a class="cart_product_name" href="product.html">Yutculpa
-                                                    ullamco</a>
+                                            <td class="text-left"><a class="cart_product_name" href="{{ route('products.show',['product'=>$c->productSku->product->id]) }}">
+                                                    {{ str_limit($c->productSku->title,10) }}</a>
                                             </td>
-                                            <td class="text-center">x1</td>
-                                            <td class="text-center">$80.00</td>
+                                            <td class="text-center">x{{ $c->amount }}</td>
+                                            <td class="text-center">${{ $c->productSku->price }}</td>
                                             <td class="text-right">
-                                                <a href="product.html" class="fa fa-edit"></a>
+                                                <a href="{{ route('cart.index') }}" class="fa fa-edit"></a>
                                             </td>
                                             <td class="text-right">
                                                 <a onclick="cart.remove('2');" class="fa fa-times fa-delete"></a>
@@ -156,39 +120,18 @@
                                         </tbody>
                                     </table>
                                 </li>
+                                @endforeach
                                 <li>
                                     <div>
-                                        <table class="table table-bordered">
-                                            <tbody>
-                                            <tr>
-                                                <td class="text-left"><strong>Sub-Total</strong>
-                                                </td>
-                                                <td class="text-right">$140.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left"><strong>Eco Tax (-2.00)</strong>
-                                                </td>
-                                                <td class="text-right">$2.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left"><strong>VAT (20%)</strong>
-                                                </td>
-                                                <td class="text-right">$20.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left"><strong>Total</strong>
-                                                </td>
-                                                <td class="text-right">$162.00</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+
                                         <p class="text-right"><a class="btn view-cart" href="{{ route('cart.index') }}"><i
                                                         class="fa fa-shopping-cart"></i>查看购物车</a>&nbsp;&nbsp;&nbsp;
-                                            <a class="btn btn-mega checkout-cart" href="checkout.html"><i
+                                            <a class="btn btn-mega checkout-cart" href="{{ route('products.index') }}"><i
                                                         class="fa fa-share"></i>查看</a>
                                         </p>
                                     </div>
                                 </li>
+                                    @endif
                             </ul>
                         </div>
 
@@ -196,10 +139,12 @@
                     <!--//cart-->
 
                     <ul class="wishlist-comp hidden-md hidden-sm hidden-xs">
-                        <li class="compare hidden-xs"><a href="#" class="top-link-compare" title="Compare "><i
+                        <li class="compare hidden-xs"><a href="javascript:void(0)" onclick="window.location.reload()"
+                                                         class="top-link-compare" title="Compare "><i
                                         class="fa fa-refresh"></i></a>
                         </li>
-                        <li class="wishlist hidden-xs"><a href="{{ route('products.favorites') }}" id="wishlist-total" class="top-link-wishlist"
+                        <li class="wishlist hidden-xs"><a href="{{ route('products.favorites') }}" id="wishlist-total"
+                                                          class="top-link-wishlist"
                                                           title="我的收藏"><i class="fa fa-heart"></i></a>
                         </li>
                     </ul>
@@ -253,46 +198,54 @@
                                                 <ul class="megamenu">
                                                     @if(isset($categoryTree))
                                                         @foreach($categoryTree as $category)
-                                                    <li class="item-vertical  with-sub-menu hover">
-                                                        <p class="close-menu"></p>
-                                                        <a href="#" class="clearfix">
-                                                            <img src="image/catalog/menu/icons/ico10.png" alt="icon">
-                                                            <span>{{ $category['name'] }}</span>
-                                                            <b class="fa-angle-right"></b>
-                                                        </a>
-                                                        <div class="sub-menu" data-subwidth="60"  >
-                                                            <div class="content" >
-                                                                <div class="row">
-                                                                    <div class="col-sm-12">
+                                                            <li class="item-vertical  with-sub-menu hover">
+                                                                <p class="close-menu"></p>
+                                                                <a href="{{ route('products.index', ['category_id' => $category['id']]) }}"
+                                                                   class="clearfix">
+                                                                    <img src="/image/catalog/menu/icons/ico10.png"
+                                                                         alt="icon">
+                                                                    <span>{{ $category['name'] }}</span>
+                                                                    <b class="fa-angle-right"></b>
+                                                                </a>
+                                                                <div class="sub-menu" data-subwidth="60">
+                                                                    <div class="content">
                                                                         <div class="row">
-                                                                            @if(isset($category['children']) && count($category['children']) > 0)
-                                                                            @foreach($category['children'] as $children)
-                                                                            <div class="col-md-12 static-menu">
-                                                                                <div class="menu">
-                                                                                    <ul>
-                                                                                        <li>
-                                                                                            <ul>
-                                                                                                @if(isset($children['children']))
-                                                                                                    <li style="float: left;margin-right: 5px;"><a style="font-weight: bold;" href="#">{{ $children['name'] }} ></a></li>
+                                                                            <div class="col-sm-12">
+                                                                                <div class="row">
+                                                                                    @if(isset($category['children']) && count($category['children']) > 0)
+                                                                                        @foreach($category['children'] as $children)
+                                                                                            <div class="col-md-12 static-menu">
+                                                                                                <div class="menu">
+                                                                                                    <ul>
+                                                                                                        <li>
+                                                                                                            <ul>
+                                                                                                                @if(isset($children['children']))
+                                                                                                                    <li style="float: left;margin-right: 5px;">
+                                                                                                                        <a style="font-weight: bold;"
+                                                                                                                           href="{{ route('products.index', ['category_id' => $children['id']]) }}">{{ $children['name'] }}
+                                                                                                                            ></a>
+                                                                                                                    </li>
 
-                                                                                                @foreach($children['children'] as $child)
-                                                                                                <li style="float: left;margin-right: 5px;"><a href="#" >{{ $child['name'] }}</a></li>
-                                                                                                @endforeach
-                                                                                                @endif
-                                                                                            </ul>
-                                                                                        </li>
-                                                                                    </ul>
+                                                                                                                    @foreach($children['children'] as $child)
+                                                                                                                        <li style="float: left;margin-right: 5px;">
+                                                                                                                            <a href="{{ route('products.index', ['category_id' => $child['id']]) }}">{{ $child['name'] }}</a>
+                                                                                                                        </li>
+                                                                                                                    @endforeach
+                                                                                                                @endif
+                                                                                                            </ul>
+                                                                                                        </li>
+                                                                                                    </ul>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        @endforeach
+                                                                                    @endif
+
                                                                                 </div>
                                                                             </div>
-                                                                                @endforeach
-                                                                            @endif
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
+                                                            </li>
                                                         @endforeach
                                                     @endif
 
@@ -331,7 +284,7 @@
                                         <div class="container-mega">
                                             <ul class="megamenu" data-transition="slide" data-animationtime="250">
                                                 <li class="home hover">
-                                                    <a href="index.html">首页</a>
+                                                    <a href="/">首页</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -359,15 +312,15 @@
                                     </a> or <a href="{{ route('register') }}">注册</a>
                                 @else
                                     <a href="{{ route('user_addresses.index') }}">{{ Auth::user()->name }}</a>
-                                        <a href="{{ route('logout') }}"
-                                           onclick="event.preventDefault();
+                                    <a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
                                            document.getElementById('logout-form').submit();">
-                                            退出
-                                        </a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                              style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
+                                        退出
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
                                 @endguest
                             </li>
                         </ul>

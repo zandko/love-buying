@@ -19,12 +19,7 @@ class RegisteredListener implements ShouldQueue
         //
     }
 
-    /**
-     * Handle the event.
-     *
-     * @param  object $event
-     * @return void
-     */
+    /*监听用户注册*/
     public function handle(Registered $event)
     {
         $user = $event->user;

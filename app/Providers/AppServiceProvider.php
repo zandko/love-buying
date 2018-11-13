@@ -15,7 +15,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        /*分类*/
+        \View::composer(['pages.index', 'products.*', 'orders.*', 'cart.*', 'email_verification.*', 'user_addresses.*'], \App\Http\ViewComposers\CategoryTreeComposer::class);
+
+        /*购物车*/
+        \View::composer(['pages.index', 'products.*', 'orders.*', 'cart.*', 'email_verification.*', 'user_addresses.*'], \App\Http\ViewComposers\CartComposer::class);
     }
 
     /**
@@ -25,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        /*注入容器*/
         $this->app->singleton('alipay', function () {
             $config = config('pay.alipay');
 //            $config['notify_url'] = route('payment.alipay.notify');

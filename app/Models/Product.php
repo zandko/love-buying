@@ -40,6 +40,7 @@ class Product extends Model
         return $this->hasMany(ProductProperty::class);
     }
 
+    /*图片路径*/
     public function getImageUrlAttribute()
     {
         if (Str::startsWith($this->attributes['image'], ['http://', 'https://'])) {
@@ -49,6 +50,7 @@ class Product extends Model
         return \Storage::disk('public')->url($this->attributes['image']);
     }
 
+    /*属性分组*/
     public function getGroupedPropertiesAttribute()
     {
         return $this->product_property

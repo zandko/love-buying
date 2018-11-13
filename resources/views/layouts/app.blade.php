@@ -60,18 +60,20 @@
 </head>
 @if(route_class() == 'pages-index')
     <body class="common-home res layout-1">
-        <div id="wrapper" class="wrapper-fluid banners-effect-3">
-            @else
-            <body class="res layout-1">
-            <div id="wrapper" class="wrapper-fluid banners-effect-5">
-                <div id="app">
-                @endif
 
-                @include('layouts._header')
-                @yield('content');
-                @include('layouts._footer')
+    <div id="wrapper" class="wrapper-fluid banners-effect-3">
+        @else
+            <body class="res layout-1">
+
+            <div id="wrapper" class="wrapper-fluid banners-effect-5">
+                @endif
+                <div id="app">
+                    @include('layouts._header')
+                    @yield('content');
+                    @include('layouts._footer')
                 </div>
             </div>
+
             <script src="{{ asset('js/app.js') }}"></script>
 
             {{--包括LIBS和插件--}}

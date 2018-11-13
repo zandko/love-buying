@@ -16,7 +16,8 @@ use Illuminate\Http\Request;
 
 class OrdersController extends Controller
 {
-    public function index(Request $request, Order $order)
+    /*订单列表*/
+    public function index(Request $request)
     {
         $orders = Order::query()
             ->with('orderItems.product', 'orderItems.productSku')
@@ -28,7 +29,8 @@ class OrdersController extends Controller
         ]);
     }
 
-    public function detail(Order $order, Request $request)
+    /*订单详情*/
+    public function detail(Order $order)
     {
         $this->authorize('own', $order);
         /*延迟预加载*/
@@ -40,6 +42,7 @@ class OrdersController extends Controller
         ]);
     }
 
+    /*生成订单*/
     public function store(OrderRequest $request, OrderService $orderService)
     {
         $user = $request->user();
@@ -51,7 +54,8 @@ class OrdersController extends Controller
         return $orderService->store($user, $address, $remart, $items);
     }
 
-    public function show(Request $request, Order $order)
+    /*付款页面*/
+    public function show(Order $order)
     {
         $this->authorize('own', $order);
         return view('orders.show', [
@@ -62,7 +66,8 @@ class OrdersController extends Controller
         ]);
     }
 
-    public function received(Order $order, Request $request)
+    /*点赞*/
+    public function received(Order $order)
     {
         $this->authorize('own', $order);
 
@@ -75,6 +80,7 @@ class OrdersController extends Controller
         return $order;
     }
 
+    /*评价页面*/
     public function review(Order $order)
     {
         $this->authorize('own', $order);
@@ -85,7 +91,7 @@ class OrdersController extends Controller
         return view('orders.review', ['order' => $order->load(['orderItems.productSku', 'orderItems.product'])]);
     }
 
-
+    /*评价*/
     public function sendReview(Order $order, SendReviewRequest $request)
     {
         $this->authorize('own', $order);
@@ -120,6 +126,7 @@ class OrdersController extends Controller
         return redirect()->back();
     }
 
+    /*退款页面*/
     public function return(Order $order)
     {
         $this->authorize('own', $order);
@@ -132,6 +139,7 @@ class OrdersController extends Controller
         ]);
     }
 
+    /*退款*/
     public function applyRefund(ApplyRefundRequest $applyRefundRequest, Order $order)
     {
         $this->authorize('own', $order);

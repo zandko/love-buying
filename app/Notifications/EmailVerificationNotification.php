@@ -24,12 +24,7 @@ class EmailVerificationNotification extends Notification implements ShouldQueue
         return ['mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
+    /*邮件通知*/
     public function toMail($notifiable)
     {
         $token = Str::random(16);

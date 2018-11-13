@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\CategoryService;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Auth;
 
 class PagesController extends Controller
 {
-    public function index(Product $product,CategoryService $categoryService)
+    /*首页*/
+    public function index(Product $product)
     {
-        $sold_count = $product->query()->orderBy('sold_count','desc')->paginate(4);
-        $desc = $product->query()->orderBy('created_at','desc')->paginate(4);
+        $sold_count = $product->query()->orderBy('sold_count', 'desc')->paginate(8);
+        $desc = $product->query()->orderBy('created_at', 'desc')->paginate(8);
 
-        return view('pages.index',[
-            'categoryTree' => $categoryService->getCategoryTree(),
+        return view('pages.index', [
             'sold_count' => $sold_count,
             'desc' => $desc,
         ]);
     }
 
+    /*验证邮箱*/
     public function emailVerifyNotice(Request $request)
     {
         return view('pages.email_verify_notice');

@@ -6,13 +6,8 @@ use Closure;
 
 class CheckIfEmailVerified
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
-     * @return mixed
-     */
+
+    /*判断用户有没有验证邮箱*/
     public function handle($request, Closure $next)
     {
         if (!$request->user()->email_verified) {

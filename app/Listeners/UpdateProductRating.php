@@ -10,7 +10,7 @@ use App\Models\OrderItem;
 
 class UpdateProductRating implements ShouldQueue
 {
-
+    /*监听订单评论更新评论数量*/
     public function handle(OrderReviewed $event)
     {
         $items = $event->getOrder()->orderItems()->with(['product'])->get();

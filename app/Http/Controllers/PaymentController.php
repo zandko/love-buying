@@ -10,6 +10,7 @@ use App\Models\Order;
 
 class PaymentController extends Controller
 {
+    /*付款*/
     public function payByAlipay(Order $order, Request $request)
     {
         $this->authorize('own', $order);
@@ -25,6 +26,7 @@ class PaymentController extends Controller
         ]);
     }
 
+    /*支付前端返回页面*/
     public function alipayReturn()
     {
         try {
@@ -36,6 +38,7 @@ class PaymentController extends Controller
         return view('pages.success', ['msg' => '付款成功']);
     }
 
+    /*支付后端*/
     public function alipayNotify()
     {
         $data = app('alipay')->verify();
@@ -55,10 +58,12 @@ class PaymentController extends Controller
             'payment_no' => $data->trade_no,
         ]);
 
+        /*触发事件*/
         $this->afterPaid($order);
         return app('alipay')->success();
     }
 
+    /*事件*/
     protected function afterPaid(Order $order)
     {
         event(new OrderPaid($order));

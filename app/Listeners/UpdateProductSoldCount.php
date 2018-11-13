@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class UpdateProductSoldCount implements ShouldQueue
 {
+    /*监听订单更新销量*/
     public function handle(OrderPaid $event)
     {
         $order = $event->getOrder();

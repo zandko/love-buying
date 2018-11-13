@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddCartRequest;
-use App\Models\CartItem;
 use App\Models\ProductSku;
 use App\Services\CartService;
 use Illuminate\Http\Request;
@@ -17,6 +16,7 @@ class CartController extends Controller
         $this->cartService = $cartService;
     }
 
+    /*购物车列表*/
     public function index(Request $request)
     {
         $cartItems = $this->cartService->get();
@@ -27,6 +27,7 @@ class CartController extends Controller
         ]);
     }
 
+    /*添加商品到购物车*/
     public function store(AddCartRequest $addCartRequest)
     {
 
@@ -38,6 +39,7 @@ class CartController extends Controller
         return [];
     }
 
+    /*把商品从购物车移除*/
     public function destory(ProductSku $sku)
     {
         $this->cartService->destory($sku->id);

@@ -10,16 +10,7 @@ class UserAddressPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Create a new policy instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
+    /*地址的授权策略*/
     public function own(User $user, UserAddress $userAddress)
     {
         return $userAddress->user_id == $user->id;

@@ -12,6 +12,7 @@ use App\Models\Order;
 
 class OrderService
 {
+    /*生成订单*/
     public function store(User $user, UserAddress $userAddress, $remark, $items)
     {
         $order = \DB::transaction(function () use ($user, $userAddress, $remark, $items) {

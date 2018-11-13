@@ -7,6 +7,7 @@ use App\Models\CartItem;
 
 class CartService
 {
+    /*常规查询*/
     public function get()
     {
         return Auth::user()->cartItems()->with([
@@ -14,6 +15,18 @@ class CartService
         ])->get();
     }
 
+    public function get_page()
+    {
+        if(Auth::user()) {
+            return Auth::user()->cartItems()->with([
+                'productSku.product'
+            ])->paginate(3);
+        }else {
+            return [];
+        }
+    }
+
+    /*添加商品到购物车*/
     public function store($skuId, $amount)
     {
         $user = Auth::user();
@@ -34,6 +47,7 @@ class CartService
         return $item;
     }
 
+    /*把商品移除购物车*/
     public function destory($skuIds)
     {
         if (!is_array($skuIds)) {

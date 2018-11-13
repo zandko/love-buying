@@ -6,6 +6,7 @@ use App\Models\Category;
 
 class  CategoryService
 {
+    /*无限极分类*/
     public function getCategoryTree($parentId = null, $allCategories = null)
     {
         if (is_null($allCategories)) {

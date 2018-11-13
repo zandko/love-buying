@@ -4,14 +4,18 @@
 
 @section('content')
 
-
-
-
     <!-- Main Container  -->
     <div class="main-container container">
         <ul class="breadcrumb">
             <li><a href="/"><i class="fa fa-home"></i></a></li>
-            <li><a href="#">全部结果</a></li>
+
+            <li><a href="{{ route('products.index') }}">全部结果</a></li>
+
+            @if ($category)
+                @foreach($category->ancestors as $ancestor)
+                    <li><a href="{{ route('products.index', ['category_id' => $ancestor->id]) }}">{{ $ancestor->name }}</a></li>
+                @endforeach
+            @endif
         </ul>
 
         <div class="row">
@@ -24,17 +28,17 @@
                             <ul id="cat_accordion" class="list-group">
                                 @foreach($categoryTree as $category)
                                     <li class="hadchild">
-                                        <a href="" class="cutom-parent">{{ $category['name'] }}</a>
+                                        <a href="{{ route('products.index', ['category_id' => $category['id']]) }}" class="cutom-parent">{{ $category['name'] }}</a>
                                         <span class="button-view  fa fa-plus-square-o"></span>
                                         <ul style="display: block;">
                                             @foreach($category['children'] as $children)
                                                 <li>
-                                                    <a href="">{{ $children['name'] }}</a>
+                                                    <a href="{{ route('products.index', ['category_id' => $children['id']]) }}">{{ $children['name'] }}</a>
                                                     <span class="button-view  fa fa-plus-square-o"></span>
                                                     <ul style="display:block">
                                                         @foreach($children['children'] as $child)
                                                             <li>
-                                                                <a href="">{{ $child['name'] }}</a>
+                                                                <a href="{{ route('products.index', ['category_id' => $child['id']]) }}">{{ $child['name'] }}</a>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -62,17 +66,17 @@
                                         <div class="product-layout item-inner style1">
                                             <div class="item-image">
                                                 <div class="item-img-info">
-                                                    <a href="#" target="_self" title="Mandouille short ">
+                                                    <a href="{{ route('products.show',['product'=>$desc->id]) }}" target="_self" title="{{ $desc->title }}">
                                                         <img src="{{ $desc->image_url }}"
-                                                             alt="Mandouille short">
+                                                             alt="{{ $desc->title }}">
                                                     </a>
                                                 </div>
 
                                             </div>
                                             <div class="item-info" style="width:180%">
                                                 <div class="item-title">
-                                                    <a href="#" target="_self"
-                                                       title="Mandouille short">{{ str_limit($desc->title,15) }}</a>
+                                                    <a href="{{ route('products.show',['product'=>$desc->id]) }}" target="_self"
+                                                       title="{{ $desc->title }}">{{ str_limit($desc->title,15) }}</a>
                                                 </div>
                                                 <div class="rating">
                                                     @for($i=1;$i<=floor($desc->rating);$i++)
@@ -155,26 +159,11 @@
                                         </select>
 
                                     </div>
-                                    {{--<div class="form-group">--}}
-                                    {{--<label class="control-label" for="input-limit">页数:</label>--}}
-                                    {{--<select id="input-limit" name="page" class="form-control">--}}
-                                    {{--<option value="15" selected="selected">15</option>--}}
-                                    {{--<option value="25">25</option>--}}
-                                    {{--<option value="50">50</option>--}}
-                                    {{--<option value="75">75</option>--}}
-                                    {{--<option value="100">100</option>--}}
-                                    {{--</select>--}}
-                                    {{--</div>--}}
                                 </div>
+                                <input type="hidden" name="search" value="{{ @$_GET['search'] }}">
+                                <input type="hidden" name="category_id" value="{{ @$_GET['category_id'] }}">
                             </form>
 
-                            <!-- <div class="box-pagination col-md-3 col-sm-4 col-xs-12 text-right">
-                                <ul class="pagination">
-                                    <li class="active"><span>1</span></li>
-                                    <li><a href="">2</a></li><li><a href="">&gt;</a></li>
-                                    <li><a href="">&gt;|</a></li>
-                                </ul>
-                            </div> -->
                         </div>
                     </div>
                     <!-- //end Filters -->
@@ -182,7 +171,8 @@
                     <!--changed listings-->
                     <div class="products-list row nopadding-xs so-filter-gird">
                         @foreach($products as $product)
-                            <div data-id="{{ $product->id }}" class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
+                            <div data-id="{{ $product->id }}"
+                                 class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
                                 <div class="product-item-container">
                                     <div class="left-block left-b">
 
@@ -214,7 +204,8 @@
                                             {{--<span>添加到购物车</span>--}}
                                             {{--</button>--}}
                                             <a class="wishlist btn-button btn-favor" title="收藏商品"
-                                                    onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>收藏商品</span>
+                                               onclick="wishlist.add('60');"><i
+                                                        class="fa fa-heart-o"></i><span>收藏商品</span>
                                             </a>
                                             {{--<button type="button" class="compare btn-button" title="Compare this Product "--}}
                                             {{--onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>Compare this Product</span>--}}
@@ -248,8 +239,10 @@
                                             {{--onclick="cart.add('101', '1');"><i--}}
                                             {{--class="fa fa-shopping-basket"></i>--}}
                                             {{--</button>--}}
-                                            <a data-id="{{$product->id}}" class="wishlist btn-button btn-favor"  title="收藏商品"
-                                               onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>收藏商品</span>
+                                            <a data-id="{{$product->id}}" class="wishlist btn-button btn-favor"
+                                               title="收藏商品"
+                                               onclick="wishlist.add('60');"><i
+                                                        class="fa fa-heart-o"></i><span>收藏商品</span>
                                             </a>
                                         {{--<button class="compare btn-button" type="button"--}}
                                         {{--title="Compare this Product"--}}
@@ -273,7 +266,7 @@
                     <div class="product-filter product-filter-bottom filters-panel">
                         <div class="row">
                             <div class="col-sm-6 text-left"></div>
-                            <div class="col-sm-6 text-right">{{ $products->render() }}</div>
+                            <div class="col-sm-6 text-right">{{ $products->appends($filters)->render() }}</div>
                         </div>
                     </div>
                     <!-- //end Filters -->
@@ -305,7 +298,12 @@
 
 
     <script>
+        var filters = {!! json_encode($filters) !!};
         $(document).ready(function () {
+            /*地址栏参数*/
+            $('.search-form select[name=order]').val(filters.order);
+
+            /*排序*/
             $('.search-form select[name=order]').on('change', function () {
                 $('.search-form').submit();
             });

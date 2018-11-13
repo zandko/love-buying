@@ -17,6 +17,7 @@ class Order extends Model
     const SHIP_STATUS_DELIVERED = 'delivered';
     const SHIP_STATUS_RECEIVED = 'received';
 
+    /*定义订单状态*/
     public static $refundStatusMap = [
         self::REFUND_STATUS_PENDING => '未退款',
         self::REFUND_STATUS_APPLIED => '已申请退款',
@@ -104,6 +105,7 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
+    /*关联中间表*/
     public function orderItems()
     {
         return $this->hasMany(OrderItem::class);
