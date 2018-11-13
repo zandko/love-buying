@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\InvalidRequestException;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ class ProductsController extends Controller
     public function index(Request $request, CategoryService $categoryService)
     {
         $builder = Product::query()->where('on_sale', true);
+        $product_desc = $builder->orderBy('id','desc')->paginate(5);
 
         if ($search = $request->input('search', '')) {
             $keywords = '%' . $search . '%';
@@ -29,7 +31,6 @@ class ProductsController extends Controller
 
         $products = $builder->paginate(15);
 
-        $product_desc = $builder->paginate(5);
         return view('products.index', [
             'products' => $products,
             'categoryTree' => $categoryService->getCategoryTree(),
@@ -49,16 +50,24 @@ class ProductsController extends Controller
             $favored = $favor = boolval($user->favoriteProducts()->find($product->id));
         }
 
+        $reviews = OrderItem::query()
+            ->with('order.user', 'productSku')
+            ->where('product_id', $product->id)
+            ->whereNotNull('reviewed_at')
+            ->orderBy('reviewed_at', 'desc')
+            ->paginate(10);
+
         return view('products.show', [
             'product' => $product,
             'favored' => $favored,
+            'reviews' => $reviews,
         ]);
     }
 
     public function favorites(Request $request)
     {
         $products = $request->user()->favoriteProducts()->paginate(10);
-        return view('products.favorites',[
+        return view('products.favorites', [
             'products' => $products,
         ]);
     }

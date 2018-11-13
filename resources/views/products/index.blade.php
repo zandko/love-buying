@@ -309,7 +309,7 @@
             $('.search-form select[name=order]').on('change', function () {
                 $('.search-form').submit();
             });
-            
+
         });
     </script>
 @endsection

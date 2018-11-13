@@ -57,6 +57,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('products/{product}', 'ProductsController@show')->name('products.show');
         Route::post('products/{product}/favorite', 'ProductsController@favor')->name('products.favor');
         Route::delete('products/{product}/favorite', 'ProductsController@disfavor')->name('products.disfavor');
+
+        /*评价*/
+        Route::get('orders/{order}/review', 'OrdersController@review')->name('orders.review.show');
+        Route::post('orders/{order}/review', 'OrdersController@sendReview')->name('orders.review.store');
     });
 });
 

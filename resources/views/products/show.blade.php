@@ -412,7 +412,8 @@
                                                                 class="fa fa-heart"></i>
                                                     </a>
                                                 @else
-                                                    <a style="background: crimson" class="icon btn-disfavor" data-toggle="tooltip" title=""
+                                                    <a style="background: crimson" class="icon btn-disfavor"
+                                                       data-toggle="tooltip" title=""
                                                        data-original-title="取消收藏"><i
                                                                 class="fa fa-heart"></i>
                                                     </a>
@@ -451,67 +452,74 @@
                                     <div id="review">
                                         <table class="table table-striped table-bordered">
                                             <tbody>
-                                            <tr>
-                                                <td style="width: 50%;"><strong>超级管理员</strong></td>
-                                                <td class="text-right">29/07/2015</td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <p>最好的这款产品opencart</p>
-                                                    <div class="ratings">
-                                                        <div class="rating-box">
-                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i
-                                                                    class="fa fa-star-o fa-stack-1x"></i></span>
-                                                            <span class="fa fa-stack"><i
-                                                                        class="fa fa-star fa-stack-1x"></i><i
-                                                                        class="fa fa-star-o fa-stack-1x"></i></span>
-                                                            <span class="fa fa-stack"><i
-                                                                        class="fa fa-star fa-stack-1x"></i><i
-                                                                        class="fa fa-star-o fa-stack-1x"></i></span>
-                                                            <span class="fa fa-stack"><i
-                                                                        class="fa fa-star fa-stack-1x"></i><i
-                                                                        class="fa fa-star-o fa-stack-1x"></i></span>
-                                                            <span class="fa fa-stack"><i
-                                                                        class="fa fa-star-o fa-stack-1x"></i></span>
+                                            @foreach($reviews as $review)
+                                                <tr>
+                                                    <td style="width: 50%;">
+                                                        <strong>{{$review->order->user->name}}</strong></td>
+                                                    <td class="text-right">{{ $review->reviewed_at->format('Y-m-d H:i') }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <p>{{ $review->review }}</p>
+                                                        <div class="ratings">
+                                                            <div class="rating-box">
+                                                                @for($i=1;$i<=floor($review->rating);$i++)
+                                                                <span class="fa fa-stack"><i
+                                                                            class="fa fa-star fa-stack-1x"></i><i
+                                                                            class="fa fa-star-o fa-stack-1x"></i></span>
+                                                                @endfor
+                                                                {{--<span class="fa fa-stack"><i--}}
+                                                                            {{--class="fa fa-star fa-stack-1x"></i><i--}}
+                                                                            {{--class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                                                                {{--<span class="fa fa-stack"><i--}}
+                                                                            {{--class="fa fa-star fa-stack-1x"></i><i--}}
+                                                                            {{--class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                                                                {{--<span class="fa fa-stack"><i--}}
+                                                                            {{--class="fa fa-star fa-stack-1x"></i><i--}}
+                                                                            {{--class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                                                                {{--<span class="fa fa-stack"><i--}}
+                                                                            {{--class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                             </tbody>
                                         </table>
                                         <div class="text-right"></div>
                                     </div>
-                                    <h2 id="review-title">写评论</h2>
-                                    <div class="contacts-form">
-                                        <div class="form-group"><span class="icon icon-user"></span>
-                                            <input type="text" name="name" class="form-control" value="Your Name"
-                                                   onblur="if (this.value == '') {this.value = 'Your Name';}"
-                                                   onfocus="if(this.value == 'Your Name') {this.value = '';}">
-                                        </div>
-                                        <div class="form-group"><span class="icon icon-bubbles-2"></span>
-                                            <textarea class="form-control" name="text"
-                                                      onblur="if (this.value == '') {this.value = 'Your Review';}"
-                                                      onfocus="if(this.value == 'Your Review') {this.value = '';}">Your Review</textarea>
-                                        </div>
-                                        <span style="font-size: 11px;"><span class="text-danger">注意:</span>						 HTML未翻译！ 翻译！</span>
+                                    {{--<h2 id="review-title">写评论</h2>--}}
+                                    {{--<div class="contacts-form">--}}
+                                        {{--<div class="form-group"><span class="icon icon-user"></span>--}}
+                                            {{--<input type="text" name="name" class="form-control" value="Your Name"--}}
+                                                   {{--onblur="if (this.value == '') {this.value = 'Your Name';}"--}}
+                                                   {{--onfocus="if(this.value == 'Your Name') {this.value = '';}">--}}
+                                        {{--</div>--}}
+                                        {{--<div class="form-group"><span class="icon icon-bubbles-2"></span>--}}
+                                            {{--<textarea class="form-control" name="text"--}}
+                                                      {{--onblur="if (this.value == '') {this.value = 'Your Review';}"--}}
+                                                      {{--onfocus="if(this.value == 'Your Review') {this.value = '';}">Your Review</textarea>--}}
+                                        {{--</div>--}}
+                                        {{--<span style="font-size: 11px;"><span class="text-danger">注意:</span>						 HTML未翻译！ 翻译！</span>--}}
 
-                                        <div class="form-group">
-                                            <b>评级</b> <span>不好</span>&nbsp;
-                                            <input type="radio" name="rating" value="1"> &nbsp;
-                                            <input type="radio" name="rating"
-                                                   value="2"> &nbsp;
-                                            <input type="radio" name="rating"
-                                                   value="3"> &nbsp;
-                                            <input type="radio" name="rating"
-                                                   value="4"> &nbsp;
-                                            <input type="radio" name="rating"
-                                                   value="5"> &nbsp;<span>好</span>
+                                        {{--<div class="form-group">--}}
+                                            {{--<b>评级</b> <span>不好</span>&nbsp;--}}
+                                            {{--<input type="radio" name="rating" value="1"> &nbsp;--}}
+                                            {{--<input type="radio" name="rating"--}}
+                                                   {{--value="2"> &nbsp;--}}
+                                            {{--<input type="radio" name="rating"--}}
+                                                   {{--value="3"> &nbsp;--}}
+                                            {{--<input type="radio" name="rating"--}}
+                                                   {{--value="4"> &nbsp;--}}
+                                            {{--<input type="radio" name="rating"--}}
+                                                   {{--value="5"> &nbsp;<span>好</span>--}}
 
-                                        </div>
-                                        <div class="buttons clearfix"><a id="button-review"
-                                                                         class="btn buttonGray">继续</a></div>
-                                    </div>
+                                        {{--</div>--}}
+                                        {{--<div class="buttons clearfix"><a id="button-review"--}}
+                                                                         {{--class="btn buttonGray">继续</a></div>--}}
+                                    {{--</div>--}}
                                 </form>
+                                <div>{{ $reviews->render() }}</div>
                             </div>
                             <div id="tab-4" class="tab-pane fade">
                                 @foreach($product->grouped_properties as $name => $value)

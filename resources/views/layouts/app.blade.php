@@ -20,7 +20,7 @@
 
     <title>@yield('title', 'loveBuying') - 爱购网</title>
 
-    {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     {{--Favicon--}}
     <link rel="shortcut icon" type="image/png" href="/ico/favicon-16x16.png"/>
