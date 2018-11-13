@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderReviewed;
 use App\Exceptions\InvalidRequestException;
 use App\Http\Requests\OrderRequest;
 use App\Http\Requests\SendReviewRequest;
@@ -111,6 +112,8 @@ class OrdersController extends Controller
             $order->update([
                 'reviewed' => true,
             ]);
+
+            event(new OrderReviewed($order));
         });
 
         return redirect()->back();

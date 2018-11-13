@@ -72,29 +72,38 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($order->orderItems as $item)
+                        @foreach($order->orderItems as $index => $item)
                             <tr>
                                 <td class="text-left">{{ $item->product->title }}</td>
                                 <td class="text-left">{{ $item->productSku->title }}</td>
                                 <td class="text-right">{{ $item->amount }}</td>
                                 <td class="text-right">${{ $item->productSku->price }}</td>
-                                <td style="white-space: nowrap;" class="text-right">
-                                    @if(!$order->paid_at && !$order->closed)
-                                        <a class="btn btn-primary" data-toggle="tooltip"
-                                           href="{{ route('payment.alipay',['order'=>$order->id]) }}">继续支付</a>
-                                    @elseif($order->closed)
-                                        <a disabled class="btn btn-danger" data-toggle="tooltip">订单已关闭</a>
-                                    @elseif($order->ship_status === \App\Models\Order::SHIP_STATUS_DELIVERED)
-                                        <a id="btn-receive"  class="btn btn-success">确认收货</a>
-                                    @elseif($order->ship_status===\App\Models\Order::SHIP_STATUS_RECEIVED)
-                                        @if(!$order->reviewed)
-                                        <a id="btn-review" href="{{ route('orders.review.show', ['order' => $order->id]) }}"  class="btn btn-primary">评价商品</a>
-                                        @else
-                                            <a id="btn-review" href="{{ route('orders.review.show', ['order' => $order->id]) }}"  class="btn btn-primary">查看评价</a>
+
+                                @if($index == 0)
+                                    <td rowspan="{{ count($order->orderItems) }}" style="white-space: nowrap;"
+                                        class="text-right">
+                                        @if(!$order->paid_at && !$order->closed)
+                                            <a class="btn btn-primary" data-toggle="tooltip"
+                                               href="{{ route('payment.alipay',['order'=>$order->id]) }}">继续支付</a>
+                                        @elseif($order->closed)
+                                            <a disabled class="btn btn-danger" data-toggle="tooltip">订单已关闭</a>
+                                        @elseif($order->ship_status === \App\Models\Order::SHIP_STATUS_DELIVERED)
+                                            <a id="btn-receive" class="btn btn-success">确认收货</a>
+                                        @elseif($order->ship_status===\App\Models\Order::SHIP_STATUS_RECEIVED)
+                                            @if(!$order->reviewed)
+                                                <a id="btn-review"
+                                                   href="{{ route('orders.review.show', ['order' => $order->id]) }}"
+                                                   class="btn btn-primary">评价商品</a>
+                                            @else
+                                                <a id="btn-review"
+                                                   href="{{ route('orders.review.show', ['order' => $order->id]) }}"
+                                                   class="btn btn-primary">查看评价</a>
+                                            @endif
+                                            <a class="btn btn-danger" data-toggle="tooltip" href="return.html">申请退款</a>
                                         @endif
-                                        <a class="btn btn-danger" data-toggle="tooltip" href="return.html">申请退款</a>
-                                    @endif
-                                </td>
+                                    </td>
+
+                                @endif
 
                             </tr>
                         @endforeach

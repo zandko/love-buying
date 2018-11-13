@@ -9,19 +9,22 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use App\Models\Order;
 
 class OrderReviewed
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    protected $order;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Order $order)
     {
-        //
+        $this->order = $order;
     }
 
     /**
@@ -29,8 +32,8 @@ class OrderReviewed
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
-    public function broadcastOn()
+    public function getOrder()
     {
-        return new PrivateChannel('channel-name');
+        return $this->order;
     }
 }
