@@ -85,12 +85,21 @@
                                 <label class="col-sm-2 control-label" for="input-coupon">在这里输入您的优惠券
                                 </label>
                                 <div class="input-group">
-                                    <input type="text" name="coupon" value="" placeholder="Enter your coupon here"
+                                    <input type="text" name="coupon_code" value=""
                                            id="input-coupon" class="form-control">
-                                    <span class="input-group-btn"><input type="button" value="申请优惠卷" id="button-coupon"
-                                                                         data-loading-text="Loading..."
-                                                                         class="btn btn-primary"></span>
+
+
+                                    <span class="input-group-btn">
+                                        <input type="button" value="检查优惠卷" id="btn-check-coupon"
+                                               data-loading-text="Loading..."
+                                               class="btn btn-primary">
+                                        <input style="display: none" type="button" value="取消" id="btn-cancel-coupon"
+                                               data-loading-text="Loading..."
+                                               class="btn btn-danger">
+                                    </span>
                                 </div>
+                                <span style="text-align: center" class="help-block" id="coupon_desc"></span>
+
                             </div>
                         </div>
                     </div>
@@ -186,13 +195,14 @@
                 });
             });
 
-            /*订单信息*/
+            /*生成订单*/
             $('#btn-show').click(function () {
 
                 var req = {
                     items: [],
                     address_id: $('#input-country option:selected').val(),
                     remark: $('#order-form').find('textarea[name=remark]').val(),
+                    coupon_code: $('input[name=coupon_code]').val(),
                 }
 
                 $('table tr[data-id]').each(function () {
@@ -232,6 +242,40 @@
                             swal('系统错误', '', 'error');
                         }
                     });
+            });
+
+            /*检查优惠卷*/
+            $("#btn-check-coupon").click(function () {
+                var code = $('input[name=coupon_code').val();
+
+                if (!code) {
+                    swal('请输入优惠码', '', 'warning');
+                    return;
+                }
+
+                axios.get('/coupon_codes/' + encodeURIComponent(code))
+                    .then(function (response) {
+                        $("#coupon_desc").text(response.data.description);
+                        $("input[name=coupon_code]").prop('readonly', true);
+                        $("#btn-cancel-coupon").show();
+                        $("#btn-check-coupon").hide();
+                    }, function (error) {
+                        if (error.response.status === 404) {
+                            swal('优惠码不存在', '', 'error');
+                        } else if (error.response.status == 403) {
+                            swal(error.response.data.msg, '', 'error');
+                        } else {
+                            swal('系统内部错误', '', 'error');
+                        }
+                    });
+            });
+
+            /*隐藏按钮*/
+            $('#btn-cancel-coupon').click(function () {
+                $('#coupon_desc').text('');
+                $('input[name=coupon_code]').prop('readonly', false);
+                $('#btn-cancel-coupon').hide();
+                $('#btn-check-coupon').show();
             });
         });
 

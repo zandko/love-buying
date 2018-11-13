@@ -114,10 +114,12 @@
 
                 if(!return_reason_id) {
                     swal('退款理由不能为空','','error')
+                    return;
                 }
 
                 if(!opened) {
-                    swal('产品是否已打卡','','error')
+                    swal('产品是否已拆开','','error')
+                    return ;
                 }
 
                 axios.post('{{ route('orders.apply_refund',['order'=>$order->id]) }}',{

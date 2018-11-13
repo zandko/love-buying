@@ -9,13 +9,18 @@ use App\Models\User;
 use App\Models\UserAddress;
 use Carbon\Carbon;
 use App\Models\Order;
+use App\Exceptions\CouponCodeUnavailableException;
+use App\Models\CouponCode;
 
 class OrderService
 {
     /*生成订单*/
-    public function store(User $user, UserAddress $userAddress, $remark, $items)
+    public function store(User $user, UserAddress $userAddress, $remark, $items, CouponCode $coupon = null)
     {
-        $order = \DB::transaction(function () use ($user, $userAddress, $remark, $items) {
+        if ($coupon) {
+            $coupon->checkAvailable($user);
+        }
+        $order = \DB::transaction(function () use ($user, $userAddress, $remark, $items, $coupon) {
             $userAddress->update([
                 'last_used_at' => Carbon::now(),
             ]);
@@ -53,6 +58,15 @@ class OrderService
 
                 if ($sku->decreaseStock($data['amount']) <= 0) {
                     throw new InvalidRequestException('该商品库存不足');
+                }
+            }
+
+            if ($coupon) {
+                $coupon->checkAvailable($user,$totalAmount);
+                $totalAmount = $coupon->getAdjustedPrice($totalAmount);
+                $order->couponCode()->associate($coupon);
+                if ($coupon->changeUsed() <= 0) {
+                    throw new CouponCodeUnavailableException('该优惠券已被兑完');
                 }
             }
 

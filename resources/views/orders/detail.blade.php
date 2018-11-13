@@ -118,13 +118,13 @@
                             <td colspan="3"></td>
                             <td class="text-right"><b>优惠卷</b>
                             </td>
-                            <td class="text-right">$101.00</td>
+                            <td class="text-right">{{ $order->couponCode->code }}</td>
                         </tr>
                         <tr>
                             <td colspan="3"></td>
                             <td class="text-right"><b>优惠额度</b>
                             </td>
-                            <td class="text-right">$5.00</td>
+                            <td class="text-right">{{ $order->couponCode->description }}</td>
                         </tr>
 
                         <tr>

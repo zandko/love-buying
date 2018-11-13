@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', 'PagesController@index')->name('pages.index');
 Route::get('products', 'ProductsController@index')->name('products.index');
 
@@ -18,6 +7,7 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
 
+    /*邮箱验证*/
     Route::get('/email_verification/send', 'EmailVerificationController@send')->name('email_verification.send');
     Route::get('/email_verify_notice', 'PagesController@emailVerifyNotice')->name('email_verify_notice');
     Route::get('/email_verification/verify', 'EmailVerificationController@verify')->name('email_verification.verify');
@@ -65,6 +55,9 @@ Route::group(['middleware' => 'auth'], function () {
         /*评价*/
         Route::get('orders/{order}/review', 'OrdersController@review')->name('orders.review.show');
         Route::post('orders/{order}/review', 'OrdersController@sendReview')->name('orders.review.store');
+
+        /*优惠卷*/
+        Route::get('coupon_codes/{code}','CouponCodesController@show')->name('coupon_codes.show');
     });
 });
 

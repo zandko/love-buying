@@ -142,7 +142,7 @@
 
                                                 <tr>
                                                     <td class="text-right" colspan="4"><strong>优惠卷:</strong></td>
-                                                    <td class="text-right">$19.68</td>
+                                                    <td class="text-right">{{ $order->couponCode->description }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-right" colspan="4"><strong>总价:</strong></td>
