@@ -12,7 +12,7 @@
 
         <div class="row">
             <!--Middle Part Start-->
-            <div id="content" class="col-sm-9">
+            <div id="content" class="col-sm-12">
                 <h2 class="title"> 商品评价</h2>
 
                 <div class="panel-body">

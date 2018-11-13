@@ -12,7 +12,7 @@
 
         <div class="row">
             <!--Middle Part Start-->
-            <div class="col-sm-9" id="content">
+            <div class="col-sm-12" id="content">
                 <h2 class="title">我的资料</h2>
                 <p class="lead">你好， <strong>{{ Auth::user()->firstname }} ！</strong> - 更新您的帐户信息。</p>
                 <div class="row">

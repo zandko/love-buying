@@ -47,10 +47,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('orders', 'OrdersController@store')->name('orders.store');
         Route::get('orders/{order}/show', 'OrdersController@show')->name('orders.show');
         Route::post('orders/{order}/received', 'OrdersController@received')->name('orders.received');
+        Route::get('orders/{order}/return', 'OrdersController@return')->name('orders.return');
 
         /*支付*/
         Route::get('payment/{order}/alipay', 'PaymentController@payByAlipay')->name('payment.alipay');
         Route::get('payment/alipay/return', 'PaymentController@alipayReturn')->name('payment.alipay.return');
+
+        /*退款*/
+        Route::post('orders/{order}/apply_refund', 'OrdersController@applyRefund')->name('orders.apply_refund');
 
         /*收藏*/
         Route::get('products/favorites', 'ProductsController@favorites')->name('products.favorites');

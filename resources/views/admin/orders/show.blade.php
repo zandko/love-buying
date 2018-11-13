@@ -85,8 +85,105 @@
                 </tr>
             @endif
             <!-- 订单发货结束 -->
-            </tr>
+
+            @if($order->refund_status !== \App\Models\Order::REFUND_STATUS_PENDING)
+                <tr>
+                    <td>退款状态：</td>
+                    <td colspan="2">{{ \App\Models\Order::$refundStatusMap[$order->refund_status] }}
+                        ，理由：{{ $order->extra['refund_return_reason_id'] }}
+                        ，产品是否已拆开：{{ $order->extra['refund_opened'] }}
+                        ，其他：{{ $order->extra['refund_comment'] }}</td>
+                    <td>
+                        @if($order->refund_status === \App\Models\Order::REFUND_STATUS_APPLIED)
+                            <button class="btn btn-sm btn-success" id="btn-refund-agree">同意</button>
+                            <button class="btn btn-sm btn-danger" id="btn-refund-disagree">不同意</button>
+                        @endif
+                    </td>
+                </tr>
+            @endif
             </tbody>
         </table>
     </div>
 </div>
+
+
+<script>
+    $(document).ready(function () {
+        /*拒绝退款*/
+        $('#btn-refund-disagree').click(function () {
+            swal({
+                title: '输入拒绝退款理由',
+                input: 'text',
+                showCancelButton: true,
+                confirmButtonText: "确认",
+                cancelButtonText: "取消",
+                showLoaderOnConfirm: true,
+                preConfirm: function (inputValue) {
+                    if (!inputValue) {
+                        swal('理由不能为空', '', 'error')
+                        return false;
+                    }
+                    return $.ajax({
+                        url: '{{ route('admin.orders.handle_refund', [$order->id]) }}',
+                        type: 'POST',
+                        data: JSON.stringify({
+                            agree: false,
+                            reason: inputValue,
+                            _token: LA.token,
+                        }),
+                        contentType: 'application/json',  // 请求的数据格式为 JSON
+                    });
+                },
+                allowOutsideClick: () => !swal.isLoading()
+            }).then(function (ret) {
+
+                if (ret.dismiss === 'cancel') {
+                    return;
+                }
+                swal({
+                    title: '操作成功',
+                    type: 'success'
+                }).then(function () {
+                    location.reload();
+                });
+            });
+        });
+
+        /*同意退款*/
+        $("#btn-refund-agree").click(function () {
+            swal({
+                title: '确认要将款项退还给用户？',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: "确认",
+                cancelButtonText: "取消",
+                showLoaderOnConfirm: true,
+                preConfirm: function () {
+
+                    return $.ajax({
+                        url: '{{ route('admin.orders.handle_refund', [$order->id]) }}',
+                        type: 'POST',
+                        data: JSON.stringify({
+                            agree: true,
+                            _token: LA.token,
+                        }),
+                        contentType: 'application/json',
+
+                    });
+                }
+            })
+                .then(function (ret) {
+                    if (ret.dismiss === 'cancel') {
+                        return;
+                    }
+                    swal({
+                        title: '操作成功',
+                        type: 'success'
+                    }).then(function () {
+                        location.reload();
+                    });
+                })
+        });
+    });
+</script>
+

@@ -12,7 +12,7 @@
 
         <div class="row">
             <!--Middle Part Start-->
-            <div id="content" class="col-sm-9">
+            <div id="content" class="col-sm-12">
                 <h2 class="title">订单信息</h2>
 
                 <table class="table table-bordered table-hover">
@@ -99,7 +99,12 @@
                                                    href="{{ route('orders.review.show', ['order' => $order->id]) }}"
                                                    class="btn btn-primary">查看评价</a>
                                             @endif
-                                            <a class="btn btn-danger" data-toggle="tooltip" href="return.html">申请退款</a>
+                                            @if($order->refund_status === \App\Models\Order::REFUND_STATUS_SUCCESS)
+                                                <a disabled class="btn btn-success" data-toggle="tooltip">退款成功</a>
+                                            @else
+                                                <a class="btn btn-danger" data-toggle="tooltip"
+                                                   href="{{ route('orders.return', ['order' => $order->id]) }}">申请退款</a>
+                                            @endif
                                         @endif
                                     </td>
 
@@ -158,6 +163,27 @@
                             <td class="text-left">未支付</td>
                         @endif
 
+                    </tr>
+                    <tr>
+                        @if($order->paid_at && $order->refund_status !== \App\Models\Order::REFUND_STATUS_PENDING)
+
+                            <td colspan="2" class="text-left">
+
+                                退款理由：
+                                {{ $order->extra['refund_return_reason_id'] }} &nbsp;&nbsp;&nbsp;&nbsp;
+                                产品是否已经打开：
+                                {{ $order->extra['refund_opened'] }} &nbsp;&nbsp;&nbsp;&nbsp;
+                                其他：
+                                {{ $order->extra['refund_comment'] }} &nbsp;&nbsp;&nbsp;&nbsp;
+                            </td>
+                        @elseif(isset($order->extra['refund_disagree_reason']))
+
+                            <td colspan="2" class="text-left">
+                                拒绝退款理由：
+                                {{ $order->extra['refund_disagree_reason'] }}
+                            </td>
+
+                        @endif
                     </tr>
 
                     </tbody>
@@ -219,6 +245,7 @@
 
     <script>
         $(document).ready(function () {
+            /*确认收货*/
             $('#btn-receive').click(function () {
                 swal({
                     title: "确认已经收到商品？",

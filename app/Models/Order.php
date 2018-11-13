@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Ramsey\Uuid\Uuid;
 
 class Order extends Model
 {
@@ -85,6 +86,16 @@ class Order extends Model
         }
 
         return false;
+    }
+
+    /*退款订单号*/
+    public static function getAvailableRefundNo()
+    {
+        do {
+            $no = Uuid::uuid4()->getHex();
+        } while (self::query()->where('refund_no', $no)->exists());
+
+        return $no;
     }
 
     /*关联用户*/

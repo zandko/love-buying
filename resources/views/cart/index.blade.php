@@ -31,7 +31,6 @@
                         <tbody>
                         @foreach($cartItems as $item)
                             <tr data-id="{{ $item->productSku->id }}">
-                                {{ $item->productSku->id }}
                                 <td><input type="checkbox" name="select"
                                            value="{{ $item->productSku->id }}" {{ $item->productSku->product->on_sale ? 'checked' : 'disabled' }}>
                                 </td>

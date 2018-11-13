@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Exceptions\InvalidRequestException;
+use App\Http\Requests\Admin\HandleRefundRequest;
 use App\Models\Order;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
@@ -110,5 +111,53 @@ class OrdersController extends Controller
         ]);
 
         return redirect()->back();
+    }
+
+    public function handleRefund(HandleRefundRequest $handleRefundRequest, Order $order)
+    {
+        if ($order->refund_status !== Order::REFUND_STATUS_APPLIED) {
+            throw new InvalidRequestException('订单状态不正确');
+        }
+
+        if ($handleRefundRequest->input('agree')) {
+            $this->_refundOrder($order);
+        } else {
+            $extra = $order->extra ?: [];
+            $extra['refund_disagree_reason'] = $handleRefundRequest->input('reason');
+
+            $order->update([
+                'refund_status' => Order::REFUND_STATUS_PENDING,
+                'extra' => $extra,
+            ]);
+        }
+
+        return $order;
+    }
+
+    public function _refundOrder(Order $order)
+    {
+        $refundNo = Order::getAvailableRefundNo();
+
+        $ret = app('alipay')->refund([
+            'out_trade_no' => $order->no,
+            'refund_amount' => $order->total_amount,
+            'out_request_no' => $refundNo,
+        ]);
+
+        if ($ret->sub_code) {
+            $extra = $order->extra;
+            $extra['refund_failed_code'] = $ret->sub_code;
+
+            $order->update([
+                'refund_no' => $refundNo,
+                'refund_status' => Order::REFUND_STATUS_FAILED,
+                'extra' => $extra,
+            ]);
+        } else {
+            $order->update([
+                'refund_no' => $refundNo,
+                'refund_status' => Order::REFUND_STATUS_SUCCESS,
+            ]);
+        }
     }
 }

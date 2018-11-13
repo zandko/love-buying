@@ -12,7 +12,7 @@
 
         <div class="row">
             <!--Middle Part Start-->
-            <div class="col-sm-9" id="content">
+            <div class="col-sm-12" id="content">
                 <h2 class="title">我的帐户</h2>
                 <p class="lead">你好， <strong>{{ Auth::user()->firstname }}</strong> - {{ $addresses->id ? '修改' : '新增' }}收货地址</p>
                 @if (count($errors) > 0)

@@ -12,7 +12,7 @@
 
         <div class="row">
             <!--Middle Part Start-->
-            <div id="content" class="col-sm-9">
+            <div id="content" class="col-sm-12">
                 <h2 class="title">订单历史</h2>
                 <div class="table-responsive">
                     @foreach($orders as $order)
