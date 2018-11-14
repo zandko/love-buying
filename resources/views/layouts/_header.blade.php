@@ -64,8 +64,7 @@
                     <div class="shopping_cart">
                         <div id="cart" class="btn-shopping-cart">
 
-                            <a  href="{{ route('cart.index') }}"  class="btn-group top_cart dropdown-toggle"
-                               >
+                            <a  href="{{ route('cart.index') }}"  class="btn-group top_cart dropdown-toggle">
                                 <div class="shopcart">
                                             <span class="icon-c">
                                                 <i class="fa fa-shopping-bag"></i>

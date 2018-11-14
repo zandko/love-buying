@@ -35,21 +35,25 @@
                                         <div class="form-group" {{ $errors->has('email') ? ' has-error' : '' }}>
                                             <label class="control-label " for="input-email">电子邮件地址</label>
                                             <input type="text" name="email" value="{{ old('email') }}" id="input-email"
-                                                   class="form-control"
-                                                   @if($errors->has('email')) style="border-color: red"
-                                                   placeholder="{{ $errors->first('email') }}" @endif />
+                                                   class="form-control"/>
+
+                                                   @if($errors->has('email'))
+                                                   <span style="color: red">{{ $errors->first('email') }}</span>
+                                                   @endif
                                         </div>
                                         <div class="form-group" {{ $errors->has('password') ? ' has-error' : '' }}>
                                             <label class="control-label " for="input-password">密码</label>
                                             <input type="password" name="password" value=""
-                                                   class="form-control"
-                                                   @if($errors->has('password')) style="border-color: red"
-                                                   placeholder="{{ $errors->first('password') }}" @endif />
+                                                   class="form-control"/>
+
+                                                   @if($errors->has('password'))
+                                                   <span style="color: red">{{ $errors->first('password') }}</span>
+                                                   @endif
                                         </div>
 
                                     </div>
                                     <div class="bottom-form">
-                                        <input style="vertical-align:middle; margin-top:-1.9px;" type="checkbox" name="remember" value="" id="input-password"
+                                        <input style="vertical-align:middle; margin-top:-1.9px;" type="checkbox"  name="remember" value="" id="input-password"
                                                 {{ old('remember') ? 'checked' : '' }}/>记住我
 
                                         <a href="{{ route('password.request') }}" class="forgot">忘记密码</a>

@@ -16,9 +16,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         /*分类*/
-        \View::composer(['pages.index', 'products.*', 'orders.*', 'cart.*', 'email_verification.*', 'user_addresses.*'], \App\Http\ViewComposers\CategoryTreeComposer::class);
+        \View::composer(['pages.index', 'products.*', 'orders.*', 'cart.*', 'email_verification.*','users.*', 'user_addresses.*'], \App\Http\ViewComposers\CategoryTreeComposer::class);
 
-        /*购物车*/
+        /*最新商品数据*/
         \View::composer(['products.*'], \App\Http\ViewComposers\ProductComposer::class);
     }
 

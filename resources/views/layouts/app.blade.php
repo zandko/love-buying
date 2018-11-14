@@ -47,8 +47,7 @@
     <link id="color_scheme" href="{{ asset('css/theme.css') }}" rel="stylesheet">
     <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
 
-    <!-- Google web fonts
-============================================ -->
+    {{-- Google web fonts --}}
     <link href='https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700' rel='stylesheet' type='text/css'>
 
     <style type="text/css">
@@ -69,7 +68,7 @@
                 @endif
                 <div id="app">
                     @include('layouts._header')
-                    @yield('content');
+                    @yield('content')
                     @include('layouts._footer')
                 </div>
             </div>

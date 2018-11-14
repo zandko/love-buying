@@ -20,7 +20,7 @@ class RegisteredListener implements ShouldQueue
     }
 
     /*监听用户注册*/
-    public function handle(Registered $event)
+    public function handle(Registered $event) 
     {
         $user = $event->user;
         $user->notify(new EmailVerificationNotification());
