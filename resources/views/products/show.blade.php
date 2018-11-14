@@ -102,9 +102,18 @@
                 <div class="module banner-left hidden-xs ">
                     <div class="banner-sidebar banners">
                         <div>
-                            <a title="Banner Image" href="#">
-                                <img src="/image/catalog/banners/banner-sidebar.jpg" alt="Banner Image">
-                            </a>
+
+                            @if($focus)
+                                @foreach($focus as $focu)
+                                    @if($focu->place===8)
+                                        <a title="{{ $focu->alt }}" href="{{ $focu->url }}">
+
+                                            <img src="{{ $focu->image_url }}" alt="{{ $focu->alt }}">
+                                        </a>
+                                    @endif
+                                @endforeach
+                            @endif
+
                         </div>
                     </div>
                 </div>

@@ -15,6 +15,13 @@ class CreateFocusTable extends Migration
     {
         Schema::create('focus', function (Blueprint $table) {
             $table->increments('id');
+            $table->tinyInteger('place')->comment('广告位置');
+            $table->string('url')->nullable()->comment('链接');
+            $table->string('image')->comment('封面图');
+            $table->string('alt')->comment('简述');
+            $table->string('remark')->nullable()->comment('备注');
+            $table->unsignedInteger('sort')->default(0)->comment('排序');
+            $table->boolean('status')->default(false)->comment('状态');
             $table->timestamps();
         });
     }

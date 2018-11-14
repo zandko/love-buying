@@ -13,7 +13,9 @@
 
             @if ($category)
                 @foreach($category->ancestors as $ancestor)
-                    <li><a href="{{ route('products.index', ['category_id' => $ancestor->id]) }}">{{ $ancestor->name }}</a></li>
+                    <li>
+                        <a href="{{ route('products.index', ['category_id' => $ancestor->id]) }}">{{ $ancestor->name }}</a>
+                    </li>
                 @endforeach
             @endif
         </ul>
@@ -28,7 +30,8 @@
                             <ul id="cat_accordion" class="list-group">
                                 @foreach($categoryTree as $category)
                                     <li class="hadchild">
-                                        <a href="{{ route('products.index', ['category_id' => $category['id']]) }}" class="cutom-parent">{{ $category['name'] }}</a>
+                                        <a href="{{ route('products.index', ['category_id' => $category['id']]) }}"
+                                           class="cutom-parent">{{ $category['name'] }}</a>
                                         <span class="button-view  fa fa-plus-square-o"></span>
                                         <ul style="display: block;">
                                             @foreach($category['children'] as $children)
@@ -66,7 +69,8 @@
                                         <div class="product-layout item-inner style1">
                                             <div class="item-image">
                                                 <div class="item-img-info">
-                                                    <a href="{{ route('products.show',['product'=>$desc->id]) }}" target="_self" title="{{ $desc->title }}">
+                                                    <a href="{{ route('products.show',['product'=>$desc->id]) }}"
+                                                       target="_self" title="{{ $desc->title }}">
                                                         <img src="{{ $desc->image_url }}"
                                                              alt="{{ $desc->title }}">
                                                     </a>
@@ -75,7 +79,8 @@
                                             </div>
                                             <div class="item-info" style="width:180%">
                                                 <div class="item-title">
-                                                    <a href="{{ route('products.show',['product'=>$desc->id]) }}" target="_self"
+                                                    <a href="{{ route('products.show',['product'=>$desc->id]) }}"
+                                                       target="_self"
                                                        title="{{ $desc->title }}">{{ str_limit($desc->title,15) }}</a>
                                                 </div>
                                                 <div class="rating">
@@ -106,9 +111,16 @@
                 <div class="module banner-left hidden-xs ">
                     <div class="banner-sidebar banners">
                         <div>
-                            <a title="Banner Image" href="#">
-                                <img src="/image/catalog/banners/banner-sidebar.jpg" alt="Banner Image">
-                            </a>
+                            @if($focus)
+                                @foreach($focus as $focu)
+                                    @if($focu->place===8)
+                                        <a title="{{ $focu->alt }}" href="{{ $focu->url }}">
+
+                                            <img src="{{ $focu->image_url }}" alt="{{ $focu->alt }}">
+                                        </a>
+                                    @endif
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -118,13 +130,19 @@
             <!--Middle Part Start-->
             <div id="content" class="col-md-9 col-sm-8">
                 <div class="products-category">
-                    <h3 class="title-category ">Accessories</h3>
+                    <h3 class="title-category ">季节广告</h3>
                     <div class="category-desc">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="banners">
                                     <div>
-                                        <a href="#"><img src="/image/catalog/demo/category/img-cate.jpg" alt="img cate"><br></a>
+                                        @if($focus)
+                                            @foreach($focus as $focu)
+                                                @if($focu->place===7)
+                                        <a href="{{ $focu->url }}"><img src="{{ $focu->image_url }}" alt="{{ $focu->alt }}"><br></a>
+                                                @endif
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
 
@@ -190,7 +208,8 @@
                                         <!--quickview-->
                                         <div class="so-quickview">
                                             <a class="iframe-link btn-button quickview quickview_handler visible-lg"
-                                               href="{{ route('products.detail',['product'=>$product->id]) }}" title="Quick view" data-fancybox-type="iframe"><i
+                                               href="{{ route('products.detail',['product'=>$product->id]) }}"
+                                               title="Quick view" data-fancybox-type="iframe"><i
                                                         class="fa fa-eye"></i><span>Quick view</span></a>
                                         </div>
                                         <!--end quickview-->
@@ -198,7 +217,7 @@
 
                                     </div>
                                     <div class="right-block">
-                                    
+
                                         <div class="caption hide-cont">
                                             <div class="ratings">
                                                 <div class="rating-box">
@@ -221,9 +240,10 @@
                                             <p>{{ $product->long_title }}</p>
                                         </div>
                                         <div class="list-block">
-                                   
+
                                             <a class="iframe-link btn-button quickview quickview_handler visible-lg"
-                                               href="{{ route('products.detail',['product'=>$product->id]) }}" title="Quick view" data-fancybox-type="iframe"><i
+                                               href="{{ route('products.detail',['product'=>$product->id]) }}"
+                                               title="Quick view" data-fancybox-type="iframe"><i
                                                         class="fa fa-eye"></i></a>
                                         </div>
                                     </div>

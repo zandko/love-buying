@@ -48,4 +48,12 @@ Route::group([
     /*退款*/
     $router->post('orders/{order}/refund', 'OrdersController@handleRefund')->name('admin.orders.handle_refund');
 
+    /*广告*/
+    $router->get('focus','FocusController@index');
+    $router->get('focus/create','FocusController@create');
+    $router->post('focus','FocusController@store');
+    $router->get('focus/{focu}/edit', 'FocusController@edit');
+    $router->put('focus/{focu}','FocusController@update');
+    $router->delete('focus/{focu}','FocusController@destroy');
+
 });

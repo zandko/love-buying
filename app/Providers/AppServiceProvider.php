@@ -20,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
 
         /*最新商品数据*/
         \View::composer(['products.*'], \App\Http\ViewComposers\ProductComposer::class);
+
+        /*广告数据*/
+        \View::composer(['pages.index','products.*'], \App\Http\ViewComposers\FocuComposer::class);
     }
 
     /**
