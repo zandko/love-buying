@@ -2,6 +2,9 @@
 
 Route::get('/', 'PagesController@index')->name('pages.index');
 Route::get('products', 'ProductsController@index')->name('products.index');
+Route::get('products/{product}/show', 'ProductsController@show')->name('products.show');
+Route::get('products/{product}/detail', 'ProductsController@detail')->name('products.detail');
+
 
 Auth::routes();
 
@@ -48,7 +51,6 @@ Route::group(['middleware' => 'auth'], function () {
 
         /*收藏*/
         Route::get('products/favorites', 'ProductsController@favorites')->name('products.favorites');
-        Route::get('products/{product}', 'ProductsController@show')->name('products.show');
         Route::post('products/{product}/favorite', 'ProductsController@favor')->name('products.favor');
         Route::delete('products/{product}/favorite', 'ProductsController@disfavor')->name('products.disfavor');
 

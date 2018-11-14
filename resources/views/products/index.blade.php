@@ -190,7 +190,7 @@
                                         <!--quickview-->
                                         <div class="so-quickview">
                                             <a class="iframe-link btn-button quickview quickview_handler visible-lg"
-                                               href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i
+                                               href="{{ route('products.detail',['product'=>$product->id]) }}" title="Quick view" data-fancybox-type="iframe"><i
                                                         class="fa fa-eye"></i><span>Quick view</span></a>
                                         </div>
                                         <!--end quickview-->
@@ -223,7 +223,7 @@
                                         <div class="list-block">
                                    
                                             <a class="iframe-link btn-button quickview quickview_handler visible-lg"
-                                               href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i
+                                               href="{{ route('products.detail',['product'=>$product->id]) }}" title="Quick view" data-fancybox-type="iframe"><i
                                                         class="fa fa-eye"></i></a>
                                         </div>
                                     </div>

@@ -121,4 +121,23 @@ class ProductsController extends Controller
         $user->favoriteProducts()->detach($product);
         return [];
     }
+
+    public function detail(Request $request, Product $product)
+    {   
+        if (!$product->on_sale) {
+            throw new InvalidRequestException('商品未上架');
+        }
+
+        $favored = false;
+
+        if ($user = $request->user()) {
+            $favored = $favor = boolval($user->favoriteProducts()->find($product->id));
+        }
+
+    
+        return view('products.detail',[
+            'product' => $product,
+            'favored' => $favored,
+        ]);
+    }
 }

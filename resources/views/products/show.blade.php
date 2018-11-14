@@ -167,8 +167,7 @@
                                 <a class="reviews_button" href=""
                                    onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">{{ $product->review_count }}
                                     评论</a> |
-                                <a class="write_review_button" href=""
-                                   onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">写评论</a>
+    
                             </div>
 
                             <div class="product-label form-group">
@@ -247,7 +246,7 @@
                                         <input type="button" data-toggle="tooltip" title="" value="添加到购物车"
                                                data-loading-text="Loading..." id="button-cart"
                                                class="btn btn-mega btn-lg"
-                                               onclick="cart.add('+{{ $product->id }}+', '','/image/catalog/demo/product/fashion/1.jpg','+{{ $product->title }}+');"
+                                    
                                                data-original-title="亲，您看要不加一下">
                                     </div>
                                     <div class="add-to-links wish_comp">
@@ -255,7 +254,7 @@
                                             <li class="wishlist">
                                                 @if(!$favored)
                                                     <a class="icon btn-favor" data-toggle="tooltip" title=""
-                                                       onclick="wishlist.add('50');" data-original-title="加入收藏"><i
+                                                      data-original-title="加入收藏"><i
                                                                 class="fa fa-heart"></i>
                                                     </a>
                                                 @else
@@ -384,20 +383,7 @@
 
                                     </div>
                                     <div class="right-block">
-                                        <div class="button-group so-quickview cartinfo--left">
-                                            <button type="button" class="addToCart" title="Add to cart"
-                                                    onclick="cart.add('60 ');">
-                                                <span>Add to cart </span>
-                                            </button>
-                                            <button type="button" class="wishlist btn-button" title="Add to Wish List"
-                                                    onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>Add to Wish List</span>
-                                            </button>
-                                            <button type="button" class="compare btn-button"
-                                                    title="Compare this Product "
-                                                    onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>Compare this Product</span>
-                                            </button>
-
-                                        </div>
+                                    
                                         <div class="caption hide-cont">
                                             <div class="ratings">
                                                 <div class="rating-box"><span class="fa fa-stack"><i
