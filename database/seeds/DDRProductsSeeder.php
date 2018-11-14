@@ -124,7 +124,6 @@ class DDRProductsSeeder extends Seeder
             ],
         ];
 
-        // 查找名为『内存』的商品类目
         $category = Category::where('name', '内存')->first();
 
         // 遍历上面的商品数据

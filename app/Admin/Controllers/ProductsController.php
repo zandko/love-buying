@@ -82,7 +82,7 @@ class ProductsController extends Controller
         $grid->id('ID');
         $grid->title('标题');
         $grid->image('封面图')->display(function () {
-            return "<img width='80' src='$this->image_url'>";
+            return "<img width='50' src='$this->image_url'>";
         });
         $grid->column('category.name','所属分类');
         $grid->on_sale('是否上架')->display(function ($on_sale) {
@@ -122,7 +122,7 @@ class ProductsController extends Controller
         $form->text('title', '标题')->rules('required');
         $form->text('long_title', '长标题')->rules('required');
         $form->select('category_id', '所属分类')->options($category_name)->default($category_id)->rules('required');
-        $form->image('image', '封面图')->resize(50,50)->rules('required|image');
+        $form->image('image', '封面图')->resize(258,258)->rules('required|image');
         $form->simplemde('description', '详情')->rules('required');
         $form->radio('on_sale', '是否上架')->options([1 => '是', '0' => '否'])->default(1);
 
@@ -131,7 +131,7 @@ class ProductsController extends Controller
         })->tab('规格', function ($form) {
             $form->hasMany('product_sku', '商品规格', function (Form\NestedForm $form) {
                 $form->text('title', '规格')->rules('required');
-                $form->image('image', '规格图');
+                $form->image('image', '规格图')->resize(120,120)->rules('required|image');
                 $form->text('description', '简介')->rules('required');
                 $form->decimal('price', '单价')->rules('required');
                 $form->number('stock', '库存')->rules('required');

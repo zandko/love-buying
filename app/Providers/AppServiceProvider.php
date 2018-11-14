@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
         \View::composer(['pages.index', 'products.*', 'orders.*', 'cart.*', 'email_verification.*', 'user_addresses.*'], \App\Http\ViewComposers\CategoryTreeComposer::class);
 
         /*购物车*/
-        \View::composer(['pages.index', 'products.*', 'orders.*', 'cart.*', 'email_verification.*', 'user_addresses.*'], \App\Http\ViewComposers\CartComposer::class);
+        \View::composer(['products.*'], \App\Http\ViewComposers\ProductComposer::class);
     }
 
     /**

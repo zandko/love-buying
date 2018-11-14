@@ -47,21 +47,13 @@
                         <div id="sosearchpro" class="sosearchpro-wrapper so-search ">
                             <form class="search-form" action="{{ route('products.index') }}">
                                 <div class="search input-group form-group">
-                                    {{--<div class="select_category filter_type  icon-select hidden-sm hidden-xs">--}}
-                                        {{--<select class="no-border">--}}
-                                            {{--<option value="0">所有分类</option>--}}
-                                            {{----}}
-                                            {{--<option value="0">所有分类</option>--}}
-                                        {{--</select>--}}
-                                    {{--</div>--}}
-
+                            
                                     <input class="autosearch-input form-control" type="text" value="" size="50"
-                                           autocomplete="off" placeholder="Keyword here..." name="search">
+                                           autocomplete="off" placeholder="关键字搜索" name="search">
                                     <button type="submit" class="button-search btn btn-primary"><i
                                                 class="fa fa-search"></i></button>
 
                                 </div>
-                                {{--<input type="hidden" name="route" value="product/search"/>--}}
                             </form>
                         </div>
                     </div>
@@ -72,67 +64,14 @@
                     <div class="shopping_cart">
                         <div id="cart" class="btn-shopping-cart">
 
-                            <a data-loading-text="Loading... " class="btn-group top_cart dropdown-toggle"
-                               data-toggle="dropdown" aria-expanded="true">
+                            <a  href="{{ route('cart.index') }}"  class="btn-group top_cart dropdown-toggle"
+                               >
                                 <div class="shopcart">
                                             <span class="icon-c">
                                                 <i class="fa fa-shopping-bag"></i>
-                                            </span>
-                                    <div class="shopcart-inner">
-                                        <p class="text-shopping-cart">
-                                            我的购物车
-                                        </p>
-
-                                        <span class="total-shopping-cart cart-total-full">
-                                                    <span class="items_cart">{{ count($cart ?? null) }}</span><span class="items_cart2">
-                                                        item(s)</span>
-                                                </span>
-                                    </div>
+                                            </span>  
                                 </div>
                             </a>
-
-                            <ul class="dropdown-menu pull-right shoppingcart-box" role="menu">
-                                @if($cart ?? null)
-                                @foreach($cart as $c)
-                                <li>
-                                    <table class="table table-striped">
-                                        <tbody>
-                                        <tr>
-                                            <td class="text-center" style="width:70px">
-                                                <a href="{{ route('products.show',['product'=>$c->productSku->product->id]) }}">
-                                                    <img src="{{ $c->productSku->image_url }}" style="width:70px"
-                                                         alt="Yutculpa ullamcon" title="Yutculpa ullamco"
-                                                         class="preview">
-                                                </a>
-                                            </td>
-                                            <td class="text-left"><a class="cart_product_name" href="{{ route('products.show',['product'=>$c->productSku->product->id]) }}">
-                                                    {{ str_limit($c->productSku->title,10) }}</a>
-                                            </td>
-                                            <td class="text-center">x{{ $c->amount }}</td>
-                                            <td class="text-center">${{ $c->productSku->price }}</td>
-                                            <td class="text-right">
-                                                <a href="{{ route('cart.index') }}" class="fa fa-edit"></a>
-                                            </td>
-                                            <td class="text-right">
-                                                <a onclick="cart.remove('2');" class="fa fa-times fa-delete"></a>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </li>
-                                @endforeach
-                                <li>
-                                    <div>
-
-                                        <p class="text-right"><a class="btn view-cart" href="{{ route('cart.index') }}"><i
-                                                        class="fa fa-shopping-cart"></i>查看购物车</a>&nbsp;&nbsp;&nbsp;
-                                            <a class="btn btn-mega checkout-cart" href="{{ route('products.index') }}"><i
-                                                        class="fa fa-share"></i>查看</a>
-                                        </p>
-                                    </div>
-                                </li>
-                                    @endif
-                            </ul>
                         </div>
 
                     </div>
@@ -193,8 +132,8 @@
                                     </div>
                                     <div class="vertical-wrapper">
                                         <span id="remove-verticalmenu" class="fa fa-times"></span>
-                                        <div class="megamenu-pattern">
-                                            <div class="container-mega">
+                                        <div class="megamenu-pattern" >
+                                            <div class="container-mega" >
                                                 <ul class="megamenu">
                                                     @if(isset($categoryTree))
                                                         @foreach($categoryTree as $category)
@@ -207,8 +146,8 @@
                                                                     <span>{{ $category['name'] }}</span>
                                                                     <b class="fa-angle-right"></b>
                                                                 </a>
-                                                                <div class="sub-menu" data-subwidth="60">
-                                                                    <div class="content">
+                                                                <div class="sub-menu" data-subwidth="60" >
+                                                                    <div class="content"  style="padding-top:10px">
                                                                         <div class="row">
                                                                             <div class="col-sm-12">
                                                                                 <div class="row">
@@ -249,10 +188,7 @@
                                                         @endforeach
                                                     @endif
 
-                                                    <li class="loadmore">
-                                                        <i class="fa fa-plus-square-o"></i>
-                                                        <span class="more-view">More Categories</span>
-                                                    </li>
+                                                  
                                                 </ul>
                                             </div>
                                         </div>

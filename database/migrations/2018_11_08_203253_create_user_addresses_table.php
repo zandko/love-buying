@@ -25,7 +25,7 @@ class CreateUserAddressesTable extends Migration
             $table->string('contact_phone')->comment('联系电话');
             $table->dateTime('last_used_at')->nullable()->comment('最后使用时间');
             $table->timestamps();
-
+            
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

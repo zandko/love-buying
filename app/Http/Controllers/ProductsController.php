@@ -10,13 +10,12 @@ use App\Services\CategoryService;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
-{
+{       
     /*商品搜索页*/
     public function index(Request $request, CategoryService $categoryService)
     {
         $builder = Product::query()->where('on_sale', true);
-        $product_desc = $builder->orderBy('id', 'desc')->paginate(5);
-
+    
         /*关键字搜索*/
         if ($search = $request->input('search', '')) {
             $like = '%' . $search . '%';
@@ -56,7 +55,6 @@ class ProductsController extends Controller
         return view('products.index', [
             'products' => $products,
             'categoryTree' => $categoryService->getCategoryTree(),
-            'product_desc' => $product_desc,
             'filters' => [
                 'search' => $search,
                 'order' => $order,

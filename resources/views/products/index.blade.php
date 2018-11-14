@@ -62,7 +62,7 @@
                             <!-- Begin extraslider-inner -->
                             <div class="yt-content-slider extraslider-inner">
                                 <div class="item ">
-                                    @foreach($product_desc as $desc)
+                                    @foreach($p_desc as $desc)
                                         <div class="product-layout item-inner style1">
                                             <div class="item-image">
                                                 <div class="item-img-info">
@@ -198,21 +198,7 @@
 
                                     </div>
                                     <div class="right-block">
-                                        <div class="button-group so-quickview cartinfo--left">
-                                            {{--<button type="button" class="addToCart" title="Add to cart"--}}
-                                            {{--onclick="cart.add('60 ');">--}}
-                                            {{--<span>添加到购物车</span>--}}
-                                            {{--</button>--}}
-                                            <a class="wishlist btn-button btn-favor" title="收藏商品"
-                                               onclick="wishlist.add('60');"><i
-                                                        class="fa fa-heart-o"></i><span>收藏商品</span>
-                                            </a>
-                                            {{--<button type="button" class="compare btn-button" title="Compare this Product "--}}
-                                            {{--onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>Compare this Product</span>--}}
-                                            {{--</button>--}}
-
-
-                                        </div>
+                                    
                                         <div class="caption hide-cont">
                                             <div class="ratings">
                                                 <div class="rating-box">
@@ -235,24 +221,10 @@
                                             <p>{{ $product->long_title }}</p>
                                         </div>
                                         <div class="list-block">
-                                            {{--<button class="addToCart btn-button" type="button" title="Add to Cart"--}}
-                                            {{--onclick="cart.add('101', '1');"><i--}}
-                                            {{--class="fa fa-shopping-basket"></i>--}}
-                                            {{--</button>--}}
-                                            <a data-id="{{$product->id}}" class="wishlist btn-button btn-favor"
-                                               title="收藏商品"
-                                               onclick="wishlist.add('60');"><i
-                                                        class="fa fa-heart-o"></i><span>收藏商品</span>
-                                            </a>
-                                        {{--<button class="compare btn-button" type="button"--}}
-                                        {{--title="Compare this Product"--}}
-                                        {{--onclick="compare.add('101');"><i class="fa fa-refresh"></i>--}}
-                                        {{--</button>--}}
-                                        <!--quickview-->
+                                   
                                             <a class="iframe-link btn-button quickview quickview_handler visible-lg"
                                                href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i
                                                         class="fa fa-eye"></i></a>
-                                            <!--end quickview-->
                                         </div>
                                     </div>
 
