@@ -59,4 +59,41 @@ class Product extends Model
                 return $properties->pluck('value')->all();
             });
     }
+
+    public function toESArray()
+    {
+        /* 函数仅返回给定数组中指定的键/值对*/
+        $arr = array_only($this->toArray(), [
+            'id',
+            'type',
+            'title',
+            'category_id',
+            'long_title',
+            'on_sale',
+            'rating',
+            'sold_count',
+            'review_count',
+            'price',
+        ]);
+
+        $arr['category'] = $this->category ? explode(' - ', $this->category->full_name) : '';
+        $arr['category_path'] = $this->category ? $this->category_path : '';
+        $arr['description'] = strip_tags($this->description);
+        $arr['skus'] = $this->product_sku->map(function (ProductSku $sku) {
+            return array_only($sku->toArray(), [
+                'title',
+                'description',
+                'price',
+            ]);
+        });
+
+        $arr['properties'] = $this->product_property->map(function (ProductProperty $properties) {
+            return array_only($properties->toArray(), [
+                'name',
+                'value',
+            ]);
+        });
+
+        return $arr;
+    }
 }

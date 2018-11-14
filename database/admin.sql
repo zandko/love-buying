@@ -21,7 +21,7 @@
 
 LOCK TABLES `admin_menu` WRITE;
 /*!40000 ALTER TABLE `admin_menu` DISABLE KEYS */;
-INSERT INTO `admin_menu` VALUES (1,0,1,'首页','fa-bar-chart','/',NULL,NULL,'2018-11-07 06:07:50'),(2,0,7,'系统管理','fa-tasks',NULL,NULL,NULL,'2018-11-11 20:19:06'),(3,2,8,'管理员','fa-users','auth/users',NULL,NULL,'2018-11-11 20:19:06'),(4,2,9,'角色','fa-user','auth/roles',NULL,NULL,'2018-11-11 20:19:06'),(5,2,10,'权限','fa-ban','auth/permissions',NULL,NULL,'2018-11-11 20:19:06'),(6,2,11,'菜单','fa-bars','auth/menu',NULL,NULL,'2018-11-11 20:19:06'),(7,2,12,'操作日志','fa-history','auth/logs',NULL,NULL,'2018-11-11 20:19:06'),(8,0,3,'分类管理','fa-bars','/categories',NULL,'2018-11-07 16:13:28','2018-11-09 21:09:21'),(9,0,4,'商品管理','fa-cubes','/products',NULL,'2018-11-07 17:59:03','2018-11-09 21:09:21'),(10,0,6,'优惠卷管理','fa-money','/coupon_codes',NULL,'2018-11-08 08:41:49','2018-11-11 20:19:06'),(11,0,2,'用户管理','fa-users','/users',NULL,'2018-11-09 21:09:15','2018-11-09 21:09:21'),(12,0,5,'订单管理','fa-first-order','/orders',NULL,'2018-11-11 20:18:58','2018-11-11 20:19:06');
+INSERT INTO `admin_menu` VALUES (1,0,1,'首页','fa-bar-chart','/',NULL,NULL,'2018-11-07 06:07:50'),(2,0,8,'系统管理','fa-tasks',NULL,NULL,NULL,'2018-11-14 17:59:52'),(3,2,9,'管理员','fa-users','auth/users',NULL,NULL,'2018-11-14 17:59:52'),(4,2,10,'角色','fa-user','auth/roles',NULL,NULL,'2018-11-14 17:59:52'),(5,2,11,'权限','fa-ban','auth/permissions',NULL,NULL,'2018-11-14 17:59:52'),(6,2,12,'菜单','fa-bars','auth/menu',NULL,NULL,'2018-11-14 17:59:52'),(7,2,13,'操作日志','fa-history','auth/logs',NULL,NULL,'2018-11-14 17:59:52'),(8,0,4,'分类管理','fa-bars','/categories',NULL,'2018-11-07 16:13:28','2018-11-14 17:59:52'),(9,0,5,'商品管理','fa-cubes','/products',NULL,'2018-11-07 17:59:03','2018-11-14 17:59:52'),(10,0,7,'优惠卷管理','fa-money','/coupon_codes',NULL,'2018-11-08 08:41:49','2018-11-14 17:59:52'),(11,0,2,'用户管理','fa-users','/users',NULL,'2018-11-09 21:09:15','2018-11-09 21:09:21'),(12,0,6,'订单管理','fa-first-order','/orders',NULL,'2018-11-11 20:18:58','2018-11-14 17:59:52'),(13,0,3,'广告模块','fa-file-image-o','/focus',NULL,'2018-11-14 17:59:42','2018-11-14 18:01:46');
 /*!40000 ALTER TABLE `admin_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,4 +103,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-13 16:45:53
+-- Dump completed on 2018-11-14 14:26:31

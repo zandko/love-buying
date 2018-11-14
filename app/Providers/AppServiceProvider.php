@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Monolog\Logger;
 use Yansongda\Pay\Pay;
+use Elasticsearch\ClientBuilder as ESClientBuilder;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        /*注入容器*/
+        /*注入容器--支付*/
         $this->app->singleton('alipay', function () {
             $config = config('pay.alipay');
 //            $config['notify_url'] = route('payment.alipay.notify');
@@ -45,6 +46,15 @@ class AppServiceProvider extends ServiceProvider
                 $config['log']['level'] = Logger::WARNING;
             }
             return Pay::alipay($config);
+        });
+        
+        /*搜索引擎*/
+        $this->app->singleton('es', function () {
+            $builder = ESClientBuilder::create()->setHosts(config('databases.elasticsearch.hosts'));
+            if (app()->environment() == 'local') {
+               $builder->setLogger(app('log')->getMonolog());
+            } 
+            return $builder->build();
         });
     }
 }

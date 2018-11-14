@@ -2,15 +2,14 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Product;
 use App\Http\Controllers\Controller;
+use App\Jobs\SyncOneProductToES;
+use App\Models\Category;
+use App\Models\Product;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
-use Encore\Admin\Show;
-use App\Models\Category;
-
 
 class ProductsController extends Controller
 {
@@ -67,7 +66,7 @@ class ProductsController extends Controller
     protected function grid()
     {
         $grid = new Grid(new Product);
-        $grid->model()->with(['category'])->orderBy('id','desc');
+        $grid->model()->with(['category'])->orderBy('id', 'desc');
         $grid->filter(function ($filter) {
             $filter->where(function ($query) {
                 $query->where('title', 'like', "%{$this->input}%")
@@ -84,7 +83,7 @@ class ProductsController extends Controller
         $grid->image('封面图')->display(function () {
             return "<img width='50' src='$this->image_url'>";
         });
-        $grid->column('category.name','所属分类');
+        $grid->column('category.name', '所属分类');
         $grid->on_sale('是否上架')->display(function ($on_sale) {
             return $on_sale ? '是' : '否';
         });
@@ -116,13 +115,13 @@ class ProductsController extends Controller
             $category_name[$v['id']] = $v->full_name;
         }
 
-        $category_id = (int)($id ? Product::find($id)->category_id : 0);
+        $category_id = (int) ($id ? Product::find($id)->category_id : 0);
 
         $form = new Form(new Product);
         $form->text('title', '标题')->rules('required');
         $form->text('long_title', '长标题')->rules('required');
         $form->select('category_id', '所属分类')->options($category_name)->default($category_id)->rules('required');
-        $form->image('image', '封面图')->resize(258,258)->rules('required|image');
+        $form->image('image', '封面图')->resize(258, 258)->rules('required|image');
         $form->simplemde('description', '详情')->rules('required');
         $form->radio('on_sale', '是否上架')->options([1 => '是', '0' => '否'])->default(1);
 
@@ -131,7 +130,7 @@ class ProductsController extends Controller
         })->tab('规格', function ($form) {
             $form->hasMany('product_sku', '商品规格', function (Form\NestedForm $form) {
                 $form->text('title', '规格')->rules('required');
-                $form->image('image', '规格图')->resize(120,120)->rules('required|image');
+                $form->image('image', '规格图')->resize(120, 120)->rules('required|image');
                 $form->text('description', '简介')->rules('required');
                 $form->decimal('price', '单价')->rules('required');
                 $form->number('stock', '库存')->rules('required');
@@ -142,7 +141,6 @@ class ProductsController extends Controller
                 $form->text('value', '属性值')->rules('required');
             });
         });
-
 
         $form->tools(function (Form\Tools $tools) {
             $tools->disableDelete();
@@ -157,7 +155,11 @@ class ProductsController extends Controller
             $form->model()->price = collect($form->input('product_sku'))->where(Form::REMOVE_FLAG_NAME, 0)->min('price') ?: 0;
         });
 
-
+        $form->saved(function (Form $form) {
+            $product = $form->model();
+            \var_dump($product);
+            $this->dispatch(new SyncOneProductToES($product));
+        });
 
         return $form;
     }
