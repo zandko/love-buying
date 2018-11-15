@@ -11,8 +11,8 @@
 
             <li><a href="{{ route('products.index') }}">全部结果</a></li>
 
-            @if ($category)
-                @foreach($category->ancestors as $ancestor)
+            @if ($categorys)
+                @foreach($categorys->ancestors as $ancestor)
                     <li>
                         <a href="{{ route('products.index', ['category_id' => $ancestor->id]) }}">{{ $ancestor->name }}</a>
                     </li>
@@ -114,7 +114,7 @@
                             @if($focus)
                                 @foreach($focus as $focu)
                                     @if($focu->place===8)
-                                        <a title="{{ $focu->alt }}" href="{{ $focu->url }}">
+                                        <a title="{{ $focuu->alt }}" href="{{ $focu->url }}">
 
                                             <img src="{{ $focu->image_url }}" alt="{{ $focu->alt }}">
                                         </a>
@@ -122,6 +122,8 @@
                                 @endforeach
                             @endif
                         </div>
+
+
                     </div>
                 </div>
             </aside>
@@ -139,7 +141,8 @@
                                         @if($focus)
                                             @foreach($focus as $focu)
                                                 @if($focu->place===7)
-                                        <a href="{{ $focu->url }}"><img src="{{ $focu->image_url }}" alt="{{ $focu->alt }}"><br></a>
+                                                    <a href="{{ $focu->url }}"><img src="{{ $focu->image_url }}"
+                                                                                    alt="{{ $focu->alt }}"><br></a>
                                                 @endif
                                             @endforeach
                                         @endif
@@ -148,7 +151,61 @@
 
                             </div>
                         </div>
+
+
+                        {{-- 属性搜索开始  --}}
+                        <div class="row">
+                            <div class="col-sm-12" style="margin-top: 20px">
+                                @foreach($propertyFilters as $name => $value)
+                                    <span class="filter">{{ $name }}:
+
+                                    <span style="
+                                        border: 1px solid #DDD;
+                                        cursor: pointer;
+                                        background: #f3f3f3;
+                                        margin-right: 5px;
+                                    " class="filter-value">{{ $value }}
+                                        <a style="margin-left: 5px; color: red;font-size: 15px;" class="remove-filter" href="javascript: removeFilterFromQuery('{{ $name }}')">×</a>
+                                    </span>
+
+                                    </span>
+                                @endforeach
+
+                                <div style="border:1px solid #DDD;box-sizing: border-box;padding-left:15px;">
+                                    @if ($categorys && $categorys->is_directory)
+                                        <div class="row">
+                                            <div style="background-color: #f3f3f3" class="col-xs-3 filter-key">子级分类：
+                                            </div>
+                                            <div class="col-xs-9 filter-values">
+                                                @foreach($categorys->children as $child)
+                                                    <a style="margin-right: 5px;"
+                                                       href="{{ route('products.index', ['category_id' => $child->id]) }}">{{ $child->name }}</a>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                                @foreach($properties as $property)
+                                    <div style="padding-left:15px;border-bottom:1px solid #DDD;border-right: 1px solid #DDD;border-left: 1px solid #DDD;box-sizing: border-box">
+                                        <div class="row">
+                                            <div style="background-color: #f3f3f3"
+                                                 class="col-xs-3 filter-key">{{ $property['key'] }}：
+                                            </div>
+                                            <div class="col-xs-9 filter-values">
+                                                @foreach($property['values'] as $value)
+                                                    <a style="margin-right: 5px;" href="javascript: appendFilterToQuery('{{ $property['key'] }}','{{ $value }}')">{{ $value }}</a>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        {{-- 属性搜索结束 --}}
                     </div>
+
+
                     <!-- Filters -->
                     <div class="product-filter product-filter-top filters-panel">
                         <div class="row">
@@ -264,7 +321,6 @@
                     <!-- //end Filters -->
 
                 </div>
-
             </div>
 
 
@@ -301,5 +357,66 @@
             });
 
         });
+    </script>
+
+    <script>
+        /*解析地址栏参数*/
+        function parseSearch() {
+            var searches = {};
+
+            location.search.substr(1).split('&').forEach(function (str) {
+                var result = str.split('=');
+                searches[decodeURIComponent(result[0])] = decodeURIComponent(result[1]);
+            });
+
+            return searches;
+        }
+
+        /*构建查询参数*/
+        function buildSearch(searches) {
+            var query = '?';
+
+            _.forEach(searches, function (value, key) {
+                query += encodeURIComponent(key) + '=' + encodeURIComponent(value) + '&';
+            });
+
+            return query.substr(0, query.length - 1);
+        }
+
+        /*将新的filter追加到当前的url上*/
+        function appendFilterToQuery(name, value) {
+            var searches = parseSearch();
+            if (searches['filters']) {
+                searches['filters'] += '|' + name + ':' + value;
+            } else {
+                searches['filters'] = name + ':' + value;
+            }
+
+            location.search = buildSearch(searches);
+        }
+
+        /*将某个filter移除*/
+        function removeFilterFromQuery(name) {
+
+            var searches = parseSearch();
+            if (!searches['filters']) {
+                return;
+            }
+
+            var filters = [];
+            searches['filters'].split('|').forEach(function (filter) {
+
+                var result = filter.split(':');
+
+                if (result[0] === name) {
+                    return;
+                }
+
+                filters.push(filter);
+            });
+
+            searches['filters'] = filters.join('|');
+            location.search = buildSearch(searches);
+        }
     </script>
 @endsection

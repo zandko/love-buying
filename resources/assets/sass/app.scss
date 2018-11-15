@@ -87,3 +87,28 @@
   textarea {
     border-radius: 0px;
   }
+
+
+  .filters {
+    font-size: 12px;
+    margin-bottom: 10px;
+    & > .row {
+      border-bottom: 1px solid #eee;
+      .filter-key {
+        width: 150px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        background: #f3f3f3;
+        color: #666;
+      }
+      .filter-values {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        a {
+          margin-right: 50px;
+          color: #666;
+          text-decoration: none;
+        }
+      }
+    }
+  }

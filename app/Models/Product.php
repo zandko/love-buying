@@ -60,6 +60,7 @@ class Product extends Model
             });
     }
 
+    /**转成数组存入搜索引擎 */
     public function toESArray()
     {
         /* 函数仅返回给定数组中指定的键/值对*/
@@ -77,20 +78,15 @@ class Product extends Model
         ]);
 
         $arr['category'] = $this->category ? explode(' - ', $this->category->full_name) : '';
-        $arr['category_path'] = $this->category ? $this->category_path : '';
+        $arr['category_path'] = $this->category ? $this->category->path : '';
         $arr['description'] = strip_tags($this->description);
         $arr['skus'] = $this->product_sku->map(function (ProductSku $sku) {
-            return array_only($sku->toArray(), [
-                'title',
-                'description',
-                'price',
-            ]);
+            return array_only($sku->toArray(), ['title', 'description', 'price']);
         });
 
-        $arr['properties'] = $this->product_property->map(function (ProductProperty $properties) {
-            return array_only($properties->toArray(), [
-                'name',
-                'value',
+        $arr['properties'] = $this->product_property->map(function (ProductProperty $property) {
+            return array_merge(array_only($property->toArray(), ['name', 'value']), [
+                'search_value' => $property->name . ':' . $property->value,
             ]);
         });
 

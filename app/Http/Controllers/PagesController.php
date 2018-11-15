@@ -14,7 +14,6 @@ class PagesController extends Controller
         $sold_count = $product->query()->orderBy('sold_count', 'desc')->paginate(8);
         $desc = $product->query()->orderBy('created_at', 'desc')->paginate(8);
 
-
         $product = $product->all();
 
         return view('pages.index', [

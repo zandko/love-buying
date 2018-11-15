@@ -6,38 +6,49 @@ use App\Exceptions\InvalidRequestException;
 use App\Models\Category;
 use App\Models\OrderItem;
 use App\Models\Product;
-use App\Services\CategoryService;
+use App\Services\SearchBuilders\ProductSearchBuilder;
+use DB;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProductsController extends Controller
-{       
+{
     /*商品搜索页*/
-    public function index(Request $request, CategoryService $categoryService)
+    public function index(Request $request)
     {
-        $builder = Product::query()->where('on_sale', true);
-    
+        /**取出已上架的商品 */
+        $page = $request->input('page', 1);
+        $perPage = 15;
+
+        $builder = (new ProductSearchBuilder())->onSale()->paginate($perPage, $page);
+
         /*关键字搜索*/
         if ($search = $request->input('search', '')) {
-            $like = '%' . $search . '%';
-            $builder->where(function ($query) use ($like) {
-                $query->where('title', 'like', $like)
-                    ->orWhere('long_title','like',$like)
-                    ->orWhere('description', 'like', $like)
-                    ->orWhereHas('product_sku', function ($query) use ($like) {
-                        $query->where('title', 'like', $like)
-                            ->orWhere('description', 'like', $like);
-                    });
-            });
+            /**array_filter 过滤空项 */
+            $keywords = array_filter(explode(' ', $search));
+
+            $builder->keywords($keywords);
         }
 
         /*分类查找*/
         if ($request->input('category_id') && $category = Category::find($request->input('category_id'))) {
-            if ($category->is_directory) {
-                $builder->whereHas('category', function ($query) use ($category) {
-                    $query->where('path', 'like', $category->path.$category->id.'-%');
-                });
-            } else {
-                $builder->where('category_id', $category->id);
+            $builder->category($category);
+        }
+
+        /**分面搜索 */
+        if ($search || isset($category)) {
+            $builder->aggregateProperties();
+        }
+
+        /**属性筛选 */
+        $propertyFilters = [];
+        if ($filterString = $request->input('filters')) {
+            $filterArray = explode('|', $filterString);
+            foreach ($filterArray as $filter) {
+                list($name, $value) = explode(':', $filter);
+                $propertyFilters[$name] = $value;
+
+                $builder->propertyFilter($name, $value);
             }
         }
 
@@ -45,21 +56,50 @@ class ProductsController extends Controller
         if ($order = $request->input('order', '')) {
             if (preg_match('/^(.+)_(asc|desc)$/', $order, $m)) {
                 if (in_array($m[1], ['price', 'sold_count', 'rating'])) {
+
                     $builder->orderBy($m[1], $m[2]);
                 }
             }
         }
 
-        $products = $builder->paginate(15);
+        $result = app('es')->search($builder->getParams());
+
+        $properties = [];
+
+        /**如果有aggregations 表示分页搜索 */
+        if (isset($result['aggregations'])) {
+            $properties = collect($result['aggregations']['properties']['properties']['buckets'])
+                ->map(function ($bucket) {
+                    return [
+                        'key' => $bucket['key'],
+                        'values' => collect($bucket['value']['buckets'])->pluck('key')->all(),
+                    ];
+                })
+                ->filter(function ($property) use ($propertyFilters) {
+                    return count($property['values']) > 1 && !isset($propertyFilters[$property['key']]);
+                });
+        }
+
+        $productIds = collect($result['hits']['hits'])->pluck('_id')->all();
+        $products = Product::query()
+            ->whereIn('id', $productIds)
+            ->orderByRaw(DB::raw("FIND_IN_SET(id,'" . join(',', $productIds) . "'" . ')'))
+            ->get();
+
+        /**laravel 分页的底层 */
+        $pager = new LengthAwarePaginator($products, $request['hits']['total'], $perPage, $page, [
+            'path' => route('products.index', false),
+        ]);
 
         return view('products.index', [
-            'products' => $products,
-            'categoryTree' => $categoryService->getCategoryTree(),
+            'products' => $pager,
             'filters' => [
                 'search' => $search,
                 'order' => $order,
             ],
-            'category' => isset($category) ? $category : null,
+            'categorys' => $category ?? null,
+            'properties' => $properties,
+            'propertyFilters' => $propertyFilters,
         ]);
     }
 
@@ -123,7 +163,7 @@ class ProductsController extends Controller
     }
 
     public function detail(Request $request, Product $product)
-    {   
+    {
         if (!$product->on_sale) {
             throw new InvalidRequestException('商品未上架');
         }
@@ -134,8 +174,7 @@ class ProductsController extends Controller
             $favored = $favor = boolval($user->favoriteProducts()->find($product->id));
         }
 
-    
-        return view('products.detail',[
+        return view('products.detail', [
             'product' => $product,
             'favored' => $favored,
         ]);
