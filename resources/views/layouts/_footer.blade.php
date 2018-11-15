@@ -7,17 +7,14 @@
                 <div class="bottom-cont">
                     <a href="#"><img src="/image/catalog/demo/payment/pay1.jpg" alt="image"></a>
                     <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Customer Service</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Site Map</a></li>
-                        <li><a href="#">Orders and Returns</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">关于我们</a></li>
+                        <li><a href="#">客户服务</a></li>
+                        <li><a href="#">隐私政策</a></li>
+                        <li><a href="#">网站地图</a></li>
+                        <li><a href="#">订单和退货</a></li>
+                        <li><a href="#">联系我们</a></li>
                     </ul>
-                    <p>**$50 off orders $350+ with the code BOO50. $75 off orders $500+ with the code BOO75.
-                        $150 off orders $1000+ with the code BOO150. Valid from October 28, 2016 to October 31,
-                        2016. Offer may not be combined with any other offers or promotions, is
-                        non-exchangeable and non-refundable. Offer valid within the US only.</p>
+                    <p>**订单满$ 350减$ 50，代码为BOO50。订单满$ 500立减$ 75，折扣码为BOO75。订单满$ 150减$ 150，使用折扣码BOO150。有效期为2016年10月28日至2016年10月31日。优惠不可与其他优惠或促销活动同时使用，不可兑换且不可退款。优惠只适用于美国境内。</p>
                 </div>
             </div>
         </div>
@@ -32,8 +29,9 @@
         <div class="copyright-w">
             <div class="container">
                 <div class="copyright">
-                    SuperMarket © 2018 Demo Store. All Rights Reserved. Designed by <a href="http://www.bootstrapmb.com"
-                                                                                       target="_blank">OpenCartWorks.Com</a>
+
+                    爱购物 © 2018 2018演示商城。 版权所有。由高赞设计 <a href="http://www.bootstrapmb.com"
+                                                                                       target="_blank"></a>
                 </div>
             </div>
         </div>

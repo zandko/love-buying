@@ -10,6 +10,7 @@ use App\Services\SearchBuilders\ProductSearchBuilder;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Services\ProductService;
 
 class ProductsController extends Controller
 {
@@ -91,6 +92,7 @@ class ProductsController extends Controller
             'path' => route('products.index', false),
         ]);
 
+
         return view('products.index', [
             'products' => $pager,
             'filters' => [
@@ -104,7 +106,7 @@ class ProductsController extends Controller
     }
 
     /*商品详情页*/
-    public function show(Request $request, Product $product)
+    public function show(Request $request, Product $product, ProductService $productService)
     {
         if (!$product->on_sale) {
             throw new InvalidRequestException('商品未上架');
@@ -116,6 +118,7 @@ class ProductsController extends Controller
             $favored = $favor = boolval($user->favoriteProducts()->find($product->id));
         }
 
+
         $reviews = OrderItem::query()
             ->with('order.user', 'productSku')
             ->where('product_id', $product->id)
@@ -123,10 +126,20 @@ class ProductsController extends Controller
             ->orderBy('reviewed_at', 'desc')
             ->paginate(10);
 
+        /*调用类查询相似*/
+        $similarProductIds = $productService->getSimilarProductIds($product, 5);
+
+        // 根据搜索出来的商品id 从数据库中读取商品数据
+        $similarProducts = Product::query()
+            ->whereIn('id', $similarProductIds)
+            ->orderByRaw(sprintf("FIND_IN_SET(id,'%s')", join(',', $similarProductIds)))
+            ->get();
+
         return view('products.show', [
             'product' => $product,
             'favored' => $favored,
             'reviews' => $reviews,
+            'similar' => $similarProducts,
         ]);
     }
 

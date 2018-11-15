@@ -33,7 +33,7 @@ class Product extends Model
     {
         return $this->hasMany(ProductSku::class);
     }
-
+    
     /*关联属性*/
     public function product_property()
     {

@@ -11,7 +11,7 @@ class ProductComposer
 
     public function __construct(Product $product)
     {
-        $this->product = $product->query()->where('on_sale',true)->orderBy('id','desc')->paginate(5);;
+        $this->product = $product->query()->where('on_sale',true)->orderBy('id','desc')->paginate(5);
     }
 
     /*购物车数据*/

@@ -8,7 +8,9 @@
     <div class="main-container container">
         <ul class="breadcrumb">
             <li><a href="/"><i class="fa fa-home"></i></a></li>
-            <li><a href="{{ route('products.index',['category_id'=>$product->category->id]) }}">{{ $product->category->name }}</a></li>
+            <li>
+                <a href="{{ route('products.index',['category_id'=>$product->category->id]) }}">{{ $product->category->name }}</a>
+            </li>
             <li><a href="#">{{ $product->long_title }}</a></li>
 
         </ul>
@@ -17,39 +19,40 @@
 
             <!--Left Part Start -->
             <aside class="col-sm-4 col-md-3 content-aside" id="column-left">
-                    <div class="module category-style">
-                            <h3 class="modtitle">分类</h3>
-                            <div class="modcontent">
-                                <div class="box-category">
-                                    <ul id="cat_accordion" class="list-group">
-                                        @foreach($categoryTree as $category)
-                                            <li class="hadchild">
-                                                <a href="{{ route('products.index', ['category_id' => $category['id']]) }}" class="cutom-parent">{{ $category['name'] }}</a>
-                                                <span class="button-view  fa fa-plus-square-o"></span>
-                                                <ul style="display: block;">
-                                                    @foreach($category['children'] as $children)
-                                                        <li>
-                                                            <a href="{{ route('products.index', ['category_id' => $children['id']]) }}">{{ $children['name'] }}</a>
-                                                            <span class="button-view  fa fa-plus-square-o"></span>
-                                                            <ul style="display:block">
-                                                                @foreach($children['children'] as $child)
-                                                                    <li>
-                                                                        <a href="{{ route('products.index', ['category_id' => $child['id']]) }}">{{ $child['name'] }}</a>
-                                                                    </li>
-                                                                @endforeach
-                                                            </ul>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-        
-        
-                            </div>
+                <div class="module category-style">
+                    <h3 class="modtitle">分类</h3>
+                    <div class="modcontent">
+                        <div class="box-category">
+                            <ul id="cat_accordion" class="list-group">
+                                @foreach($categoryTree as $category)
+                                    <li class="hadchild">
+                                        <a href="{{ route('products.index', ['category_id' => $category['id']]) }}"
+                                           class="cutom-parent">{{ $category['name'] }}</a>
+                                        <span class="button-view  fa fa-plus-square-o"></span>
+                                        <ul style="display: block;">
+                                            @foreach($category['children'] as $children)
+                                                <li>
+                                                    <a href="{{ route('products.index', ['category_id' => $children['id']]) }}">{{ $children['name'] }}</a>
+                                                    <span class="button-view  fa fa-plus-square-o"></span>
+                                                    <ul style="display:block">
+                                                        @foreach($children['children'] as $child)
+                                                            <li>
+                                                                <a href="{{ route('products.index', ['category_id' => $child['id']]) }}">{{ $child['name'] }}</a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
-                 <div class="module product-simple">
+
+
+                    </div>
+                </div>
+                <div class="module product-simple">
                     <h3 class="modtitle">
                         <span>最新产品</span>
                     </h3>
@@ -62,7 +65,8 @@
                                         <div class="product-layout item-inner style1">
                                             <div class="item-image">
                                                 <div class="item-img-info">
-                                                    <a href="{{ route('products.show',['product'=>$desc->id]) }}" target="_self" title="{{ $desc->title }}">
+                                                    <a href="{{ route('products.show',['product'=>$desc->id]) }}"
+                                                       target="_self" title="{{ $desc->title }}">
                                                         <img src="{{ $desc->image_url }}"
                                                              alt="{{ $desc->title }}">
                                                     </a>
@@ -71,7 +75,8 @@
                                             </div>
                                             <div class="item-info" style="width:180%">
                                                 <div class="item-title">
-                                                    <a href="{{ route('products.show',['product'=>$desc->id]) }}" target="_self"
+                                                    <a href="{{ route('products.show',['product'=>$desc->id]) }}"
+                                                       target="_self"
                                                        title="{{ $desc->title }}">{{ str_limit($desc->title,15) }}</a>
                                                 </div>
                                                 <div class="rating">
@@ -176,7 +181,7 @@
                                 <a class="reviews_button" href=""
                                    onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">{{ $product->review_count }}
                                     评论</a> |
-    
+
                             </div>
 
                             <div class="product-label form-group">
@@ -255,7 +260,7 @@
                                         <input type="button" data-toggle="tooltip" title="" value="添加到购物车"
                                                data-loading-text="Loading..." id="button-cart"
                                                class="btn btn-mega btn-lg"
-                                    
+
                                                data-original-title="亲，您看要不加一下">
                                     </div>
                                     <div class="add-to-links wish_comp">
@@ -263,7 +268,7 @@
                                             <li class="wishlist">
                                                 @if(!$favored)
                                                     <a class="icon btn-favor" data-toggle="tooltip" title=""
-                                                      data-original-title="加入收藏"><i
+                                                       data-original-title="加入收藏"><i
                                                                 class="fa fa-heart"></i>
                                                     </a>
                                                 @else
@@ -319,21 +324,10 @@
                                                         <div class="ratings">
                                                             <div class="rating-box">
                                                                 @for($i=1;$i<=floor($review->rating);$i++)
-                                                                <span class="fa fa-stack"><i
-                                                                            class="fa fa-star fa-stack-1x"></i><i
-                                                                            class="fa fa-star-o fa-stack-1x"></i></span>
+                                                                    <span class="fa fa-stack"><i
+                                                                                class="fa fa-star fa-stack-1x"></i><i
+                                                                                class="fa fa-star-o fa-stack-1x"></i></span>
                                                                 @endfor
-                                                                {{--<span class="fa fa-stack"><i--}}
-                                                                            {{--class="fa fa-star fa-stack-1x"></i><i--}}
-                                                                            {{--class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                                {{--<span class="fa fa-stack"><i--}}
-                                                                            {{--class="fa fa-star fa-stack-1x"></i><i--}}
-                                                                            {{--class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                                {{--<span class="fa fa-stack"><i--}}
-                                                                            {{--class="fa fa-star fa-stack-1x"></i><i--}}
-                                                                            {{--class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                                {{--<span class="fa fa-stack"><i--}}
-                                                                            {{--class="fa fa-star-o fa-stack-1x"></i></span>--}}
                                                             </div>
                                                         </div>
                                                     </td>
@@ -343,7 +337,7 @@
                                         </table>
                                         <div class="text-right"></div>
                                     </div>
-                                    
+
                                 </form>
                                 <div>{{ $reviews->render() }}</div>
                             </div>
@@ -368,59 +362,65 @@
                          data-margin="30" data-items_column00="5" data-items_column0="5" data-items_column1="3"
                          data-items_column2="3" data-items_column3="2" data-items_column4="1" data-arrows="yes"
                          data-pagination="no" data-lazyload="yes" data-hoverpause="yes">
-                        <div class="item">
-                            <div class="item-inner product-layout transition product-grid">
-                                <div class="product-item-container">
-                                    <div class="left-block left-b">
+                        @foreach($similar as $sml)
 
-                                        <div class="product-image-container second_img">
-                                            <a href="product.html" target="_self" title="Lastrami bacon">
-                                                <img src="/image/catalog/demo/product/270/e1.jpg"
-                                                     class="img-1 img-responsive" alt="image1">
-                                                <img src="/image/catalog/demo/product/270/e10.jpg"
-                                                     class="img-2 img-responsive" alt="image2">
-                                            </a>
-                                        </div>
-                                        <!--quickview-->
-                                        <div class="so-quickview">
-                                            <a class="iframe-link btn-button quickview quickview_handler visible-lg"
-                                               href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i
-                                                        class="fa fa-eye"></i><span>Quick view</span></a>
-                                        </div>
-                                        <!--end quickview-->
+                            <div class="item">
 
+                                <div class="item-inner product-layout transition product-grid">
+                                    <div class="product-item-container">
+                                        <div class="left-block left-b">
 
-                                    </div>
-                                    <div class="right-block">
-                                    
-                                        <div class="caption hide-cont">
-                                            <div class="ratings">
-                                                <div class="rating-box"><span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star fa-stack-2x"></i></span>
-                                                </div>
-                                                <span class="rating-num">( 2 )</span>
+                                            <div class="product-image-container second_img">
+                                                <a href="{{ route('products.show',['product'=>$sml->id]) }}"
+                                                   target="_self" title="Lastrami bacon">
+                                                    <img src="{{ $sml->image_url }}"
+                                                         class="img-1 img-responsive" alt="image1">
+                                                    <img src="/image/catalog/demo/product/270/e10.jpg"
+                                                         class="img-2 img-responsive" alt="image2">
+                                                </a>
                                             </div>
-                                            <h4><a href="product.html" title="Pastrami bacon" target="_self">Lastrami
-                                                    bacon</a></h4>
+                                            <!--quickview-->
+                                            <div class="so-quickview">
+                                                <a class="iframe-link btn-button quickview quickview_handler visible-lg"
+                                                   href="{{ route('products.detail',['product'=>$sml->id]) }}"
+                                                   title="Quick view" data-fancybox-type="iframe"><i
+                                                            class="fa fa-eye"></i><span>查看</span></a>
+                                            </div>
+                                            <!--end quickview-->
 
                                         </div>
-                                        <p class="price">
-                                            <span class="price-new">$80.00</span>
+                                        <div class="right-block">
 
-                                        </p>
+                                            <div class="caption hide-cont">
+                                                <div class="ratings">
+                                                    <div class="rating-box">
+
+                                                        @for($i=1;$i<=floor($sml->rating);$i++)
+                                                            <span class="fa fa-stack"><i
+                                                                        class="fa fa-star fa-stack-1x"></i><i
+                                                                        class="fa fa-star-o fa-stack-1x"></i></span>
+                                                        @endfor
+
+                                                    </div>
+                                                    <span class="rating-num">( {{ $sml->review_count }} )</span>
+                                                </div>
+                                                <h4><a href="product.html" title="Pastrami bacon" target="_self">
+                                                        {{ $sml->title }}
+                                                    </a></h4>
+
+                                            </div>
+                                            <p class="price">
+                                                <span class="price-new">${{ $sml->price }}</span>
+
+                                            </p>
+                                        </div>
+
                                     </div>
-
                                 </div>
+
                             </div>
-                        </div>
+                        @endforeach
+
                     </div>
                 </div>
 
