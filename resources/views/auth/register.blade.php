@@ -26,12 +26,12 @@
                             <div class="col-sm-10">
 
                                 <input type="text" name="name" value="{{ old('name') }}"
-                                        placeholder="User Name"
-                                        id="input-name"
+                                       placeholder="User Name"
+                                       id="input-name"
                                        class="form-control" required>
-                                       @if($errors->has('name'))
-                                       <span style="color: red">{{ $errors->first('name') }}</span>
-                                       @endif
+                                @if($errors->has('name'))
+                                    <span style="color: red">{{ $errors->first('name') }}</span>
+                                @endif
                             </div>
                         </div>
 
@@ -39,22 +39,22 @@
                             <label class="col-sm-2 control-label" for="input-email">邮箱</label>
                             <div class="col-sm-10">
                                 <input type="text" name="email" value="{{ old('email') }}"
-                                       placeholder="Email" 
+                                       placeholder="Email"
                                        class="form-control" id="input-email" required>
-                                       @if($errors->has('email'))
-                                   <span style="color: red">{{ $errors->first('email') }}</span>
-                                   @endif
+                                @if($errors->has('email'))
+                                    <span style="color: red">{{ $errors->first('email') }}</span>
+                                @endif
                             </div>
                         </div>
                         <div class="form-group required" {{ $errors->has('firstname') ? ' has-error' : '' }}>
                             <label class="col-sm-2 control-label" for="input-firstname">名字</label>
                             <div class="col-sm-10">
-                                <input type="text" name="firstname" value="{{ old('firstname') }}" 
+                                <input type="text" name="firstname" value="{{ old('firstname') }}"
                                        placeholder="First Name"
                                        id="input-firstname" class="form-control" required>
-                                    @if($errors->has('firstname'))
-                                   <span style="color: red">{{ $errors->first('firstname') }}</span>
-                                   @endif
+                                @if($errors->has('firstname'))
+                                    <span style="color: red">{{ $errors->first('firstname') }}</span>
+                                @endif
                             </div>
                         </div>
                     </fieldset>
@@ -63,11 +63,11 @@
                     <div class="form-group required" {{ $errors->has('password') ? ' has-error' : '' }}>
                         <label class="col-sm-2 control-label" for="input-password">密码</label>
                         <div class="col-sm-10">
-                            <input type="password" name="password" value="" placeholder="Password" 
+                            <input type="password" name="password" value="" placeholder="Password"
                                    id="input-password" class="form-control" required>
-                                   @if($errors->has('password'))
-                                   <span style="color: red">{{ $errors->first('password') }}</span>
-                                   @endif
+                            @if($errors->has('password'))
+                                <span style="color: red">{{ $errors->first('password') }}</span>
+                            @endif
                         </div>
                     </div>
                     <div class="form-group required">
@@ -82,11 +82,12 @@
                     <div class="buttons">
                         <div class="pull-right">
                             我已阅读并同意
-                            <input style="vertical-align:middle; margin-top:-1.9px;" checked class="box-checkbox" type="checkbox" name="agree" value="1"> &nbsp;
+                            <input style="vertical-align:middle; margin-top:-1.9px;" checked class="box-checkbox"
+                                   type="checkbox" name="agree" value="1"> &nbsp;
                             @if($errors->has('agree'))
-                            <span>{{ $errors->first('agree') }}</span>
+                                <span>{{ $errors->first('agree') }}</span>
                             @endif
-                            <input type="submit" value="提交" class="btn btn-primary">  
+                            <input type="submit" value="提交" class="btn btn-primary">
                         </div>
                     </div>
                 </form>

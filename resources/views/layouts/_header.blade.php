@@ -6,8 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="header-top-left col-lg-7 col-md-8 col-sm-6 col-xs-4">
-                    <div class="hidden-md hidden-sm hidden-xs welcome-msg">欢迎来到爱购物！在爱购物上每天都有新的优惠/礼物 - 新优惠券代码：Happy2018:
-                        <span>Happy2018</span>
+                    <div class="hidden-md hidden-sm hidden-xs welcome-msg">欢迎来到爱购物！在爱购物上购物每天都有新的优惠/礼物
                     </div>
                     <ul class="top-link list-inline hidden-lg ">
                         <li class="account" id="my_account">
@@ -33,8 +32,8 @@
             <div class="row">
                 <!-- Logo -->
                 <div class="navbar-logo col-lg-2 col-md-3 col-sm-4 col-xs-12">
-                    <div class="logo"><a href="/"><img src="/image/catalog/logo.png" title="Your Store"
-                                                                alt="Your Store"/></a></div>
+                    <div class="logo"><a href="/"><img src="/image/catalog/logo1.png" title="Go Go Go"
+                                                       alt="爱购物"/></a></div>
                 </div>
                 <!-- //end Logo -->
 
@@ -47,7 +46,7 @@
                         <div id="sosearchpro" class="sosearchpro-wrapper so-search ">
                             <form class="search-form" action="{{ route('products.index') }}">
                                 <div class="search input-group form-group">
-                            
+
                                     <input class="autosearch-input form-control" type="text" value="" size="50"
                                            autocomplete="off" placeholder="关键字搜索" name="search">
                                     <button type="submit" class="button-search btn btn-primary"><i
@@ -64,11 +63,11 @@
                     <div class="shopping_cart">
                         <div id="cart" class="btn-shopping-cart">
 
-                            <a  href="{{ route('cart.index') }}"  class="btn-group top_cart dropdown-toggle">
+                            <a href="{{ route('cart.index') }}" class="btn-group top_cart dropdown-toggle">
                                 <div class="shopcart">
                                             <span class="icon-c">
                                                 <i class="fa fa-shopping-bag"></i>
-                                            </span>  
+                                            </span>
                                 </div>
                             </a>
                         </div>
@@ -131,22 +130,27 @@
                                     </div>
                                     <div class="vertical-wrapper">
                                         <span id="remove-verticalmenu" class="fa fa-times"></span>
-                                        <div class="megamenu-pattern" >
-                                            <div class="container-mega" >
+                                        <div class="megamenu-pattern">
+                                            <div class="container-mega">
                                                 <ul class="megamenu">
                                                     @if(isset($categoryTree))
                                                         @foreach($categoryTree as $category)
+
                                                             <li class="item-vertical  with-sub-menu hover">
                                                                 <p class="close-menu"></p>
                                                                 <a href="{{ route('products.index', ['category_id' => $category['id']]) }}"
                                                                    class="clearfix">
-                                                                    <img src="/image/catalog/menu/icons/ico10.png"
-                                                                         alt="icon">
+                                                                    @if($category['ico'])
+                                                                        <img src="/uploads/{{ $category['ico']}}"
+                                                                             alt="icon">
+                                                                    @else
+                                                                        <img src="">
+                                                                    @endif
                                                                     <span>{{ $category['name'] }}</span>
                                                                     <b class="fa-angle-right"></b>
                                                                 </a>
-                                                                <div class="sub-menu" data-subwidth="60" >
-                                                                    <div class="content"  style="padding-top:10px">
+                                                                <div class="sub-menu"  data-subwidth="60">
+                                                                    <div class="content" style="padding-top:10px">
                                                                         <div class="row">
                                                                             <div class="col-sm-12">
                                                                                 <div class="row">
@@ -160,13 +164,12 @@
                                                                                                                 @if(isset($children['children']))
                                                                                                                     <li style="float: left;margin-right: 5px;">
                                                                                                                         <a style="font-weight: bold;"
-                                                                                                                           href="{{ route('products.index', ['category_id' => $children['id']]) }}">{{ $children['name'] }}
-                                                                                                                            ></a>
+                                                                                                                           href="{{ route('products.index', ['category_id' => $children['id']]) }}">{{ $children['name'] }} > </a>
                                                                                                                     </li>
 
                                                                                                                     @foreach($children['children'] as $child)
                                                                                                                         <li style="float: left;margin-right: 5px;">
-                                                                                                                            <a href="{{ route('products.index', ['category_id' => $child['id']]) }}">{{ $child['name'] }}</a>
+                                                                                                                            <a href="{{ route('products.index', ['category_id' => $child['id']]) }}">| {{ $child['name'] }}</a>
                                                                                                                         </li>
                                                                                                                     @endforeach
                                                                                                                 @endif
@@ -187,7 +190,7 @@
                                                         @endforeach
                                                     @endif
 
-                                                  
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -220,6 +223,10 @@
                                             <ul class="megamenu" data-transition="slide" data-animationtime="250">
                                                 <li class="home hover">
                                                     <a href="/">首页</a>
+                                                </li>
+
+                                                <li class="home hover">
+                                                    <a href="#">抢购</a>
                                                 </li>
                                             </ul>
                                         </div>

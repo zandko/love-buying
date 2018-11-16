@@ -3,13 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Category extends Model
 {
-    protected $fillable = ['name', 'is_directory', 'level', 'path'];
+    protected $fillable = ['name', 'is_directory', 'level', 'path','order'];
 
     protected $casts = [
         'is_directory' => 'boolean',
+        'order' => 'boolean',
     ];
 
     protected static function boot()
@@ -70,5 +72,15 @@ class Category extends Model
             ->pluck('name')
             ->push($this->name)
             ->implode(' - ');
+    }
+
+    /*图片路径*/
+    public function getIcoUrlAttribute()
+    {
+        if (Str::startsWith($this->attributes['ico'], ['http://', 'https://'])) {
+            return $this->attributes['ico'];
+        }
+
+        return \Storage::disk('admin')->url($this->attributes['ico']);
     }
 }

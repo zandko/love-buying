@@ -71,12 +71,21 @@ class CategoriesController extends Controller
         });
         $grid->id('ID')->sortable();
         $grid->name('名称')->display(function ($name) {
-            return str_repeat("&nbsp;",$this->level*8).$name;
+            if($this->ico) 
+            {
+                return str_repeat("&nbsp;",$this->level*8)."<img src='{$this->ico_url}'>".$name;
+            }else {
+                return str_repeat("&nbsp;",$this->level*8).$name;
+            }
         });
         $grid->column('parent.name', '上级分类');
         $grid->is_directory('是否有子级分类')->display(function ($is_directory) {
             return $is_directory ? '是' : '否';
         });
+
+        $grid->order('是否楼层')->display(function ($order) {
+            return $order ? '是' : '否';
+        })->sortable();
         $grid->level('级别');
         $grid->path('路径');
         $grid->created_at('添加时间')->sortable();
@@ -107,6 +116,8 @@ class CategoriesController extends Controller
 
         $form = new Form(new Category);
         $form->text('name', '名称')->rules('required');
+        $form->image('ico', '图标');
+        $form->radio('order','是否楼层')->options(['1'=>'是','0'=>'否'])->rules('required');
 
         if($isEditing) {
             $form->display('parent.name','上级分类');

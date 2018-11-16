@@ -180,7 +180,7 @@
 
                                 <a class="reviews_button" href=""
                                    onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">{{ $product->review_count }}
-                                    评论</a> |
+                                    评论</a>
 
                             </div>
 
@@ -372,18 +372,21 @@
 
                                             <div class="product-image-container second_img">
                                                 <a href="{{ route('products.show',['product'=>$sml->id]) }}"
-                                                   target="_self" title="Lastrami bacon">
+                                                   target="_self" title="{{ $sml->title }}">
                                                     <img src="{{ $sml->image_url }}"
-                                                         class="img-1 img-responsive" alt="image1">
-                                                    <img src="/image/catalog/demo/product/270/e10.jpg"
-                                                         class="img-2 img-responsive" alt="image2">
+                                                         class="img-1 img-responsive" alt="{{ $sml->title }}">
+
+                                                    @foreach($sml->product_sku as $skus)
+                                                        <img src="{{ $skus->image_url }}"
+                                                             class="img-2 img-responsive" alt="{{ $skus->title }}">
+                                                    @endforeach
                                                 </a>
                                             </div>
                                             <!--quickview-->
                                             <div class="so-quickview">
                                                 <a class="iframe-link btn-button quickview quickview_handler visible-lg"
                                                    href="{{ route('products.detail',['product'=>$sml->id]) }}"
-                                                   title="Quick view" data-fancybox-type="iframe"><i
+                                                   title="查看" data-fancybox-type="iframe"><i
                                                             class="fa fa-eye"></i><span>查看</span></a>
                                             </div>
                                             <!--end quickview-->
@@ -404,8 +407,8 @@
                                                     </div>
                                                     <span class="rating-num">( {{ $sml->review_count }} )</span>
                                                 </div>
-                                                <h4><a href="product.html" title="Pastrami bacon" target="_self">
-                                                        {{ $sml->title }}
+                                                <h4><a href="product.html" title="{{ $sml->title }}" target="_self">
+                                                        {{ str_limit($sml->title,20) }}
                                                     </a></h4>
 
                                             </div>

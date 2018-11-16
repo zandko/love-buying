@@ -112,29 +112,29 @@
                 var opened = $('input[name=opened]:checked').val();
                 var comment = $('#input-comment').val();
 
-                if(!return_reason_id) {
-                    swal('退款理由不能为空','','error')
+                if (!return_reason_id) {
+                    swal('退款理由不能为空', '', 'error')
                     return;
                 }
 
-                if(!opened) {
-                    swal('产品是否已拆开','','error')
-                    return ;
+                if (!opened) {
+                    swal('产品是否已拆开', '', 'error')
+                    return;
                 }
 
-                axios.post('{{ route('orders.apply_refund',['order'=>$order->id]) }}',{
-                    return_reason_id:return_reason_id,
-                    opened:opened,
-                    comment:comment,
+                axios.post('{{ route('orders.apply_refund',['order'=>$order->id]) }}', {
+                    return_reason_id: return_reason_id,
+                    opened: opened,
+                    comment: comment,
 
                 })
                     .then(function (response) {
                         console.log(response.data);
-                        swal('申请退款成功','','success')
+                        swal('申请退款成功', '', 'success')
                             .then(function () {
-                                location.href='/orders/'+ response.data.id +'/detail';
+                                location.href = '/orders/' + response.data.id + '/detail';
                             })
-                    },function (errors) {
+                    }, function (errors) {
                         return;
                     })
             });

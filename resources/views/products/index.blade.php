@@ -132,7 +132,15 @@
             <!--Middle Part Start-->
             <div id="content" class="col-md-9 col-sm-8">
                 <div class="products-category">
-                    <h3 class="title-category ">季节广告</h3>
+                    @if($focus)
+                        @foreach($focus as $focu)
+                            @if($focu->place===7)
+
+                                <h3 class="title-category ">{{ $focu->alt}}</h3>
+                            @endif
+
+                        @endforeach
+                    @endif
                     <div class="category-desc">
                         <div class="row">
                             <div class="col-sm-12">
@@ -165,7 +173,8 @@
                                         background: #f3f3f3;
                                         margin-right: 5px;
                                     " class="filter-value">{{ $value }}
-                                        <a style="margin-left: 5px; color: red;font-size: 15px;" class="remove-filter" href="javascript: removeFilterFromQuery('{{ $name }}')">×</a>
+                                        <a style="margin-left: 5px; color: red;font-size: 15px;" class="remove-filter"
+                                           href="javascript: removeFilterFromQuery('{{ $name }}')">×</a>
                                     </span>
 
                                     </span>
@@ -193,7 +202,8 @@
                                             </div>
                                             <div class="col-xs-9 filter-values">
                                                 @foreach($property['values'] as $value)
-                                                    <a style="margin-right: 5px;" href="javascript: appendFilterToQuery('{{ $property['key'] }}','{{ $value }}')">{{ $value }}</a>
+                                                    <a style="margin-right: 5px;"
+                                                       href="javascript: appendFilterToQuery('{{ $property['key'] }}','{{ $value }}')">{{ $value }}</a>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -213,9 +223,9 @@
 
                                 <div class="list-view">
                                     <button class="btn btn-default grid active" data-view="grid" data-toggle="tooltip"
-                                            data-original-title="Grid"><i class="fa fa-th"></i></button>
+                                            data-original-title="九宫格"><i class="fa fa-th"></i></button>
                                     <button class="btn btn-default list" data-view="list" data-toggle="tooltip"
-                                            data-original-title="List"><i class="fa fa-th-list"></i></button>
+                                            data-original-title="列表"><i class="fa fa-th-list"></i></button>
                                 </div>
 
                             </div>
@@ -253,12 +263,12 @@
 
                                         <div class="product-image-container second_img">
                                             <a href="{{ route('products.show',['product'=>$product->id]) }}"
-                                               target="_self" title="Lastrami bacon">
+                                               target="_self" title="{{ $product->title }}">
                                                 <img src="{{ $product->image_url }}"
-                                                     class="img-1 img-responsive" alt="image1">
+                                                     class="img-1 img-responsive" alt="{{ $product->title }}">
                                                 @foreach($product->product_sku as $sku_img)
                                                     <img src="{{ $sku_img->image_url }}"
-                                                         class="img-2 img-responsive" alt="image2">
+                                                         class="img-2 img-responsive" alt="{{ $sku_img->title }}">
                                                 @endforeach
                                             </a>
                                         </div>
@@ -266,8 +276,8 @@
                                         <div class="so-quickview">
                                             <a class="iframe-link btn-button quickview quickview_handler visible-lg"
                                                href="{{ route('products.detail',['product'=>$product->id]) }}"
-                                               title="Quick view" data-fancybox-type="iframe"><i
-                                                        class="fa fa-eye"></i><span>Quick view</span></a>
+                                               title="查看" data-fancybox-type="iframe"><i
+                                                        class="fa fa-eye"></i><span>查看</span></a>
                                         </div>
                                         <!--end quickview-->
 
@@ -300,8 +310,8 @@
 
                                             <a class="iframe-link btn-button quickview quickview_handler visible-lg"
                                                href="{{ route('products.detail',['product'=>$product->id]) }}"
-                                               title="Quick view" data-fancybox-type="iframe"><i
-                                                        class="fa fa-eye"></i></a>
+                                               title="查看" data-fancybox-type="iframe"><i
+                                                        class="fa fa-eye"></i><span>查看</span></a>
                                         </div>
                                     </div>
 

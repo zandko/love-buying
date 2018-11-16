@@ -29,9 +29,9 @@ class ProductService
         $params['body']['query']['bool']['must_not'] = [
             [
                 'term' => [
-                    '_id' => $product->id
-                ]
-            ]
+                    '_id' => $product->id,
+                ],
+            ],
         ];
 
         $result = app('es')->search($params);

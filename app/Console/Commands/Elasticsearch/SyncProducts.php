@@ -2,13 +2,13 @@
 
 namespace App\Console\Commands\Elasticsearch;
 
-use Illuminate\Console\Command;
 use App\Models\Product;
+use Illuminate\Console\Command;
 
 class SyncProducts extends Command
 {
 
-    protected $signature = 'es:sync-products';
+    protected $signature = 'es:sync-products {--index=products}';
 
     protected $description = '将商品数据同步到Elasticsearch';
 
@@ -38,7 +38,7 @@ class SyncProducts extends Command
 
                     $req['body'][] = [
                         'index' => [
-                            '_index' => 'products',
+                            '_index' => $this->option('index'),
                             '_type' => '_doc',
                             '_id' => $data['id'],
                         ],
@@ -48,7 +48,7 @@ class SyncProducts extends Command
                 }
 
                 try {
-                    $es->bulk($req);  /**批量创建 */
+                    $es->bulk($req); /**批量创建 */
                 } catch (\Exception $e) {
                     $this->error($e->getMessage());
                 }

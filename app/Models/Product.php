@@ -16,10 +16,12 @@ class Product extends Model
         'image',
         'sold_count',
         'review_count',
+        'pushs',
     ];
 
     protected $casts = [
         'on_sale' => 'boolean',
+        'push' => 'boolean',
     ];
 
     /*关联分类*/

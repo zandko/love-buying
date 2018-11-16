@@ -59,26 +59,26 @@
                             </tr>
 
 
-                            @section('scriptsAfterJs')
+                        @section('scriptsAfterJs')
 
-                                <script>
+                            <script>
 
-                                    $(document).ready(function () {
-                                        /*取消收藏*/
-                                        $('.btn-disfavor').click(function () {
-                                            axios.delete('{{ route('products.disfavor', ['product' => $product->id]) }}')
-                                                .then(function () {
-                                                    swal('操作成功', '', 'success')
-                                                        .then(function () {
-                                                            location.reload();
-                                                        });
-                                                });
-                                        });
+                                $(document).ready(function () {
+                                    /*取消收藏*/
+                                    $('.btn-disfavor').click(function () {
+                                        axios.delete('{{ route('products.disfavor', ['product' => $product->id]) }}')
+                                            .then(function () {
+                                                swal('操作成功', '', 'success')
+                                                    .then(function () {
+                                                        location.reload();
+                                                    });
+                                            });
                                     });
+                                });
 
-                                </script>
+                            </script>
 
-                            @endsection
+                        @endsection
 
                         @endforeach
                         </tbody>

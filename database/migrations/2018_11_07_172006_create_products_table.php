@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('long_title')->comment('长标题');
             $table->text('description')->comment('详情');
             $table->boolean('on_sale')->default(true)->comment('是否上架');
+            $table->boolean('pushs')->default(false)->comment('推荐');
             $table->string('image')->comment('封面图');
             $table->float('rating')->default(5)->comment('评分');
             $table->unsignedInteger('sold_count')->default(0)->comment('销量');

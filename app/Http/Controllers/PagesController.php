@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Cache;
 
 class PagesController extends Controller
 {
@@ -14,7 +14,9 @@ class PagesController extends Controller
         $sold_count = $product->query()->orderBy('sold_count', 'desc')->paginate(8);
         $desc = $product->query()->orderBy('created_at', 'desc')->paginate(8);
 
-        $product = $product->all();
+        $product = Cache::remember('product_pages',60,function () use ($product) {
+            return $product->all();
+        });
 
         return view('pages.index', [
             'sold_count' => $sold_count,

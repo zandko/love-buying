@@ -6,11 +6,11 @@ use App\Exceptions\InvalidRequestException;
 use App\Models\Category;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Services\ProductService;
 use App\Services\SearchBuilders\ProductSearchBuilder;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use App\Services\ProductService;
 
 class ProductsController extends Controller
 {
@@ -92,7 +92,6 @@ class ProductsController extends Controller
             'path' => route('products.index', false),
         ]);
 
-
         return view('products.index', [
             'products' => $pager,
             'filters' => [
@@ -117,7 +116,6 @@ class ProductsController extends Controller
         if ($user = $request->user()) {
             $favored = $favor = boolval($user->favoriteProducts()->find($product->id));
         }
-
 
         $reviews = OrderItem::query()
             ->with('order.user', 'productSku')

@@ -161,7 +161,8 @@
                                         <div class="buttons">
                                             <div class="pull-right">
                                                 @if(!$order->paid_at && !$order->closed)
-                                                    <a href="{{ route('payment.alipay',['order'=>$order->id]) }}" class="btn btn-primary">提交订单</a>
+                                                    <a href="{{ route('payment.alipay',['order'=>$order->id]) }}"
+                                                       class="btn btn-primary">提交订单</a>
                                                 @endif
 
                                             </div>

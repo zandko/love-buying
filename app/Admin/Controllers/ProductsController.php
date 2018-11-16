@@ -84,15 +84,22 @@ class ProductsController extends Controller
             return "<img width='50' src='$this->image_url'>";
         });
         $grid->column('category.name', '所属分类');
+    
         $grid->on_sale('是否上架')->display(function ($on_sale) {
             return $on_sale ? '是' : '否';
         });
+
+        $grid->column('pushs','是否推荐')->display(function ($push) {
+            return $push ? '是' : '否';
+        });
+            
         $grid->rating('评分');
         $grid->sold_count('销量');
         $grid->review_count('评论数量');
         $grid->price('最低价');
         $grid->created_at('添加时间');
         $grid->updated_at('修改时间');
+
 
         $grid->disableRowSelector();
         $grid->actions(function ($actions) {
@@ -125,12 +132,14 @@ class ProductsController extends Controller
         $form->simplemde('description', '详情')->rules('required');
         $form->radio('on_sale', '是否上架')->options([1 => '是', '0' => '否'])->default(1);
 
+        $form->switch('pushs', '是否推荐')->options([1 => '是', '0' => '否'])->default(0);
+
         $form->tab('商品', function ($form) {
 
         })->tab('规格', function ($form) {
             $form->hasMany('product_sku', '商品规格', function (Form\NestedForm $form) {
                 $form->text('title', '规格')->rules('required');
-                $form->image('image', '规格图')->rules('required|image');
+                $form->image('image', '规格图');
                 $form->text('description', '简介')->rules('required');
                 $form->decimal('price', '单价')->rules('required');
                 $form->number('stock', '库存')->rules('required');
@@ -157,7 +166,6 @@ class ProductsController extends Controller
 
         $form->saved(function (Form $form) {
             $product = $form->model();
-            \var_dump($product);
             $this->dispatch(new SyncOneProductToES($product));
         });
 
