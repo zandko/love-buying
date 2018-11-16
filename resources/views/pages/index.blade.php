@@ -27,7 +27,7 @@
                                             @if($focu->place === 0)
                                                 <div class="yt-content-slide">
                                                     <a href="#"><img src="/image/catalog/slideshow/home1/slider-1.jpg"
-                                                                     alt="slider1"
+                                                                     alt="{{ $focu->alt }}"
                                                                      class="img-responsive"></a>
                                                 </div>
                                             @endif
@@ -428,7 +428,7 @@
                         </div>
 
                         <!-- Deals -->
-                        <div class="module deals-layout1">
+                        {{-- <div class="module deals-layout1">
                             <div class="head-title">
                                 <div class="modtitle">
                                     <span>抢购</span>
@@ -528,7 +528,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- End Deals -->
 
                         <!-- Banners -->

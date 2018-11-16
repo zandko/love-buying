@@ -114,7 +114,7 @@
                             @if($focus)
                                 @foreach($focus as $focu)
                                     @if($focu->place===8)
-                                        <a title="{{ $focuu->alt }}" href="{{ $focu->url }}">
+                                        <a title="{{ $focu->alt }}" href="{{ $focu->url }}">
 
                                             <img src="{{ $focu->image_url }}" alt="{{ $focu->alt }}">
                                         </a>

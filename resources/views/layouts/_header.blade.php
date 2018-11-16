@@ -224,9 +224,17 @@
                                                 <li class="home hover">
                                                     <a href="/">首页</a>
                                                 </li>
-
                                                 <li class="home hover">
-                                                    <a href="#">抢购</a>
+                                                    <a>待开发1</a>
+                                                </li>
+                                                <li class="home hover">
+                                                    <a>待开发2</a>
+                                                </li>
+                                                <li class="home hover">
+                                                    <a>待开发3</a>
+                                                </li>
+                                                <li class="home hover">
+                                                    <a>待开发4</a>
                                                 </li>
                                             </ul>
                                         </div>

@@ -37,9 +37,9 @@ class SyncOneProductToES implements ShouldQueue
         $data = $this->product->toESArray();
         app('es')->index([
             'index' => 'products',
-            'type' => '_dec',
-            'id' => $data['id'],
-            'body' => $data,
+            'type'  => '_doc',
+            'id'    => $data['id'],
+            'body'  => $data,
         ]);
     }
 }
