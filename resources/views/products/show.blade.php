@@ -212,8 +212,8 @@
                                     <label class="control-label">规格</label>
                                     <ul class="product-options clearfix" id="input-option231">
                                         @foreach($product->product_sku as $sku)
-                                            <li style="margin-right: 10px" class="radio">
-                                                <label class="sku-btn"
+                                            <li style="margin-right: 10px;" class="radio">
+                                                <label class="sku-btn;"
                                                        data-price="{{ $sku->price }}"
                                                        data-stock="{{ $sku->stock }}"
                                                        data-toggle="tooltip"
@@ -224,7 +224,7 @@
                                                            value="{{ $sku->id }}">
                                                     <img style="width: 50px" src="{{ $sku->image_url }}"
                                                          data-original-title="{{ $sku->description }}"> <i
-                                                            class="fa fa-check"></i>
+                                                            class="fa fa-check" style="font-size:20px;color:red"></i>
                                                     <label>{{ $sku->title }}</label>
                                                 </label>
                                             </li>
